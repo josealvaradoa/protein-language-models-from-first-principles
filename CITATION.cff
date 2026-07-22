@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this educational software, please cite it using this file."
+title: "Protein Language Models From First Principles"
+type: software
+authors:
+  - family-names: "Alvarado Alvarenga"
+    given-names: "Jose"
+version: 0.1.0
+license: MIT
+abstract: >-
+  An educational implementation series progressing from scalar automatic
+  differentiation to locally trained causal and masked protein language
+  models with reproducible evaluation.

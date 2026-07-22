@@ -1,0 +1,75 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Raw and processed datasets
+data/
+datasets/
+downloads/
+
+# External model assets and training outputs
+artifacts/
+checkpoints/
+models/
+outputs/
+runs/
+wandb/
+mlruns/
+*.ckpt
+*.onnx
+*.pt
+*.pth
+*.safetensors
+
+# Common biological sequence and compressed data formats
+*.fa
+*.faa
+*.fasta
+*.fastq
+*.fq
+*.a3m
+*.sto
+*.gz
+*.bz2
+*.xz
+*.zst
+
+# Third-party caches and binaries
+.cache/
+huggingface/
+hf_cache/
+mmseqs/
+bin/
+
+# Private project-management material
+.agents/
+.specify/
+AGENTS.md
+notes/
+prompts/
+specs/
+private/
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
