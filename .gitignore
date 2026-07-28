@@ -20,9 +20,9 @@ build/
 .ipynb_checkpoints/
 
 # Raw and processed datasets
-data/
-datasets/
-downloads/
+/data/
+/datasets/
+/downloads/
 
 # External model assets and training outputs
 artifacts/

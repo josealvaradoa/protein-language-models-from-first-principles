@@ -1,9 +1,13 @@
 # Protein Language Models From First Principles
 
-An educational implementation series that rebuilds the path from scalar
-automatic differentiation to a small masked protein Transformer. The models
-operate on amino-acid sequences and are evaluated against simple baselines and
-an external ESMC-300M reference model.
+An experiment-driven protein language-model series that begins by measuring
+related-sequence contamination and freezing reproducible evaluation data and
+PyTorch inputs. It then builds toward a small masked protein Transformer
+evaluated against simple baselines and an external ESMC-300M reference model.
+
+Scalar automatic differentiation is the private conceptual foundation for the
+training mechanics used later in the series. The first public result addresses
+a separate prerequisite: an auditable protein evaluation split.
 
 The goal is understanding and reproducibility, not state-of-the-art protein
 modeling. Generated sequences are model outputs only. They are not evidence of
@@ -14,9 +18,9 @@ biological function, safety, or therapeutic value.
 The repository is in its setup phase. No model result or biological claim has
 been published yet.
 
-## Learning Progression
+## Experiment Progression
 
-1. Scalar automatic differentiation
+1. Homology-aware protein data and deterministic PyTorch inputs
 2. Amino-acid unigram and bigram models
 3. Context MLPs and residue embeddings
 4. Training diagnostics and manual backpropagation
@@ -77,9 +81,10 @@ a published result without that provenance.
 ## Learning Sources
 
 The project is inspired by Andrej Karpathy's *Neural Networks: Zero to Hero*
-course, but its public implementation is independently reconstructed for
-protein sequences. See [LEARNING_SOURCES.md](LEARNING_SOURCES.md) for the
-source map and attribution policy.
+course. Applicable public model implementations are independently reconstructed
+for protein sequences after private study. See
+[LEARNING_SOURCES.md](LEARNING_SOURCES.md) for the source map and attribution
+policy.
 
 ## AI Assistance
 

@@ -22,9 +22,9 @@ their data, weights, or binaries to this repository:
 
 | Resource | Planned role | Repository policy |
 |---|---|---|
-| UniProtKB/Swiss-Prot 2026_01 | Curated protein sequence corpus | Download externally; record source and checksum |
-| Release-matched UniRef50 | Homology-aware grouping | Download externally; record source and checksum |
-| MMseqs2 | Local sequence-similarity audit | Install externally; record version |
+| UniProtKB/Swiss-Prot 2026_02 | Curated protein sequence corpus | Download externally; record source and checksum |
+| Release-matched UniRef50 2026_02 | Homology-aware grouping | Download externally; record source and checksum |
+| [MMseqs2 `18-8cc5c`](https://github.com/soedinglab/MMseqs2) | Local sequence-similarity audit | Installed externally with Homebrew; binary not committed |
 | ProteinGym v1.3 | Mutation-effect evaluation panel | Download externally; record source and checksum |
 | Biohub ESMC-300M | Final external model baseline | Cache weights externally; pin revision and terms |
 

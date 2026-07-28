@@ -1,0 +1,35 @@
+schema_version = 1
+
+[release]
+id = "2026_02"
+date = "2026-06-10"
+metadata_url = "https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/reldate.txt"
+
+[license]
+spdx = "CC-BY-4.0"
+name = "Creative Commons Attribution 4.0 International"
+url = "https://www.uniprot.org/help/license"
+
+[storage]
+raw_directory = "data/raw/uniprot/2026_02"
+
+[verification]
+published_checksum = "md5"
+local_checksum = "sha256"
+
+[[sources]]
+role = "swiss_prot_records"
+description = "Canonical UniProtKB/Swiss-Prot records"
+filename = "uniprot_sprot.dat.gz"
+url = "https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.dat.gz"
+expected_bytes = 699031150
+published_md5 = "868b301a6ec93955f4e4355d579d8683"
+
+[[sources]]
+role = "uniref50_membership"
+description = "UniProtKB identifier mapping with UniRef50 membership in column 10"
+filename = "idmapping_selected.tab.gz"
+url = "https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/idmapping_selected.tab.gz"
+expected_bytes = 7066467385
+published_md5 = "f426a0ee61882f4c86f1b0d616ae53ec"
+uniref50_column = 10
