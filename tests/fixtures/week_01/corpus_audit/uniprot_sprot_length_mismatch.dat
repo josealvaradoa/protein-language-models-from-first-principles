@@ -1,0 +1,7 @@
+ID   BROKEN_SYNTH            Reviewed;           4 AA.
+AC   P99999;
+DE   RecName: Full=Synthetic malformed protein;
+OS   Synthetic organism.
+SQ   SEQUENCE   4 AA;  0 MW;  0000000000000000 CRC64;
+     AAA
+//
