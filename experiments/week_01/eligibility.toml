@@ -1,0 +1,20 @@
+schema_version = 1
+scope = "week_01_task_4_eligible_records"
+source_release = "2026_02"
+proteingym_release = "v1.3"
+approved_task2_report_sha256 = "ab83d9a3341694dab9b4097334f43b2036e5b4fb0417c8b3a028e54f679cdd0f"
+sequence_hash = "sha256"
+canonical_amino_acids = "ACDEFGHIKLMNPQRSTVWY"
+minimum_length = 32
+maximum_length = 2046
+primary_exclusion_precedence = [
+    "noncanonical_residue",
+    "fragment",
+    "below_min_length",
+    "above_max_length",
+    "blank_uniref50_mapping",
+]
+expected_resolvable_proteingym_targets = 177
+expected_resolvable_proteingym_assays = 207
+expected_reserved_proteingym_families = 175
+catalog_order = "swiss_prot_source"

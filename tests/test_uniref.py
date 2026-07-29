@@ -196,6 +196,18 @@ def test_entry_name_duplicates_and_conflicts_do_not_change_accession_mapping(
             _mapping_row("P00001", "UniRef90_WRONG_LEVEL") + "\n",
             "invalid UniRef50 identifier",
         ),
+        (
+            _mapping_row("P00001", "UniRef50_GROUP A") + "\n",
+            "invalid UniRef50 identifier",
+        ),
+        (
+            _mapping_row("P00001", "UniRef50_GRÖUP") + "\n",
+            "invalid UniRef50 identifier",
+        ),
+        (
+            _mapping_row("P00001", "UniRef50_GROUP\x7f") + "\n",
+            "invalid UniRef50 identifier",
+        ),
     ],
 )
 def test_uniref50_audit_rejects_malformed_matched_rows(
@@ -222,6 +234,39 @@ def test_scan_rejects_malformed_row_matched_only_by_entry_name(
             ("P00001",),
             target_entry_names=("PROTEINGYM_TARGET",),
         )
+
+
+@pytest.mark.parametrize("compressed", [False, True])
+def test_uniref50_audit_rejects_bare_cr_line_endings(
+    tmp_path: Path,
+    compressed: bool,
+) -> None:
+    suffix = ".tab.gz" if compressed else ".tab"
+    malformed_path = tmp_path / f"bare_cr{suffix}"
+    content = (_mapping_row("P00001", "UniRef50_GROUP_A") + "\r").encode()
+    if compressed:
+        with gzip.open(malformed_path, mode="wb") as output:
+            output.write(content)
+    else:
+        malformed_path.write_bytes(content)
+
+    with pytest.raises(UniRef50ParseError, match="bare CR"):
+        audit_uniref50_membership(malformed_path, ("P00001",))
+
+
+@pytest.mark.parametrize("line_ending", [b"\n", b"\r\n"])
+def test_uniref50_audit_accepts_lf_and_crlf(
+    tmp_path: Path,
+    line_ending: bytes,
+) -> None:
+    mapping_path = tmp_path / "accepted_line_ending.tab"
+    mapping_path.write_bytes(
+        _mapping_row("P00001", "UniRef50_GROUP_A").encode() + line_ending
+    )
+
+    audit = audit_uniref50_membership(mapping_path, ("P00001",))
+
+    assert audit.mapped_accession_count == 1
 
 
 def test_uniref50_audit_rejects_invalid_target_input() -> None:

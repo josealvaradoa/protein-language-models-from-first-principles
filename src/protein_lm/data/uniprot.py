@@ -10,7 +10,7 @@ from pathlib import Path
 
 _ID_PATTERN = re.compile(r"^ID\s+(?P<name>\S+)\s+Reviewed;\s+(?P<length>\d+)\s+AA\.$")
 _SQ_PATTERN = re.compile(r"^SQ\s+SEQUENCE\s+(?P<length>\d+)\s+AA;")
-_SEQUENCE_PATTERN = re.compile(r"^[A-Z]+$")
+_SEQUENCE_PATTERN = re.compile(r"^[A-Za-z]+$")
 _EC_PATTERN = re.compile(r"\bEC=([^;]+);")
 _FRAGMENT_PATTERN = re.compile(r"^DE\s+Flags:.*\bFragments?;")
 
@@ -116,7 +116,7 @@ def parse_swiss_prot(path: Path) -> Iterator[SwissProtRecord]:
                 sequence_chunk = "".join(line.split())
                 if _SEQUENCE_PATTERN.fullmatch(sequence_chunk) is None:
                     raise SwissProtParseError(f"line {line_number}: malformed sequence")
-                sequence_parts.append(sequence_chunk)
+                sequence_parts.append(sequence_chunk.upper())
                 continue
 
             if line.startswith("AC") and primary_accession is None:

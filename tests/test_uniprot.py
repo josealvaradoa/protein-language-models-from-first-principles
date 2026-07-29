@@ -45,6 +45,19 @@ def test_parser_reads_gzip_without_extracting_it(tmp_path: Path) -> None:
     )
 
 
+def test_parser_normalizes_ascii_sequence_letters_to_uppercase(
+    tmp_path: Path,
+) -> None:
+    source = (FIXTURE_DIRECTORY / "uniprot_sprot.dat").read_text(encoding="utf-8")
+    lowercase_path = tmp_path / "lowercase_sequence.dat"
+    lowercase_path.write_text(source.replace("ACDEF", "acdef"), encoding="utf-8")
+
+    records = tuple(parse_swiss_prot(lowercase_path))
+
+    assert records[0].sequence == "ACDEF"
+    assert records[1].sequence == "ACDEF"
+
+
 def test_parser_rejects_length_mismatch() -> None:
     malformed_path = FIXTURE_DIRECTORY / "uniprot_sprot_length_mismatch.dat"
 

@@ -9,7 +9,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
-_UNIREF50_PATTERN = re.compile(r"^UniRef50_\S+$")
+_UNIREF50_PATTERN = re.compile(r"^UniRef50_[\x21-\x7e]+$")
 
 
 class UniRef50ParseError(ValueError):
@@ -103,9 +103,14 @@ def scan_uniref50_membership(
 
     source_path = Path(path)
     if source_path.name.endswith(".gz"):
-        source = gzip.open(source_path, mode="rt", encoding="utf-8")
+        source = gzip.open(
+            source_path,
+            mode="rt",
+            encoding="utf-8",
+            newline="",
+        )
     else:
-        source = source_path.open(encoding="utf-8")
+        source = source_path.open(encoding="utf-8", newline="")
 
     with source:
         for line_number, raw_line in enumerate(source, start=1):
@@ -114,18 +119,23 @@ def scan_uniref50_membership(
             accession_is_target = accession in accession_targets
 
             if not separator:
-                if accession_is_target:
+                possible_accession = _remove_line_ending(raw_line)
+                if possible_accession in accession_targets:
                     raise UniRef50ParseError(
                         f"line {line_number}: matched row has fewer than 10 columns"
                     )
                 continue
 
-            entry_name = remainder.partition("\t")[0].rstrip("\r\n")
+            entry_name, next_separator, _ = remainder.partition("\t")
+            if not next_separator:
+                entry_name = _remove_line_ending(entry_name)
             entry_name_is_target = entry_name in entry_name_targets
             if not accession_is_target and not entry_name_is_target:
                 continue
 
-            columns_after_accession = remainder.rstrip("\r\n").split("\t", 9)
+            line = _remove_line_ending(raw_line)
+            accession, _, remainder = line.partition("\t")
+            columns_after_accession = remainder.split("\t", 9)
             if len(columns_after_accession) < 9:
                 raise UniRef50ParseError(
                     f"line {line_number}: matched row has fewer than 10 columns"
@@ -213,6 +223,16 @@ def scan_uniref50_membership(
         duplicate_entry_names=frozenset(duplicate_entry_names),
         conflicting_entry_names=frozenset(conflicting_entry_names),
     )
+
+
+def _remove_line_ending(raw_line: str) -> str:
+    if raw_line.endswith("\r\n"):
+        return raw_line[:-2]
+    if raw_line.endswith("\n"):
+        return raw_line[:-1]
+    if raw_line.endswith("\r"):
+        raise UniRef50ParseError("unsupported bare CR line ending")
+    return raw_line
 
 
 def _record_match(
