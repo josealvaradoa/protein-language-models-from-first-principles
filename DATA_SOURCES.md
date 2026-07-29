@@ -8,9 +8,9 @@ assets stay in ignored local directories.
 
 | Source | Frozen version | Planned use | Setup status |
 |---|---|---|---|
-| UniProtKB/Swiss-Prot | `2026_02` | Canonical curated protein sequences | Not downloaded |
-| UniRef50 | Release matched to Swiss-Prot `2026_02` | Group-level train, validation, and test splitting | Not downloaded |
-| ProteinGym | `v1.3` | Small mutation-effect evaluation panel | Not downloaded |
+| UniProtKB/Swiss-Prot | `2026_02` | Canonical curated protein sequences | Present locally; checksum verification pending |
+| UniRef50 | Release matched to Swiss-Prot `2026_02` | Group-level train, validation, and test splitting | Present locally; checksum verification pending |
+| ProteinGym | `v1.3` | Small mutation-effect evaluation panel | Metadata present and verified; assay files not acquired |
 | Biohub ESMC | `biohub/ESMC-300M`, revision to be pinned | External masked-model and representation baseline | Not downloaded |
 
 The `2026_02` source pair is frozen for this project. Swiss-Prot records and
@@ -31,19 +31,48 @@ UniProt, or download data.
 
 | Use | File | Published bytes | Published MD5 | Local SHA-256 |
 |---|---|---:|---|---|
-| Swiss-Prot records | `uniprot_sprot.dat.gz` | 699,031,150 | `868b301a6ec93955f4e4355d579d8683` | Pending acquisition |
-| UniRef50 membership, column 10 | `idmapping_selected.tab.gz` | 7,066,467,385 | `f426a0ee61882f4c86f1b0d616ae53ec` | Pending acquisition |
+| Swiss-Prot records | `uniprot_sprot.dat.gz` | 699,031,150 | `868b301a6ec93955f4e4355d579d8683` | Pending local verification |
+| UniRef50 membership, column 10 | `idmapping_selected.tab.gz` | 7,066,467,385 | `f426a0ee61882f4c86f1b0d616ae53ec` | Pending local verification |
 
-The upstream files currently appear below `current_release`. Before any
-transfer, acquisition must verify that `reldate.txt` still identifies release
-`2026_02` of June 10, 2026 and that published sizes and MD5 values match this
-table. A mismatch stops acquisition rather than advancing the project to a
-newer release.
+Before use, local verification must confirm that `reldate.txt` identifies
+release `2026_02` of June 10, 2026 and that file sizes and calculated MD5
+values match this table. A mismatch stops the task rather than advancing the
+project to a newer release.
 
 The published MD5 values verify that local files match UniProt's listings.
-After acquisition, the project also calculates SHA-256 values for its own
-provenance record. Those local values are evidence from actual files, so they
-are not prefilled in the acquisition config.
+The same local verification pass also calculates SHA-256 values for the
+project's provenance record. Those values are evidence from actual files, so
+they are not prefilled in the acquisition config.
+
+## ProteinGym v1.3 Metadata Pin
+
+The local ProteinGym metadata file is pinned to the official `PG_v1.3` release:
+
+| Field | Frozen value |
+|---|---|
+| Official repository | [`OATML-Markslab/ProteinGym`](https://github.com/OATML-Markslab/ProteinGym) |
+| Release tag | [`PG_v1.3`](https://github.com/OATML-Markslab/ProteinGym/releases/tag/PG_v1.3) |
+| Release date | April 28, 2025 |
+| Immutable commit | `1f8de974dead8ff7501eff087b725d14a965e9f9` |
+| Official artifact | [`reference_files/DMS_substitutions.csv`](https://github.com/OATML-Markslab/ProteinGym/blob/1f8de974dead8ff7501eff087b725d14a965e9f9/reference_files/DMS_substitutions.csv) |
+| Published bytes | 208,734 |
+| Official Git blob SHA-1 | `8d1ea9a19c0404b511cd24378b25c2a5f86f10e9` |
+| Local SHA-256 | `a8f498011532a74aa9fe556a50555a75e928c5837d19c06a87592ae04049b308` |
+| Retrieval date | July 28, 2026 |
+| Retrieval method | Manual user download; no project download script executed |
+| Local path | `data/raw/proteingym/v1.3/DMS_substitutions.csv` |
+| License | [MIT](https://github.com/OATML-Markslab/ProteinGym/blob/1f8de974dead8ff7501eff087b725d14a965e9f9/LICENSE) |
+
+The local file has the same byte count and Git blob identity as the artifact at
+the immutable upstream commit. The project-specific SHA-256 above identifies
+the local bytes independently of Git.
+
+The file's `UniProt_ID` field contains UniProtKB entry names, not stable primary
+accessions. Corpus support is therefore resolved through the parsed Swiss-Prot
+entry name and primary accession. Column 2 of the release-matched UniProt
+identifier mapping is used only as a fallback for ProteinGym targets outside
+the Swiss-Prot population so that their UniRef50 families can still be
+reserved.
 
 ## External Tool Provenance
 
@@ -78,5 +107,5 @@ Every downloaded source must record:
 - applicable license or terms; and
 - the script and command that produced any derived artifact.
 
-Download commands and checksums will be added when the corresponding data task
-is specified and executed. No placeholder checksum is treated as evidence.
+Verification commands and checksums will be added when the corresponding data
+task is executed. No placeholder checksum is treated as evidence.
