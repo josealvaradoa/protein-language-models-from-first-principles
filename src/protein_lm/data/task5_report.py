@@ -137,6 +137,8 @@ def render_task5_report(report: Task5Report) -> RenderedTask5Report:
 
 def render_completion_index(
     artifacts: tuple[CompletedPublicArtifact, ...],
+    *,
+    scope: str = "week_01_task_05_public_outputs",
 ) -> str:
     """Render the deterministic marker for one complete public output set."""
 
@@ -164,7 +166,7 @@ def render_completion_index(
 
     payload = {
         "schema_version": 1,
-        "scope": "week_01_task_05_public_outputs",
+        "scope": scope,
         "complete": True,
         "artifacts": indexed,
     }

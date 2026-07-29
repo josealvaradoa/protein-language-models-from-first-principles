@@ -52,3 +52,20 @@ uv run --locked --offline python scripts/build_random_diagnostic.py --repeat-che
 
 The command makes no network requests. Its output is diagnostic only and the
 training guard rejects it as a selected model split.
+
+`build_group_aware_candidate.py` verifies the same Task 4 inputs, keeps each
+UniRef50 group and exact-duplicate-connected component intact, reserves the
+approved ProteinGym families for test, and applies the frozen exact two-axis
+allocator. It writes the ignored pre-repair assignment history, a label-free
+public manifest, aggregate reports, checksums, and a last-written completion
+index.
+
+The acceptance command performs two complete builds:
+
+```bash
+uv run --locked --offline python scripts/build_group_aware_candidate.py --repeat-check
+```
+
+The command makes no network requests and never searches for another seed. A
+balance failure is preserved as Task 6 evidence, remains prohibited for model
+use, and does not authorize Task 7.

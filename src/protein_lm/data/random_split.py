@@ -8,6 +8,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from decimal import Decimal, ROUND_HALF_UP, localcontext
 from pathlib import Path
+from typing import Protocol
 
 from protein_lm.data.eligibility import CATALOG_COLUMNS
 from protein_lm.data.random_split_policy import (
@@ -52,13 +53,26 @@ class DiagnosticSplitUseError(RandomSplitError):
 
 @dataclass(frozen=True)
 class SplitInputRecord:
-    """The approved Task 4 fields needed for diagnostic assignment."""
+    """The approved Task 4 fields needed by both split strategies."""
 
     primary_accession: str
     sequence_sha256: str
     biological_length: int
     uniref50_group: str
     proteingym_candidate_test_reserved: bool
+
+
+class Task4AnchorPolicy(Protocol):
+    """Task 4 provenance fields required by either split policy."""
+
+    task4_report_sha256: str
+    task4_policy_sha256: str
+    task4_catalog_sha256: str
+    task4_catalog_byte_size: int
+    task4_catalog_row_count: int
+    expected_eligible_records: int
+    expected_eligible_residues: int
+    expected_eligible_groups: int
 
 
 def assignment_payload(
@@ -138,9 +152,9 @@ def sha256_sidecar(filename: str, digest: str) -> str:
 
 def validate_task4_report(
     task4_report: Mapping[str, object],
-    policy: RandomSplitPolicy,
+    policy: Task4AnchorPolicy,
 ) -> dict[str, dict[str, object]]:
-    """Validate the Task 4 anchors needed before constructing Task 5."""
+    """Validate the Task 4 anchors shared by both Week 1 split strategies."""
 
     expected = {
         "schema version": (task4_report.get("schema_version"), 1),
@@ -211,7 +225,7 @@ def build_random_diagnostic(
     """Build staged local and public Task 5 manifests."""
 
     _validate_build_policy(policy, policy_sha256)
-    records = _read_eligible_records(catalog_path, policy)
+    records = read_eligible_records(catalog_path, policy)
     records.sort(key=lambda record: record.primary_accession)
     return _write_manifests(
         records,
@@ -221,9 +235,9 @@ def build_random_diagnostic(
     )
 
 
-def _read_eligible_records(
+def read_eligible_records(
     path: Path,
-    policy: RandomSplitPolicy,
+    policy: Task4AnchorPolicy,
 ) -> list[SplitInputRecord]:
     records: list[SplitInputRecord] = []
     accessions: set[str] = set()
