@@ -103,7 +103,34 @@ this repository.
 
 The primary corpus uses canonical protein sequences containing only the 20
 standard amino-acid symbols. Sequences containing `B`, `J`, `X`, `Z`, `U`, or
-`O` are excluded and counted rather than silently rewritten.
+`O` are excluded and counted rather than silently rewritten. Records marked as
+fragments, records outside the inclusive 32 through 2046 amino-acid range, and
+records with blank UniRef50 mappings are also ineligible.
+
+The Task 4 eligibility policy is pinned in
+`experiments/week_01/eligibility.toml`. On July 29, 2026, committed revision
+`a7c8b59f38b3599fb9541f2336e4d276c0dccc23` ran the required two-pass offline
+preparation:
+
+```bash
+uv run --locked --offline python scripts/prepare_eligible_records.py --repeat-check
+```
+
+Both passes agreed. The source population contained 575,503 records and
+208,906,902 residues. After applying the frozen filters, 557,718 records and
+197,375,585 residues were eligible.
+
+The detailed sequence-bearing artifacts remain ignored:
+
+| Artifact | Data rows | Bytes | SHA-256 |
+|---|---:|---:|---|
+| `data/processed/week_01/task_04_record_catalog.tsv` | 575,503 | 286,813,587 | `7d619d7853eb6165786c0e0aca4f50ed66f5b69dfbed134a81d789d9c6dbcb70` |
+| `data/processed/week_01/task_04_candidate_test_reserved_families.txt` | 175 | 2,812 | `7b0f3389c74ad31f849a120c6d944ffdfc64a838a636cb0ee546bec9ce2d2a07` |
+
+The aggregate public JSON has SHA-256
+`be791d35b39c4bf1337c121ed830ab01de1d9e73adee77e9eb5d24b0bf64bc5d`.
+It contains counts and provenance, but no sequences, record identifiers,
+family identifiers, split membership, labels, or model results.
 
 Raw records, annotations, sequence files, split working data, and external
 labels remain outside Git. Public manifests may contain stable identifiers,

@@ -20,3 +20,19 @@ uv run --locked --offline python scripts/run_corpus_audit.py --repeat-check
 
 The command requires committed execution code, makes no network requests, and
 does not produce a split, leakage result, or model result.
+
+`prepare_eligible_records.py` verifies the same pinned sources, applies the
+approved Task 4 filters, maps UniRef50 groups, detects exact duplicates, and
+reserves the full resolvable ProteinGym family universe. It writes the detailed
+catalog and reserved-family list under ignored `data/processed/week_01/`, then
+writes aggregate-only evidence under `reports/week_01/`.
+
+The acceptance command always performs two complete passes:
+
+```bash
+uv run --locked --offline python scripts/prepare_eligible_records.py --repeat-check
+```
+
+The command stops on source, policy, Task 2 anchor, mapping, or repeated-run
+drift. It makes no network requests and does not assign a split or train a
+model.
