@@ -8,8 +8,8 @@ assets stay in ignored local directories.
 
 | Source | Frozen version | Planned use | Setup status |
 |---|---|---|---|
-| UniProtKB/Swiss-Prot | `2026_02` | Canonical curated protein sequences | Present locally; checksum verification pending |
-| UniRef50 | Release matched to Swiss-Prot `2026_02` | Group-level train, validation, and test splitting | Present locally; checksum verification pending |
+| UniProtKB/Swiss-Prot | `2026_02` | Canonical curated protein sequences | Present locally; size, MD5, and SHA-256 verified |
+| UniRef50 | Release matched to Swiss-Prot `2026_02` | Group-level train, validation, and test splitting | Present locally; size, MD5, and SHA-256 verified |
 | ProteinGym | `v1.3` | Small mutation-effect evaluation panel | Metadata present and verified; assay files not acquired |
 | Biohub ESMC | `biohub/ESMC-300M`, revision to be pinned | External masked-model and representation baseline | Not downloaded |
 
@@ -31,8 +31,8 @@ UniProt, or download data.
 
 | Use | File | Published bytes | Published MD5 | Local SHA-256 |
 |---|---|---:|---|---|
-| Swiss-Prot records | `uniprot_sprot.dat.gz` | 699,031,150 | `868b301a6ec93955f4e4355d579d8683` | Pending local verification |
-| UniRef50 membership, column 10 | `idmapping_selected.tab.gz` | 7,066,467,385 | `f426a0ee61882f4c86f1b0d616ae53ec` | Pending local verification |
+| Swiss-Prot records | `uniprot_sprot.dat.gz` | 699,031,150 | `868b301a6ec93955f4e4355d579d8683` | `741bcb144f98b8d10f0369b145d562b6751bfd17c285e936553aeb9cb54ab592` |
+| UniRef50 membership, column 10 | `idmapping_selected.tab.gz` | 7,066,467,385 | `f426a0ee61882f4c86f1b0d616ae53ec` | `96707b0430f76e78f708eaa70d6cae7ccb4bb8e4b6b981c7d169215d650cc605` |
 
 Before use, local verification must confirm that `reldate.txt` identifies
 release `2026_02` of June 10, 2026 and that file sizes and calculated MD5
@@ -46,6 +46,18 @@ they are not prefilled in the acquisition config.
 
 Both UniProt files were retrieved manually on July 28, 2026. No project
 download script was executed.
+
+The Task 2 audit verified the release metadata, published sizes, published MD5
+values, and local SHA-256 values on July 29, 2026:
+
+```bash
+uv run --locked --offline python scripts/run_corpus_audit.py --repeat-check
+```
+
+The repeated audit produced the canonical aggregate JSON checksum
+`ab83d9a3341694dab9b4097334f43b2036e5b4fb0417c8b3a028e54f679cdd0f`.
+The corresponding machine-readable, human-readable, and checksum outputs are
+stored under `reports/week_01/`.
 
 ## ProteinGym v1.3 Metadata Pin
 
@@ -110,5 +122,5 @@ Every downloaded source must record:
 - applicable license or terms; and
 - the script and command that produced any derived artifact.
 
-Verification commands and checksums will be added when the corresponding data
+Verification commands and checksums are added only after the corresponding data
 task is executed. No placeholder checksum is treated as evidence.
