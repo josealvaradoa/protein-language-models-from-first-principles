@@ -44,6 +44,9 @@ The same local verification pass also calculates SHA-256 values for the
 project's provenance record. Those values are evidence from actual files, so
 they are not prefilled in the acquisition config.
 
+Both UniProt files were retrieved manually on July 28, 2026. No project
+download script was executed.
+
 ## ProteinGym v1.3 Metadata Pin
 
 The local ProteinGym metadata file is pinned to the official `PG_v1.3` release:
