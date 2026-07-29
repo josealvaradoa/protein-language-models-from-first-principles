@@ -1,0 +1,27 @@
+{
+  "artifacts": {
+    "manifests/week_01/task_05_random_diagnostic.tsv": {
+      "byte_size": 56286073,
+      "sha256": "bd0f4e376df0afa785bfef0153e072470c733cb8f9afe06c5bf973cb12a39c3e"
+    },
+    "manifests/week_01/task_05_random_diagnostic.tsv.sha256": {
+      "byte_size": 96,
+      "sha256": "25aaaa1aa502f4f8999e2ad3c865db450867f2f00a9d92d5d272ec64b3c90c63"
+    },
+    "reports/week_01/task_05_random_diagnostic.json": {
+      "byte_size": 4173,
+      "sha256": "403d76db01632a875b2a1d549e08ef4ac979557bb77513f685606f9be3500c44"
+    },
+    "reports/week_01/task_05_random_diagnostic.md": {
+      "byte_size": 5420,
+      "sha256": "c0374eaea181d1efda2586000c10b25c37aee92f9f0142091bedd0dcc2b5ae76"
+    },
+    "reports/week_01/task_05_random_diagnostic.sha256": {
+      "byte_size": 97,
+      "sha256": "a46918588abb1d9d1078df4597341c354542240da6874cda94bc3918212940de"
+    }
+  },
+  "complete": true,
+  "schema_version": 1,
+  "scope": "week_01_task_05_public_outputs"
+}

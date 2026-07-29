@@ -132,6 +132,24 @@ The aggregate public JSON has SHA-256
 It contains counts and provenance, but no sequences, record identifiers,
 family identifiers, split membership, labels, or model results.
 
+## Task 5 Random Diagnostic
+
+Committed revision `976af20de2e834e7576b89e69cb8a18b09d818fb` assigned
+the 557,718 eligible records twice with the frozen accession-hash algorithm:
+
+```bash
+uv run --locked --offline python scripts/build_random_diagnostic.py --repeat-check
+```
+
+Both passes agreed. The public manifest has 557,718 data rows, 56,286,073
+bytes, and SHA-256
+`bd0f4e376df0afa785bfef0153e072470c733cb8f9afe06c5bf973cb12a39c3e`.
+The ignored local assignment history has SHA-256
+`3b8687cdd5c7477b114fef7f425a68516ffd093f084aefee19d98272f397bfe6`.
+
+This split is an intentionally unprotected diagnostic baseline. It is
+prohibited for model training and is not the selected Week 1 split.
+
 Raw records, annotations, sequence files, split working data, and external
 labels remain outside Git. Public manifests may contain stable identifiers,
 partition assignments, source revisions, and checksums, but not raw labels

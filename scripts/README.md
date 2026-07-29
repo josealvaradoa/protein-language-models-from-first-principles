@@ -36,3 +36,19 @@ uv run --locked --offline python scripts/prepare_eligible_records.py --repeat-ch
 The command stops on source, policy, Task 2 anchor, mapping, or repeated-run
 drift. It makes no network requests and does not assign a split or train a
 model.
+
+`build_random_diagnostic.py` verifies the pinned Task 4 catalog and report,
+then assigns each eligible primary accession independently with the frozen
+SHA-256 boundaries. It writes an ignored local assignment history, a
+label-free public manifest, aggregate reports, checksums, and a last-written
+completion index.
+
+The acceptance command performs two complete builds and requires identical
+artifact evidence:
+
+```bash
+uv run --locked --offline python scripts/build_random_diagnostic.py --repeat-check
+```
+
+The command makes no network requests. Its output is diagnostic only and the
+training guard rejects it as a selected model split.
