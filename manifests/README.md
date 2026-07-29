@@ -19,3 +19,19 @@ The adjacent sidecar records the same checksum.
 This manifest deliberately does not keep exact duplicates, UniRef50 groups, or
 ProteinGym families together. It exists only as the comparison baseline and
 must not be used for model training.
+
+The Week 1 Task 6 group-aware pre-repair manifest is:
+
+```text
+manifests/week_01/task_06_group_aware_pre_repair.tsv
+```
+
+It uses the same five-column public schema and contains the same 557,718
+eligible records. Its SHA-256 is
+`f6ee25d078ca6df864e8e30bba848025d5b45810ed60605f09255c767c77f71a`.
+The adjacent sidecar records the same checksum.
+
+The manifest keeps complete UniRef50 groups, exact-duplicate-connected units,
+and represented ProteinGym-reserved groups intact. It is preserved as
+pre-repair evidence, but it failed the frozen residue-balance tolerance and
+must not be used for Task 7 or model training.

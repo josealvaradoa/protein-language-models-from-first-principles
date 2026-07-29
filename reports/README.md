@@ -45,3 +45,18 @@ two-pass equality, input and output checksums, and the model-use prohibition.
 The completion index is written last and covers the byte size and SHA-256 of
 every preceding public Task 5 artifact. The canonical Task 5 JSON SHA-256 is
 `403d76db01632a875b2a1d549e08ef4ac979557bb77513f685606f9be3500c44`.
+
+The Week 1 Task 6 group-aware pre-repair candidate writes:
+
+```text
+reports/week_01/task_06_group_aware_pre_repair.json
+reports/week_01/task_06_group_aware_pre_repair.md
+reports/week_01/task_06_group_aware_pre_repair.sha256
+reports/week_01/task_06_group_aware_pre_repair.complete.json
+```
+
+The report records exact grouping, reservation, balance, integrity, state-zero,
+and two-pass reproducibility evidence. The frozen candidate passed record
+balance but failed residue balance in every partition, so Task 7 and model use
+remain unauthorized. The canonical Task 6 JSON SHA-256 is
+`9ebb8093962bf31cc010b160f229efb3bbd73ed6d688c54d277db4e6ee683ebf`.

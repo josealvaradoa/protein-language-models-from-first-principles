@@ -150,6 +150,40 @@ The ignored local assignment history has SHA-256
 This split is an intentionally unprotected diagnostic baseline. It is
 prohibited for model training and is not the selected Week 1 split.
 
+## Task 6 Group-Aware Pre-Repair Candidate
+
+Committed revision `bfa191d788954c0e4b8a26f03ee2b2eeca1e6339` assigned
+the same 557,718 eligible records twice with the frozen group-aware allocator:
+
+```bash
+uv run --locked --offline python scripts/build_group_aware_candidate.py --repeat-check
+```
+
+Both passes agreed. The 185,344 UniRef50 groups remained 185,344 assignment
+units because no exact sequence hash crossed groups. All 157 represented
+ProteinGym-reserved groups remained in test, no accession, exact hash, or
+UniRef50 group crossed partitions, and retention was 100 percent.
+
+The public pre-repair manifest has 557,718 data rows, 56,285,795 bytes, and
+SHA-256
+`f6ee25d078ca6df864e8e30bba848025d5b45810ed60605f09255c767c77f71a`.
+The ignored local assignment history has SHA-256
+`7a89c5d432ff9b2a2a787cae9d5584754ec8a027df4118aaedcc2bd4c41221d1`.
+The exact repair-state-zero digest is
+`0ed690a0e048c2c0c735d1caf796487be47b3700eb90ad9fcafeec0a315ce176`.
+
+Record shares passed the frozen tolerance, but residue shares did not:
+
+| Partition | Records | Record share | Residues | Residue share |
+|---|---:|---:|---:|---:|
+| Training | 500,585 | 89.755934% | 182,674,157 | 92.551547% |
+| Validation | 28,550 | 5.119075% | 7,395,854 | 3.747097% |
+| Test | 28,583 | 5.124991% | 7,305,574 | 3.701356% |
+
+The candidate status is `failed_balance`. The frozen seed, allocator, and
+tolerance were not changed after observing the result. Task 7 and model use
+remain unauthorized.
+
 Raw records, annotations, sequence files, split working data, and external
 labels remain outside Git. Public manifests may contain stable identifiers,
 partition assignments, source revisions, and checksums, but not raw labels

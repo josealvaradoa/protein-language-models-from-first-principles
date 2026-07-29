@@ -1,0 +1,176 @@
+{
+  "assignment_units": {
+    "assignment_unit_count": 185344,
+    "exact_hashes_spanning_groups": 0,
+    "groups_in_merged_units": 0,
+    "initial_group_count": 185344,
+    "largest_reserved_unit_records": 284,
+    "largest_reserved_unit_residues": 78684,
+    "largest_unit_original_groups": 1,
+    "largest_unit_records": 641,
+    "largest_unit_residues": 307920,
+    "merged_unit_count": 0,
+    "represented_reserved_groups": 157,
+    "reservation_expanded_groups": 0,
+    "reservation_expanded_records": 0,
+    "reservation_expanded_residues": 0,
+    "reserved_assignment_records": 1965,
+    "reserved_assignment_residues": 700093,
+    "reserved_assignment_units": 157,
+    "reserved_family_universe": 175,
+    "source_reserved_records": 1965,
+    "source_reserved_residues": 700093,
+    "unrepresented_reserved_families": 18
+  },
+  "candidate_status": "failed_balance",
+  "code_revision": "bfa191d788954c0e4b8a26f03ee2b2eeca1e6339",
+  "config_sha256": "54708910a4d09f2c9af4be2171e0044dcc08799a5e0d64e9620a419095af10b8",
+  "failure_reasons": [
+    "training_residue_balance",
+    "validation_residue_balance",
+    "test_residue_balance"
+  ],
+  "hash_algorithm": "sha256",
+  "input_catalog": {
+    "byte_size": 286813587,
+    "relative_path": "data/processed/week_01/task_04_record_catalog.tsv",
+    "row_count": 575503,
+    "sha256": "7d619d7853eb6165786c0e0aca4f50ed66f5b69dfbed134a81d789d9c6dbcb70"
+  },
+  "integrity": {
+    "accession_crossings": 0,
+    "all_balance_axes_passed": false,
+    "assigned_records": 557718,
+    "exact_sequence_hash_crossings": 0,
+    "record_balance_passed": true,
+    "record_retention_percent": "100.000000",
+    "reserved_groups_outside_test": 0,
+    "reserved_records_outside_test": 0,
+    "residue_balance_passed": false,
+    "residue_retention_percent": "100.000000",
+    "structural_invariants_passed": true,
+    "uniref50_group_crossings": 0
+  },
+  "license_spdx": "CC-BY-4.0",
+  "local_assignments": {
+    "byte_size": 31778425,
+    "relative_path": "data/processed/week_01/task_06_group_aware_pre_repair_assignments.tsv",
+    "row_count": 557718,
+    "sha256": "7a89c5d432ff9b2a2a787cae9d5584754ec8a027df4118aaedcc2bd4c41221d1"
+  },
+  "model_use": "prohibited",
+  "order_namespace": "week1-group-order-v1",
+  "partitions": {
+    "test": {
+      "assignment_units": 26775,
+      "record_balance_passed": true,
+      "record_deviation_percentage_points": "0.124991",
+      "record_share_percent": "5.124991",
+      "records": 28583,
+      "residue_balance_passed": false,
+      "residue_deviation_percentage_points": "-1.298644",
+      "residue_share_percent": "3.701356",
+      "residues": 7305574,
+      "target_denominator": 20,
+      "target_numerator": 1,
+      "target_share_percent": "5.000000",
+      "unique_groups": 26775
+    },
+    "training": {
+      "assignment_units": 130019,
+      "record_balance_passed": true,
+      "record_deviation_percentage_points": "-0.244066",
+      "record_share_percent": "89.755934",
+      "records": 500585,
+      "residue_balance_passed": false,
+      "residue_deviation_percentage_points": "2.551547",
+      "residue_share_percent": "92.551547",
+      "residues": 182674157,
+      "target_denominator": 20,
+      "target_numerator": 18,
+      "target_share_percent": "90.000000",
+      "unique_groups": 130019
+    },
+    "validation": {
+      "assignment_units": 28550,
+      "record_balance_passed": true,
+      "record_deviation_percentage_points": "0.119075",
+      "record_share_percent": "5.119075",
+      "records": 28550,
+      "residue_balance_passed": false,
+      "residue_deviation_percentage_points": "-1.252903",
+      "residue_share_percent": "3.747097",
+      "residues": 7395854,
+      "target_denominator": 20,
+      "target_numerator": 1,
+      "target_share_percent": "5.000000",
+      "unique_groups": 28550
+    }
+  },
+  "population": {
+    "records": 557718,
+    "residues": 197375585,
+    "unique_groups": 185344
+  },
+  "public_manifest": {
+    "byte_size": 56285795,
+    "relative_path": "manifests/week_01/task_06_group_aware_pre_repair.tsv",
+    "row_count": 557718,
+    "sha256": "f6ee25d078ca6df864e8e30bba848025d5b45810ed60605f09255c767c77f71a"
+  },
+  "repair_cycle": 0,
+  "repair_state": {
+    "byte_size": 9248545,
+    "repair_cycle": 0,
+    "row_count": 185344,
+    "sha256": "0ed690a0e048c2c0c735d1caf796487be47b3700eb90ad9fcafeec0a315ce176"
+  },
+  "repeat_verified": true,
+  "schema_version": 1,
+  "scope": "week_01_task_06_group_aware_pre_repair",
+  "seed": 20260727,
+  "selected_for_training": false,
+  "similarity_audit_completed": false,
+  "sources": {
+    "proteingym_metadata": {
+      "byte_size": 208734,
+      "filename": "DMS_substitutions.csv",
+      "license_spdx": "MIT",
+      "release": "v1.3",
+      "retrieval_date": "2026-07-28",
+      "retrieval_method": "manual_user_download",
+      "sha256": "a8f498011532a74aa9fe556a50555a75e928c5837d19c06a87592ae04049b308",
+      "upstream_checksum": "8d1ea9a19c0404b511cd24378b25c2a5f86f10e9",
+      "upstream_checksum_algorithm": "git_blob_sha1"
+    },
+    "swiss_prot_records": {
+      "byte_size": 699031150,
+      "filename": "uniprot_sprot.dat.gz",
+      "license_spdx": "CC-BY-4.0",
+      "release": "2026_02",
+      "retrieval_date": "2026-07-28",
+      "retrieval_method": "manual_user_download",
+      "sha256": "741bcb144f98b8d10f0369b145d562b6751bfd17c285e936553aeb9cb54ab592",
+      "upstream_checksum": "868b301a6ec93955f4e4355d579d8683",
+      "upstream_checksum_algorithm": "md5"
+    },
+    "uniref50_membership": {
+      "byte_size": 7066467385,
+      "filename": "idmapping_selected.tab.gz",
+      "license_spdx": "CC-BY-4.0",
+      "release": "2026_02",
+      "retrieval_date": "2026-07-28",
+      "retrieval_method": "manual_user_download",
+      "sha256": "96707b0430f76e78f708eaa70d6cae7ccb4bb8e4b6b981c7d169215d650cc605",
+      "upstream_checksum": "f426a0ee61882f4c86f1b0d616ae53ec",
+      "upstream_checksum_algorithm": "md5"
+    }
+  },
+  "stage": "pre_repair",
+  "strategy": "group_aware",
+  "task4_policy_sha256": "69b8160e0aa972b66d28c0404af1c1b0a745bc423b8a620e47d30e5e483ce276",
+  "task4_report_sha256": "be791d35b39c4bf1337c121ed830ab01de1d9e73adee77e9eb5d24b0bf64bc5d",
+  "task6_gates_passed": false,
+  "task7_authorized": false,
+  "verified_passes": 2
+}
