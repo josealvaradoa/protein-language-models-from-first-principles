@@ -60,3 +60,8 @@ and two-pass reproducibility evidence. The frozen candidate passed record
 balance but failed residue balance in every partition, so Task 7 and model use
 remain unauthorized. The canonical Task 6 JSON SHA-256 is
 `9ebb8093962bf31cc010b160f229efb3bbd73ed6d688c54d277db4e6ee683ebf`.
+
+`reports/week_01/task_07_diagnostic_continuation.md` records the later A-003
+authorization to run only the frozen MMseqs2 audit against the immutable Task
+5 and Task 6 assignments. It does not rewrite the Task 6 result or authorize
+repair, selection, Task 8 membership use, or model training.
