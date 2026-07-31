@@ -69,3 +69,26 @@ uv run --locked --offline python scripts/build_group_aware_candidate.py --repeat
 The command makes no network requests and never searches for another seed. A
 balance failure is preserved as Task 6 evidence, remains prohibited for model
 use, and does not authorize Task 7.
+
+`run_diagnostic_similarity_audit.py` implements the separate A-003
+authorization. It verifies the immutable Task 5 and Task 6 assignments,
+materializes six ignored FASTA files, builds one training target database per
+strategy, and runs the frozen W1-D09 enforcement and residual searches for
+validation and test. Every track compares complete per-query rows at caps
+1,000 and 10,000, escalating only changed queries to 100,000.
+
+The command is intentionally explicit because it starts the long local corpus
+audit:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_diagnostic_similarity_audit.py \
+  --execute-diagnostic-audit
+```
+
+The runner requires committed execution code and MMseqs2 `18-8cc5c`. It is
+resumable, makes no network requests, keeps sequences and alignment rows under
+ignored `data/`, and stops without a public report if any staged-cap result
+fails to converge. It has no repair, reassignment, selection, training, or
+alternate-threshold option. A completed report still records the Task 6
+candidate as `failed_balance` and returns control to Jose for review.
