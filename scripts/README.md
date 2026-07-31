@@ -92,3 +92,22 @@ ignored `data/`, and stops without a public report if any staged-cap result
 fails to converge. It has no repair, reassignment, selection, training, or
 alternate-threshold option. A completed report still records the Task 6
 candidate as `failed_balance` and returns control to Jose for review.
+
+For a human code review, read Task 7 in this order:
+
+1. `diagnostic_similarity_audit.toml` freezes the authority and search policy.
+2. `task7_workflow.py` shows the complete audit from preflight to publication.
+3. `similarity_manifests.py` and `similarity_fastas.py` prove the memberships
+   and build the six query and training files.
+4. `task7_search.py` owns the staged MMseqs2 search procedure, while
+   `task7_execution.py` and `task7_checkpoints.py` isolate machine safety and
+   resumability.
+5. `similarity_alignment.py`, `similarity_results.py`, and
+   `similarity_evidence.py` follow the scientific data flow from strict rows to
+   cap comparison to aggregate evidence.
+6. `task7_report_output.py` assembles and publishes the report, and
+   `task7_report.py` validates and renders its public JSON and Markdown.
+
+The small `similarity_audit.py` and `similarity_inputs.py` files only preserve
+older imports. Task 7 implementation modules import their concrete owners
+directly.
