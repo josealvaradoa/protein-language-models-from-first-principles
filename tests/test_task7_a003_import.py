@@ -12,9 +12,6 @@ from protein_lm.data.similarity_audit_policy import (
 from protein_lm.data.similarity_fastas import FastaEvidence
 from protein_lm.data.task7_a003_import import verify_a003_residual_import
 from protein_lm.data.task7_a004_policy import A004Policy, FIXED_CAPS, load_a004_policy
-from protein_lm.data.task7_checkpoints import file_identity
-from protein_lm.data.task7_commands import createdb_command, search_command
-from protein_lm.data.task7_inputs import run_fingerprint
 
 PROJECT_ROOT = Path(__file__).parents[1]
 SOURCE_POLICY = (
@@ -103,7 +100,7 @@ def _build_fixture(
     source_policy = load_similarity_audit_policy(source_config)
     policy = load_a004_policy(A004_POLICY)
     workspace = root / policy.source_workspace_relative_path
-    fingerprint = run_fingerprint(
+    fingerprint = _source_fingerprint(
         policy=source_policy,
         code_revision=policy.source_code_revision,
         mmseqs_version=policy.source_mmseqs_version,
@@ -165,14 +162,13 @@ def _build_fixture(
             "strategy": "random",
             "training_fasta": asdict(training),
             "command": list(
-                createdb_command(
-                    source_policy,
-                    training_fasta=training_path,
-                    database_prefix=workspace / "databases/.random.incomplete/target",
+                _literal_createdb_command(
+                    training_path,
+                    workspace / "databases/.random.incomplete/target",
                 )
             ),
             "runtime_seconds": "0.1",
-            "artifacts": {"target": file_identity(database_artifact)},
+            "artifacts": {"target": _identity(database_artifact)},
         },
     )
 
@@ -205,9 +201,7 @@ def _build_fixture(
                 "query_count": query.record_count,
                 "query_fasta": asdict(query),
                 "command": list(
-                    search_command(
-                        source_policy,
-                        pass_name="residual",
+                    _literal_search_command(
                         cap=cap,
                         query_fasta=query_path,
                         target_database=workspace / "databases/random/target",
@@ -223,12 +217,12 @@ def _build_fixture(
                 },
             },
         )
-        stage_hashes.append((cap, file_identity(marker_path)["sha256"]))
+        stage_hashes.append((cap, _identity(marker_path)["sha256"]))
 
     policy = replace(
         policy,
-        source_fastas_marker_sha256=str(file_identity(fastas_marker)["sha256"]),
-        source_database_marker_sha256=str(file_identity(database_marker)["sha256"]),
+        source_fastas_marker_sha256=str(_identity(fastas_marker)["sha256"]),
+        source_database_marker_sha256=str(_identity(database_marker)["sha256"]),
         source_stage_marker_sha256=tuple(stage_hashes),
     )
     assert first_canonical is not None
@@ -254,7 +248,7 @@ def _write_json(path: Path, payload: dict[str, object]) -> None:
 
 
 def _file_evidence(path: Path, row_count: int) -> dict[str, object]:
-    identity = file_identity(path)
+    identity = _identity(path)
     return {"row_count": row_count, **identity}
 
 
@@ -269,3 +263,94 @@ def _snapshot(policy: A004Policy, root: Path) -> dict[str, bytes]:
         for path in workspace.rglob("*")
         if path.is_file()
     }
+
+
+def _identity(path: Path) -> dict[str, object]:
+    content = path.read_bytes()
+    return {"byte_size": len(content), "sha256": hashlib.sha256(content).hexdigest()}
+
+
+def _source_fingerprint(*, policy, code_revision: str, mmseqs_version: str) -> str:
+    payload = {
+        "code_revision": code_revision,
+        "config_sha256": (
+            "ce767f0ce843e4f40edbcd2f9da6ca4642996046cb4042a2410c27c39cbae742"
+        ),
+        "mmseqs_version": mmseqs_version,
+        "task4_catalog_sha256": policy.task4_catalog_sha256,
+        "task5_public_manifest_sha256": policy.task5_public_manifest_sha256,
+        "task5_local_assignment_sha256": policy.task5_local_assignment_sha256,
+        "task5_report_sha256": policy.task5_report_sha256,
+        "task6_public_manifest_sha256": policy.task6_public_manifest_sha256,
+        "task6_local_assignment_sha256": policy.task6_local_assignment_sha256,
+        "task6_report_sha256": policy.task6_report_sha256,
+        "task6_repair_state_sha256": policy.task6_repair_state_sha256,
+    }
+    serialized = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(serialized).hexdigest()
+
+
+def _literal_createdb_command(
+    training_fasta: Path, database_prefix: Path
+) -> tuple[str, ...]:
+    return (
+        "/opt/homebrew/bin/mmseqs",
+        "createdb",
+        str(training_fasta),
+        str(database_prefix),
+        "--dbtype",
+        "1",
+        "--shuffle",
+        "0",
+        "--createdb-mode",
+        "0",
+        "--threads",
+        "10",
+    )
+
+
+def _literal_search_command(
+    *,
+    cap: int,
+    query_fasta: Path,
+    target_database: Path,
+    raw_output: Path,
+    temp_directory: Path,
+) -> tuple[str, ...]:
+    return (
+        "/opt/homebrew/bin/mmseqs",
+        "easy-search",
+        str(query_fasta),
+        str(target_database),
+        str(raw_output),
+        str(temp_directory),
+        "--search-type",
+        "1",
+        "--alignment-mode",
+        "3",
+        "--seq-id-mode",
+        "0",
+        "-s",
+        "7.5",
+        "-e",
+        "10",
+        "--mask",
+        "0",
+        "--comp-bias-corr",
+        "0",
+        "--max-seqs",
+        str(cap),
+        "--threads",
+        "10",
+        "--format-output",
+        (
+            "query,target,fident,qcov,tcov,alnlen,qlen,tlen,qstart,qend,"
+            "tstart,tend,evalue,bits"
+        ),
+        "--min-seq-id",
+        "0.3",
+        "-c",
+        "0.0",
+        "--cov-mode",
+        "0",
+    )

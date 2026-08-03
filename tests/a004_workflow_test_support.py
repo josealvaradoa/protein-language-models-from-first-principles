@@ -4,6 +4,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 import protein_lm.data.task7_a004_database as database_module
 import protein_lm.data.task7_a004_workflow as workflow_module
@@ -39,14 +40,33 @@ class SyntheticWorkflow:
     project_root: Path
     config_path: Path
     workspace: Path
+    source_workspace: Path
+    source_policy: object
+    source_policy_path: Path
     hardware: dict[str, object]
-    database_calls: list[tuple[str, ...]]
-    search_calls: list[tuple[str, ...]]
-    database_runner: object
-    search_runner: object
+    database_calls: list["RunnerCall"]
+    search_calls: list["RunnerCall"]
+    database_runner: Callable[..., str]
+    search_runner: Callable[..., str]
 
 
-def install_synthetic_workflow(monkeypatch, tmp_path: Path) -> SyntheticWorkflow:
+@dataclass(frozen=True)
+class RunnerCall:
+    """Exact runner boundary observed by the synthetic workflow."""
+
+    command: tuple[str, ...]
+    project_root: Path
+    workspace: Path
+    log_path: Path
+    policy: object
+
+
+def install_synthetic_workflow(
+    monkeypatch,
+    tmp_path: Path,
+    *,
+    changed_search: bool = False,
+) -> SyntheticWorkflow:
     """Patch only external/preflight seams while retaining orchestration and evidence."""
 
     project_root = tmp_path / "repo"
@@ -54,7 +74,10 @@ def install_synthetic_workflow(monkeypatch, tmp_path: Path) -> SyntheticWorkflow
     source_workspace = project_root / "a003"
     project_root.mkdir()
     policy = load_a004_policy(A004_CONFIG)
-    source_policy = load_similarity_audit_policy(SOURCE_CONFIG)
+    source_policy_path = project_root / "experiments/week_01/diagnostic_similarity_audit.toml"
+    source_policy_path.parent.mkdir(parents=True)
+    source_policy_path.write_bytes(SOURCE_CONFIG.read_bytes())
+    source_policy = load_similarity_audit_policy(source_policy_path)
     manifests = _manifests()
     inputs = _materialized_inputs(workspace, manifests)
     imported = _imported_a003(source_workspace, manifests, inputs)
@@ -72,7 +95,7 @@ def install_synthetic_workflow(monkeypatch, tmp_path: Path) -> SyntheticWorkflow
         paths={
             "workspace": workspace,
             "source_workspace": source_workspace,
-            "source_policy": SOURCE_CONFIG,
+            "source_policy": source_policy_path,
         },
     )
     monkeypatch.setattr(
@@ -122,23 +145,33 @@ def install_synthetic_workflow(monkeypatch, tmp_path: Path) -> SyntheticWorkflow
     monkeypatch.setattr(database_module, "run_mmseqs_command", forbidden_runner)
     monkeypatch.setattr(stage_module, "run_mmseqs_command", forbidden_runner)
 
-    database_calls: list[tuple[str, ...]] = []
-    search_calls: list[tuple[str, ...]] = []
+    database_calls: list[RunnerCall] = []
+    search_calls: list[RunnerCall] = []
 
-    def database_runner(command, *args):
-        database_calls.append(tuple(command))
+    def database_runner(command, project_root, workspace, log_path, policy):
+        database_calls.append(
+            RunnerCall(tuple(command), project_root, workspace, log_path, policy)
+        )
         Path(command[3]).write_bytes(b"synthetic database")
         return "0.01"
 
-    def search_runner(command, *args):
-        search_calls.append(tuple(command))
+    def search_runner(command, project_root, workspace, log_path, policy):
+        search_calls.append(
+            RunnerCall(tuple(command), project_root, workspace, log_path, policy)
+        )
         query_ids = [
             line[1:]
             for line in Path(command[2]).read_text().splitlines()
             if line.startswith(">")
         ]
+        cap = int(command[command.index("--max-seqs") + 1])
+        fident = "0.10" if changed_search and cap == 1_000 else "0.60"
         rows = [
-            _row(query, "R_TRAIN" if query.startswith("R_") else "G_TRAIN")
+            _row(
+                query,
+                "R_TRAIN" if query.startswith("R_") else "G_TRAIN",
+                fident=fident,
+            )
             for query in query_ids
         ]
         Path(command[4]).write_text("\n".join(rows) + "\n")
@@ -148,6 +181,9 @@ def install_synthetic_workflow(monkeypatch, tmp_path: Path) -> SyntheticWorkflow
         project_root=project_root,
         config_path=A004_CONFIG,
         workspace=workspace,
+        source_workspace=source_workspace,
+        source_policy=source_policy,
+        source_policy_path=source_policy_path,
         hardware={
             "platform": "synthetic-platform",
             "machine": "synthetic-machine",
