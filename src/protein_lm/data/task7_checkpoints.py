@@ -156,14 +156,27 @@ def verify_file(path: Path, expected_size: int, expected_sha256: str) -> None:
         raise SimilarityAuditError(f"completed artifact checksum drifted: {path}")
 
 
-def verify_artifact_index(directory: Path, raw_index: object) -> None:
-    """Verify every file recorded for a completed MMseqs2 database."""
+def verify_database_artifacts(directory: Path, raw_index: object) -> None:
+    """Require the current database inventory to equal its frozen index."""
 
     if not isinstance(raw_index, dict) or not raw_index:
         raise SimilarityAuditError("database artifact index is malformed")
+    if any(
+        not isinstance(filename, str) or Path(filename).name != filename
+        for filename in raw_index
+    ):
+        raise SimilarityAuditError("database artifact filename is unsafe")
+    indexed_names = set(raw_index)
+    if "target" not in indexed_names:
+        raise SimilarityAuditError("database artifact index lacks its target prefix")
+    actual_names = {
+        path.name for path in directory.iterdir() if path.name != "complete.json"
+    }
+    if actual_names != indexed_names:
+        raise SimilarityAuditError("database artifact inventory drifted")
     for filename, evidence in raw_index.items():
-        if not isinstance(filename, str) or Path(filename).name != filename:
-            raise SimilarityAuditError("database artifact filename is unsafe")
+        if not (directory / filename).is_file():
+            raise SimilarityAuditError("database artifact inventory contains a non-file")
         if not isinstance(evidence, dict):
             raise SimilarityAuditError("database artifact evidence is malformed")
         verify_file(
@@ -171,6 +184,12 @@ def verify_artifact_index(directory: Path, raw_index: object) -> None:
             _strict_int(evidence.get("byte_size"), "database byte size"),
             _strict_string(evidence.get("sha256"), "database SHA-256"),
         )
+
+
+def verify_artifact_index(directory: Path, raw_index: object) -> None:
+    """Backward-compatible alias for strict database-artifact verification."""
+
+    verify_database_artifacts(directory, raw_index)
 
 
 def verify_compact_file(path: Path, raw_evidence: object) -> None:

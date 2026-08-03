@@ -111,6 +111,11 @@ def ensure_materialized_inputs(
             fastas=fastas,
         )
 
+    if fasta_directory.exists() and any(fasta_directory.iterdir()):
+        raise SimilarityAuditError(
+            "materialized-input FASTA directory lacks its completion marker"
+        )
+
     print("materializing six pinned FASTA inputs...")
     inputs = materialize_strategy_fastas(
         catalog_path=catalog_path,

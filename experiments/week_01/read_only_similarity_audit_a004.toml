@@ -1,0 +1,31 @@
+schema_version = 1
+scope = "week_01_task_07_read_only_fixed_budget_audit"
+adjustment_id = "A-004"
+source_adjustment_id = "A-003"
+read_only = true
+repair_authorized = false
+selected_split_authorized = false
+task8_membership_use_authorized = false
+model_use = "prohibited"
+
+source_policy_relative_path = "experiments/week_01/diagnostic_similarity_audit.toml"
+source_policy_sha256 = "ce767f0ce843e4f40edbcd2f9da6ca4642996046cb4042a2410c27c39cbae742"
+source_workspace_relative_path = "data/processed/week_01/task_07_diagnostic_similarity_audit"
+workspace_relative_path = "data/processed/week_01/task_07_read_only_fixed_budget_audit_a004"
+source_code_revision = "ca8940a2557a129da2b76fd2bd4b619a0fff8361"
+source_run_fingerprint = "865c3eaead1167d6d27469a26f2a3add8fb0e1f1e52322353251aef2dea52041"
+source_mmseqs_version = "18-8cc5c"
+
+all_query_cap = 10000
+staged_escalation_cap = 100000
+import_strategy = "random"
+import_partition = "validation"
+import_pass = "residual"
+
+source_fastas_marker_sha256 = "5a4b23ba4c0550279967d056077a8c6ce06f40d3e4b58c58cd2b7c1445bde9f0"
+source_database_marker_sha256 = "f3c4c170239d723ca9cc305041da6d3df30b986a5c76617c0e112a13e6f6eb7f"
+
+[source_stage_marker_sha256]
+"1000" = "6c90bf2d17b968619a665aa0d98974cdf345de68d1a5a6ba89b906f8715df01f"
+"10000" = "9b7544504bf8578e19ea2f4db7a3984f4dc1fc5b36af61f2aed325ae164ed48d"
+"100000" = "a02b2374fe0c056a9ca912ca8df8a06ce1efd526fa99c0d1847e215dd925bcc5"
