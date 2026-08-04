@@ -9,7 +9,7 @@ from protein_lm.data.similarity_results import (
     compare_canonical_results,
     convergence_evidence,
 )
-from task7_test_support import (
+from similarity_evidence_test_support import (
     alignment_tsv_row,
     canonicalize_rows,
     metadata,
@@ -45,11 +45,14 @@ def test_canonicalization_ignores_row_order_and_decimal_spelling(
         queries,
         targets,
     )
-    assert compare_canonical_results(
-        first,
-        second,
-        expected_query_ids=queries,
-    ) == ()
+    assert (
+        compare_canonical_results(
+            first,
+            second,
+            expected_query_ids=queries,
+        )
+        == ()
+    )
 
 
 @pytest.mark.parametrize(
@@ -246,11 +249,14 @@ def test_zero_hit_queries_participate_in_equality(tmp_path: Path) -> None:
         queries,
         targets,
     )
-    assert compare_canonical_results(
-        first,
-        second,
-        expected_query_ids=queries,
-    ) == ()
+    assert (
+        compare_canonical_results(
+            first,
+            second,
+            expected_query_ids=queries,
+        )
+        == ()
+    )
 
 
 def test_staged_cap_escalation_converges_or_stops(tmp_path: Path) -> None:

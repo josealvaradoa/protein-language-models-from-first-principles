@@ -6,7 +6,7 @@ import hashlib
 from dataclasses import replace
 from pathlib import Path
 
-import protein_lm.data.task7_a004_workflow as workflow_module
+import protein_lm.data.fixed_budget_audit.workflow as workflow_module
 from a004_workflow_test_support import SOURCE_CONFIG, install_synthetic_workflow
 from protein_lm.data.similarity_audit_models import FileEvidence, SequenceMetadata
 from protein_lm.data.similarity_audit_policy import load_similarity_audit_policy
@@ -15,7 +15,7 @@ from protein_lm.data.similarity_manifests import (
     StrategyManifest,
     StructuralMembershipAudit,
 )
-from protein_lm.data.task7_inputs import ensure_materialized_inputs
+from protein_lm.data.fixed_budget_audit.source import ensure_materialized_inputs
 
 from .golden_support import GoldenAudit, fasta_evidence, identity, json_bytes
 
@@ -28,7 +28,7 @@ def test_full_synthetic_workflow_matches_independent_byte_goldens(
 ) -> None:
     synthetic = install_synthetic_workflow(monkeypatch, tmp_path, changed_search=True)
 
-    workflow_module.run_a004_fixed_budget_audit(
+    workflow_module.run_fixed_budget_audit(
         project_root=synthetic.project_root,
         config_path=synthetic.config_path,
         search_runner=synthetic.search_runner,
@@ -41,6 +41,12 @@ def test_full_synthetic_workflow_matches_independent_byte_goldens(
         synthetic.source_policy_path.read_bytes(),
     )
     golden.add_publication(GOLDEN_REPORT.read_bytes())
+    actual_artifacts = {
+        path.relative_to(synthetic.project_root).as_posix()
+        for path in synthetic.project_root.rglob("*")
+        if path.is_file()
+    }
+    assert actual_artifacts == set(golden.artifacts) | {"a004/audit.lock"}
     for relative_path, expected in golden.artifacts.items():
         actual_path = synthetic.project_root / relative_path
         assert actual_path.read_bytes() == expected, relative_path
@@ -151,7 +157,9 @@ def _manifests() -> dict[str, StrategyManifest]:
     for strategy, partitions in assignments.items():
         records = {
             accession: SequenceMetadata(
-                sequence_sha256=hashlib.sha256(sequences[accession].encode()).hexdigest(),
+                sequence_sha256=hashlib.sha256(
+                    sequences[accession].encode()
+                ).hexdigest(),
                 biological_length=4,
                 uniref50_group=groups[accession],
                 partition=partition,

@@ -15,7 +15,11 @@ from protein_lm.data.similarity_evidence import (
     compact_converged_results,
 )
 from protein_lm.data.similarity_results import convergence_evidence
-from task7_test_support import alignment_tsv_row, canonicalize_rows, metadata
+from similarity_evidence_test_support import (
+    alignment_tsv_row,
+    canonicalize_rows,
+    metadata,
+)
 
 
 def test_aggregation_counts_queries_pairs_attribution_and_categories(

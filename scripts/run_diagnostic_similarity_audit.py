@@ -6,7 +6,9 @@ import argparse
 import subprocess
 from pathlib import Path
 
-from protein_lm.data.task7_workflow import run_diagnostic_similarity_audit
+from protein_lm.data.fixed_budget_audit.diagnostic_workflow import (
+    run_diagnostic_similarity_audit,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = (
@@ -15,24 +17,25 @@ CONFIG_PATH = (
 REPORT_DIRECTORY = PROJECT_ROOT / "reports" / "week_01"
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
+        prog="run_diagnostic_similarity_audit.py",
         description=(
             "Run only the A-003 diagnostic MMseqs2 audit. This command never "
             "repairs, selects, or trains on a split."
-        )
+        ),
     )
     parser.add_argument(
-        "--execute-diagnostic-audit",
+        "--execute-searches",
         action="store_true",
         required=True,
         help="required safety acknowledgement that starts the corpus searches",
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> int:
-    parse_args()
+def main(argv: list[str] | None = None) -> int:
+    parse_args(argv)
     try:
         rendered = run_diagnostic_similarity_audit(
             project_root=PROJECT_ROOT,

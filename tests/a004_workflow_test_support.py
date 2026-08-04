@@ -6,9 +6,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
-import protein_lm.data.task7_a004_database as database_module
-import protein_lm.data.task7_a004_workflow as workflow_module
-import protein_lm.data.task7_fixed_budget_stages as stage_module
+import protein_lm.data.fixed_budget_audit.workflow as workflow_module
+import protein_lm.data.fixed_budget_audit.search as search_module
+import protein_lm.data.fixed_budget_audit.validation as validation_module
+from protein_lm.data.fixed_budget_audit.errors import SourceEvidenceError
 from protein_lm.data.similarity_audit_models import FileEvidence
 from protein_lm.data.similarity_audit_policy import load_similarity_audit_policy
 from protein_lm.data.similarity_fastas import FastaEvidence, MaterializedInputs
@@ -18,15 +19,15 @@ from protein_lm.data.similarity_manifests import (
     StructuralMembershipAudit,
 )
 from protein_lm.data.similarity_results import canonicalize_mmseqs_tsv
-from protein_lm.data.task7_a003_import import A003Import
-from protein_lm.data.task7_a003_stages import (
+from protein_lm.data.fixed_budget_audit.source import (
+    A003Import,
     DatabaseImport,
     ImportedStage,
     MarkerEvidence,
 )
-from protein_lm.data.task7_a004_policy import load_a004_policy
-from protein_lm.data.task7_a004_workflow import A004Configuration
-from task7_test_support import alignment_tsv_row, metadata
+from protein_lm.data.fixed_budget_audit.config import load_a004_policy
+from protein_lm.data.fixed_budget_audit.workflow import A004Configuration
+from similarity_evidence_test_support import alignment_tsv_row, metadata
 
 REPOSITORY = Path(__file__).parents[1]
 A004_CONFIG = REPOSITORY / "experiments/week_01/read_only_similarity_audit_a004.toml"
@@ -43,6 +44,7 @@ class SyntheticWorkflow:
     source_workspace: Path
     source_policy: object
     source_policy_path: Path
+    source_paths: dict[str, Path]
     hardware: dict[str, object]
     database_calls: list["RunnerCall"]
     search_calls: list["RunnerCall"]
@@ -74,7 +76,9 @@ def install_synthetic_workflow(
     source_workspace = project_root / "a003"
     project_root.mkdir()
     policy = load_a004_policy(A004_CONFIG)
-    source_policy_path = project_root / "experiments/week_01/diagnostic_similarity_audit.toml"
+    source_policy_path = (
+        project_root / "experiments/week_01/diagnostic_similarity_audit.toml"
+    )
     source_policy_path.parent.mkdir(parents=True)
     source_policy_path.write_bytes(SOURCE_CONFIG.read_bytes())
     source_policy = load_similarity_audit_policy(source_policy_path)
@@ -82,6 +86,8 @@ def install_synthetic_workflow(
     inputs = _materialized_inputs(workspace, manifests)
     imported = _imported_a003(source_workspace, manifests, inputs)
     source_paths = _frozen_source_paths(project_root)
+    source_bytes = {name: path.read_bytes() for name, path in source_paths.items()}
+    source_policy_bytes = source_policy_path.read_bytes()
     balances = {
         strategy: {
             partition: {"records": 1, "residues": 4, "unique_groups": 1}
@@ -103,7 +109,9 @@ def install_synthetic_workflow(
         "validate_a004_configuration",
         lambda **kwargs: configuration,
     )
-    monkeypatch.setattr(workflow_module, "require_committed_execution_code", lambda *args: None)
+    monkeypatch.setattr(
+        workflow_module, "require_committed_execution_code", lambda *args: None
+    )
     monkeypatch.setattr(workflow_module, "git_output", lambda *args: "b" * 40)
     monkeypatch.setattr(
         workflow_module,
@@ -112,7 +120,7 @@ def install_synthetic_workflow(
     )
     monkeypatch.setattr(workflow_module, "prove_path_is_ignored", lambda *args: None)
     monkeypatch.setattr(workflow_module, "require_disk_capacity", lambda *args: None)
-    monkeypatch.setattr(stage_module, "require_disk_capacity", lambda *args: None)
+    monkeypatch.setattr(search_module, "require_disk_capacity", lambda *args: None)
     monkeypatch.setattr(workflow_module, "verify_boundary_fixtures", lambda: None)
     monkeypatch.setattr(workflow_module, "policy_paths", lambda *args: source_paths)
     monkeypatch.setattr(
@@ -120,7 +128,9 @@ def install_synthetic_workflow(
         "load_and_validate_frozen_reports",
         lambda *args: {"random": {}, "group_aware": {}},
     )
-    monkeypatch.setattr(workflow_module, "load_frozen_manifests", lambda *args: manifests)
+    monkeypatch.setattr(
+        workflow_module, "load_frozen_manifests", lambda *args: manifests
+    )
     monkeypatch.setattr(
         workflow_module,
         "validate_report_populations",
@@ -132,18 +142,42 @@ def install_synthetic_workflow(
         lambda **kwargs: imported,
     )
     monkeypatch.setattr(
+        validation_module,
+        "verify_a003_residual_import",
+        lambda **kwargs: imported,
+    )
+    monkeypatch.setattr(
         workflow_module,
         "ensure_materialized_inputs",
         lambda **kwargs: inputs,
     )
-    monkeypatch.setattr(workflow_module, "reverify_frozen_run_state", lambda **kwargs: None)
+
+    def reverify_synthetic_source(**kwargs):
+        for name, expected in source_bytes.items():
+            if source_paths[name].read_bytes() != expected:
+                raise SourceEvidenceError(
+                    f"frozen {name} checksum changed during the audit"
+                )
+        if source_policy_path.read_bytes() != source_policy_bytes:
+            raise SourceEvidenceError("A-003 source policy changed during the audit")
+
+    monkeypatch.setattr(
+        workflow_module,
+        "reverify_frozen_run_state",
+        reverify_synthetic_source,
+    )
+    monkeypatch.setattr(
+        validation_module,
+        "reverify_frozen_run_state",
+        reverify_synthetic_source,
+    )
     monkeypatch.setattr(workflow_module, "load_a004_policy", lambda path: policy)
+    monkeypatch.setattr(validation_module, "load_a004_policy", lambda path: policy)
 
     def forbidden_runner(*args, **kwargs):
         raise AssertionError("a real MMseqs runner was invoked by a synthetic test")
 
-    monkeypatch.setattr(database_module, "run_mmseqs_command", forbidden_runner)
-    monkeypatch.setattr(stage_module, "run_mmseqs_command", forbidden_runner)
+    monkeypatch.setattr(search_module, "run_mmseqs_command", forbidden_runner)
 
     database_calls: list[RunnerCall] = []
     search_calls: list[RunnerCall] = []
@@ -184,6 +218,7 @@ def install_synthetic_workflow(
         source_workspace=source_workspace,
         source_policy=source_policy,
         source_policy_path=source_policy_path,
+        source_paths=source_paths,
         hardware={
             "platform": "synthetic-platform",
             "machine": "synthetic-machine",

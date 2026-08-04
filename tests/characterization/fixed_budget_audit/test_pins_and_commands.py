@@ -5,7 +5,7 @@ import tomllib
 from pathlib import Path
 
 from a004_workflow_test_support import install_synthetic_workflow
-from protein_lm.data.task7_a004_workflow import run_a004_fixed_budget_audit
+from protein_lm.data.fixed_budget_audit.workflow import run_fixed_budget_audit
 
 REPOSITORY = Path(__file__).parents[3]
 A004_CONFIG = REPOSITORY / "experiments/week_01/read_only_similarity_audit_a004.toml"
@@ -44,12 +44,14 @@ def test_literal_configuration_and_a003_marker_pins() -> None:
     assert hashlib.sha256(a004_bytes).hexdigest() == A004_SHA256
     assert hashlib.sha256(a003_bytes).hexdigest() == A003_SHA256
     assert parsed["source_policy_sha256"] == A003_SHA256
-    assert parsed["source_fastas_marker_sha256"] == A003_MARKER_PINS[
-        "source_fastas_marker_sha256"
-    ]
-    assert parsed["source_database_marker_sha256"] == A003_MARKER_PINS[
-        "source_database_marker_sha256"
-    ]
+    assert (
+        parsed["source_fastas_marker_sha256"]
+        == A003_MARKER_PINS["source_fastas_marker_sha256"]
+    )
+    assert (
+        parsed["source_database_marker_sha256"]
+        == A003_MARKER_PINS["source_database_marker_sha256"]
+    )
     assert parsed["source_stage_marker_sha256"] == {
         cap: A003_MARKER_PINS[cap] for cap in ("1000", "10000", "100000")
     }
@@ -65,7 +67,7 @@ def test_exact_createdb_and_changed_only_search_runner_sequence(
         changed_search=True,
     )
 
-    run_a004_fixed_budget_audit(
+    run_fixed_budget_audit(
         project_root=synthetic.project_root,
         config_path=synthetic.config_path,
         search_runner=synthetic.search_runner,
@@ -123,11 +125,7 @@ def test_exact_createdb_and_changed_only_search_runner_sequence(
     assert all(
         Path(call.command[index]).is_absolute()
         for call in (*synthetic.database_calls, *synthetic.search_calls)
-        for index in (
-            (2, 3)
-            if call.command[1] == "createdb"
-            else (2, 3, 4, 5)
-        )
+        for index in ((2, 3) if call.command[1] == "createdb" else (2, 3, 4, 5))
     )
 
 

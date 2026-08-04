@@ -6,8 +6,11 @@ import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
+
 REPOSITORY = Path(__file__).parents[3]
 SCRIPT = REPOSITORY / "scripts/run_read_only_fixed_budget_audit.py"
+DIAGNOSTIC_SCRIPT = REPOSITORY / "scripts/run_diagnostic_similarity_audit.py"
 
 
 def test_main_without_arguments_prints_exact_plan_and_writes_nothing(
@@ -39,7 +42,7 @@ def test_main_without_arguments_prints_exact_plan_and_writes_nothing(
     monkeypatch.setattr(module, "PROJECT_ROOT", project_root)
     monkeypatch.setattr(module, "CONFIG_PATH", config_path)
     monkeypatch.setattr(module, "validate_a004_configuration", validate)
-    monkeypatch.setattr(module, "run_a004_fixed_budget_audit", forbidden_workflow)
+    monkeypatch.setattr(module, "run_fixed_budget_audit", forbidden_workflow)
 
     result = module.main([])
 
@@ -70,7 +73,9 @@ def test_main_without_arguments_prints_exact_plan_and_writes_nothing(
         )
     )
     assert result == 0
-    assert capsys.readouterr().out == expected
+    captured = capsys.readouterr()
+    assert captured.out == expected
+    assert captured.err == ""
     assert validation_calls == [
         {"project_root": project_root, "config_path": config_path}
     ]
@@ -78,8 +83,61 @@ def test_main_without_arguments_prints_exact_plan_and_writes_nothing(
     assert not tmp_path.exists() or list(tmp_path.rglob("*")) == []
 
 
-def _load_script():
-    spec = importlib.util.spec_from_file_location("a004_characterization_cli", SCRIPT)
+def test_diagnostic_main_without_consent_has_exact_argparse_failure(
+    monkeypatch,
+    capsys,
+) -> None:
+    module = _load_script(
+        DIAGNOSTIC_SCRIPT,
+        "diagnostic_characterization_cli",
+    )
+    workflow_calls = []
+
+    def forbidden_workflow(**kwargs):
+        workflow_calls.append(kwargs)
+        raise AssertionError("diagnostic main([]) must not invoke the workflow")
+
+    monkeypatch.setattr(
+        module,
+        "run_diagnostic_similarity_audit",
+        forbidden_workflow,
+    )
+
+    with pytest.raises(SystemExit) as raised:
+        module.main([])
+
+    captured = capsys.readouterr()
+    assert raised.value.code == 2
+    assert captured.out == ""
+    assert captured.err == (
+        "usage: run_diagnostic_similarity_audit.py [-h] --execute-searches\n"
+        "run_diagnostic_similarity_audit.py: error: the following arguments are "
+        "required: --execute-searches\n"
+    )
+    assert workflow_calls == []
+
+
+def test_both_clis_accept_only_the_standard_execution_flag(capsys) -> None:
+    fixed_budget = _load_script(SCRIPT, "a004_flag_cli")
+    diagnostic = _load_script(DIAGNOSTIC_SCRIPT, "diagnostic_flag_cli")
+
+    assert fixed_budget.parse_args(["--execute-searches"]).execute_searches is True
+    assert diagnostic.parse_args(["--execute-searches"]).execute_searches is True
+    for module, legacy_flag in (
+        (fixed_budget, "--execute-fixed-budget-audit"),
+        (diagnostic, "--execute-diagnostic-audit"),
+    ):
+        with pytest.raises(SystemExit) as raised:
+            module.parse_args([legacy_flag])
+        assert raised.value.code == 2
+        capsys.readouterr()
+
+
+def _load_script(
+    path: Path = SCRIPT,
+    module_name: str = "a004_characterization_cli",
+):
+    spec = importlib.util.spec_from_file_location(module_name, path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

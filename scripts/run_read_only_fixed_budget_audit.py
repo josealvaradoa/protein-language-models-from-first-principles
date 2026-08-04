@@ -6,11 +6,9 @@ import argparse
 import subprocess
 from pathlib import Path
 
-from protein_lm.data.task7_a004_plan import fixed_budget_stage_plan
-from protein_lm.data.task7_a004_workflow import (
-    run_a004_fixed_budget_audit,
-    validate_a004_configuration,
-)
+from protein_lm.data.fixed_budget_audit import run_fixed_budget_audit
+from protein_lm.data.fixed_budget_audit.tracks import fixed_budget_stage_plan
+from protein_lm.data.fixed_budget_audit.workflow import validate_a004_configuration
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = (
@@ -28,7 +26,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         )
     )
     parser.add_argument(
-        "--execute-fixed-budget-audit",
+        "--execute-searches",
         action="store_true",
         help="explicitly start the expensive local A-004 database and search stages",
     )
@@ -44,11 +42,13 @@ def main(argv: list[str] | None = None) -> int:
             project_root=PROJECT_ROOT, config_path=CONFIG_PATH
         )
         _print_plan(configuration)
-        if not args.execute_fixed_budget_audit:
-            print("Configuration valid. No database, search, or evidence output was created.")
+        if not args.execute_searches:
+            print(
+                "Configuration valid. No database, search, or evidence output was created."
+            )
             print("Network requests made: none")
             return 0
-        result = run_a004_fixed_budget_audit(
+        result = run_fixed_budget_audit(
             project_root=PROJECT_ROOT, config_path=CONFIG_PATH
         )
     except (OSError, ValueError, subprocess.SubprocessError) as error:
@@ -66,7 +66,8 @@ def _print_plan(configuration: object) -> None:
     print("A-004 fixed-budget stage plan:")
     for track in fixed_budget_stage_plan():
         print(
-            f"- {track.origin}: {track.strategy}/{track.partition}/{track.pass_name} "
+            f"- {track.origin.value}: {track.strategy.value}/"
+            f"{track.partition.value}/{track.pass_name.value} "
             "at all-query caps 1,000 and 10,000; 100,000 only for changed queries"
         )
     print(f"- source workspace: {getattr(configuration, 'paths')['source_workspace']}")

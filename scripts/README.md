@@ -83,7 +83,7 @@ audit:
 ```bash
 env PYTHONPATH=src uv run --locked --offline \
   python scripts/run_diagnostic_similarity_audit.py \
-  --execute-diagnostic-audit
+  --execute-searches
 ```
 
 The runner requires committed execution code and MMseqs2 `18-8cc5c`. It is
@@ -96,18 +96,33 @@ candidate as `failed_balance` and returns control to Jose for review.
 For a human code review, read Task 7 in this order:
 
 1. `diagnostic_similarity_audit.toml` freezes the authority and search policy.
-2. `task7_workflow.py` shows the complete audit from preflight to publication.
+2. `fixed_budget_audit/diagnostic_workflow.py` shows the complete audit from
+   preflight to publication.
 3. `similarity_manifests.py` and `similarity_fastas.py` prove the memberships
    and build the six query and training files.
-4. `task7_search.py` owns the staged MMseqs2 search procedure, while
-   `task7_execution.py` and `task7_checkpoints.py` isolate machine safety and
-   resumability.
+4. `fixed_budget_audit/search.py` owns staged MMseqs2 search and resumability,
+   while `fixed_budget_audit/execution.py` isolates machine safety.
 5. `similarity_alignment.py`, `similarity_results.py`, and
    `similarity_evidence.py` follow the scientific data flow from strict rows to
    cap comparison to aggregate evidence.
-6. `task7_report_output.py` assembles and publishes the report, and
-   `task7_report.py` validates and renders its public JSON and Markdown.
+6. `fixed_budget_audit/diagnostic_reporting.py` assembles, validates, renders, and
+   publishes the diagnostic report's public JSON and Markdown.
 
 The small `similarity_audit.py` and `similarity_inputs.py` files only preserve
 older imports. Task 7 implementation modules import their concrete owners
 directly.
+
+`run_read_only_fixed_budget_audit.py` is the separate A-004 fixed-budget
+entrypoint. With no arguments it validates the pinned configuration and prints
+the complete stage plan without creating databases, searches, or evidence.
+Explicit consent is required to start its local MMseqs2 work:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_read_only_fixed_budget_audit.py \
+  --execute-searches
+```
+
+The orchestration is owned by `fixed_budget_audit/workflow.py`. It imports the
+historical A-003 evidence read-only and does not import or invoke
+`fixed_budget_audit/diagnostic_workflow.py`.

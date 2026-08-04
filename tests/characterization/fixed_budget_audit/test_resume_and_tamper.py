@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-import protein_lm.data.task7_a004_workflow as workflow_module
+import protein_lm.data.fixed_budget_audit.workflow as workflow_module
 from a004_workflow_test_support import install_synthetic_workflow
 from protein_lm.data.similarity_audit_policy import SimilarityAuditError
 
@@ -87,7 +87,7 @@ def test_complete_two_run_resume_is_byte_identical_and_invokes_no_runner(
     synthetic = install_synthetic_workflow(monkeypatch, tmp_path, changed_search=True)
     imported_before = _snapshot(synthetic.source_workspace)
 
-    first = workflow_module.run_a004_fixed_budget_audit(
+    first = workflow_module.run_fixed_budget_audit(
         project_root=synthetic.project_root,
         config_path=synthetic.config_path,
         search_runner=synthetic.search_runner,
@@ -107,7 +107,7 @@ def test_complete_two_run_resume_is_byte_identical_and_invokes_no_runner(
         calls["search"] += 1
         raise AssertionError("resumed workflow invoked the search runner")
 
-    second = workflow_module.run_a004_fixed_budget_audit(
+    second = workflow_module.run_fixed_budget_audit(
         project_root=synthetic.project_root,
         config_path=synthetic.config_path,
         search_runner=forbidden_search_runner,
@@ -147,7 +147,7 @@ def test_final_gate_rejects_each_mutated_artifact_and_preserves_mutation(
     monkeypatch.setattr(workflow_module, "publish_receipt", publish_then_tamper)
 
     with pytest.raises(SimilarityAuditError):
-        workflow_module.run_a004_fixed_budget_audit(
+        workflow_module.run_fixed_budget_audit(
             project_root=synthetic.project_root,
             config_path=synthetic.config_path,
             search_runner=synthetic.search_runner,
