@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import builtins
+import os
 import signal
 import subprocess
+import sys
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
@@ -15,6 +18,7 @@ from protein_lm.data.fixed_budget_audit.errors import AuditExecutionError
 from protein_lm.data.fixed_budget_audit.execution import (
     prove_path_is_ignored,
     prove_path_is_public,
+    exclusive_lock,
     require_committed_execution_code,
     require_disk_capacity,
     run_mmseqs_command,
@@ -28,6 +32,116 @@ PROJECT_ROOT = Path(__file__).parents[3]
 POLICY_PATH = (
     PROJECT_ROOT / "experiments" / "week_01" / "diagnostic_similarity_audit.toml"
 )
+
+
+def test_execution_and_package_import_without_fcntl_in_a_fresh_process() -> None:
+    code = """
+import builtins
+import importlib
+
+attempts = []
+original_import = builtins.__import__
+
+def blocked_fcntl(name, *args, **kwargs):
+    if name == "fcntl":
+        attempts.append(name)
+        raise ModuleNotFoundError("No module named 'fcntl'", name="fcntl")
+    return original_import(name, *args, **kwargs)
+
+builtins.__import__ = blocked_fcntl
+execution = importlib.import_module("protein_lm.data.fixed_budget_audit.execution")
+package = importlib.import_module("protein_lm.data.fixed_budget_audit")
+assert execution is not None
+assert package is not None
+try:
+    __import__("fcntl")
+except ModuleNotFoundError:
+    pass
+else:
+    raise AssertionError("fcntl was not blocked")
+assert attempts
+"""
+    environment = {**os.environ, "PYTHONPATH": str(PROJECT_ROOT / "src")}
+
+    subprocess.run(
+        [sys.executable, "-c", code],
+        cwd=PROJECT_ROOT,
+        env=environment,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+
+def test_exclusive_lock_reports_missing_fcntl_without_continuing(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    missing_fcntl = ModuleNotFoundError("No module named 'fcntl'", name="fcntl")
+    original_import = builtins.__import__
+
+    def blocked_fcntl(name: str, *args: object, **kwargs: object) -> object:
+        if name == "fcntl":
+            raise missing_fcntl
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", blocked_fcntl)
+
+    with pytest.raises(AuditExecutionError) as error:
+        with exclusive_lock(tmp_path / "audit.lock"):
+            pytest.fail("exclusive_lock yielded without fcntl")
+
+    assert str(error.value) == (
+        "exclusive locking is unsupported on platforms without fcntl"
+    )
+    assert error.value.__cause__ is missing_fcntl
+    assert not (tmp_path / "audit.lock").exists()
+
+
+def test_exclusive_lock_preserves_nonblocking_unix_locking_and_pid_bytes(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    calls: list[tuple[int, int]] = []
+    fake_fcntl = SimpleNamespace(LOCK_EX=4, LOCK_NB=8, LOCK_UN=16)
+
+    def fake_flock(file_descriptor: int, operation: int) -> None:
+        calls.append((file_descriptor, operation))
+
+    fake_fcntl.flock = fake_flock
+    monkeypatch.setattr(execution_module, "_load_fcntl", lambda: fake_fcntl)
+    lock_path = tmp_path / "locks" / "audit.lock"
+
+    with exclusive_lock(lock_path):
+        assert lock_path.read_bytes() == f"pid={os.getpid()}\n".encode()
+        assert calls == [(calls[0][0], fake_fcntl.LOCK_EX | fake_fcntl.LOCK_NB)]
+
+    assert calls == [
+        (calls[0][0], fake_fcntl.LOCK_EX | fake_fcntl.LOCK_NB),
+        (calls[0][0], fake_fcntl.LOCK_UN),
+    ]
+
+
+def test_exclusive_lock_preserves_contention_error_and_cause(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    contention = BlockingIOError("synthetic contention")
+    fake_fcntl = SimpleNamespace(LOCK_EX=4, LOCK_NB=8, LOCK_UN=16)
+
+    def raise_contention(file_descriptor: int, operation: int) -> None:
+        del file_descriptor, operation
+        raise contention
+
+    fake_fcntl.flock = raise_contention
+    monkeypatch.setattr(execution_module, "_load_fcntl", lambda: fake_fcntl)
+
+    with pytest.raises(AuditExecutionError) as error:
+        with exclusive_lock(tmp_path / "audit.lock"):
+            pytest.fail("exclusive_lock yielded despite contention")
+
+    assert str(error.value) == "another Task 7 audit is already running"
+    assert error.value.__cause__ is contention
 
 
 class _FakeProcess:

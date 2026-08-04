@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import fcntl
 import os
 import shutil
 import signal
@@ -14,6 +13,18 @@ from pathlib import Path
 
 from protein_lm.data.fixed_budget_audit.errors import AuditExecutionError
 from protein_lm.data.similarity_audit_policy import SimilarityAuditPolicy
+
+
+def _load_fcntl() -> object:
+    """Load the Unix-only locking module only when a lock is requested."""
+
+    try:
+        import fcntl
+    except ImportError as error:
+        raise AuditExecutionError(
+            "exclusive locking is unsupported on platforms without fcntl"
+        ) from error
+    return fcntl
 
 
 def run_mmseqs_command(
@@ -125,6 +136,7 @@ def require_disk_capacity(workspace: Path, policy: SimilarityAuditPolicy) -> Non
 def exclusive_lock(path: Path) -> Iterator[None]:
     """Prevent two Task 7 processes from sharing one workspace."""
 
+    fcntl = _load_fcntl()
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a+") as lock:
         try:
