@@ -5,11 +5,11 @@ from typing import cast
 import torch
 from torch.utils.data import DataLoader
 
-from protein_lm.synthetic_collation import (
+from protein_lm.synthetic.collation import (
     SyntheticProteinBatch,
     collate_synthetic_proteins,
 )
-from protein_lm.synthetic_dataset import SyntheticProteinDataset
+from protein_lm.synthetic.dataset import SyntheticProteinDataset
 
 
 SYNTHETIC_BATCH_SIZE = 8

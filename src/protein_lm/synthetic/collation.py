@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 import torch
 from torch import Tensor
 
-from protein_lm.synthetic_dataset import SyntheticProteinItem
+from protein_lm.synthetic.dataset import SyntheticProteinItem
 from protein_lm.tokenization import TokenId, decode
 
 

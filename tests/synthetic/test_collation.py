@@ -3,8 +3,8 @@ from dataclasses import replace
 import pytest
 import torch
 
-from protein_lm.synthetic_collation import collate_synthetic_proteins
-from protein_lm.synthetic_dataset import (
+from protein_lm.synthetic.collation import collate_synthetic_proteins
+from protein_lm.synthetic.dataset import (
     SyntheticProtein,
     SyntheticProteinDataset,
     SyntheticProteinItem,

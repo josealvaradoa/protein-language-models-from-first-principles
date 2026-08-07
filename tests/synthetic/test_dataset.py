@@ -4,7 +4,7 @@ from dataclasses import FrozenInstanceError
 import pytest
 from torch.utils.data import Dataset
 
-from protein_lm.synthetic_dataset import (
+from protein_lm.synthetic.dataset import (
     SyntheticProtein,
     SyntheticProteinDataset,
     SyntheticProteinItem,

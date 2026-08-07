@@ -1,15 +1,15 @@
 import pytest
 from torch.utils.data import RandomSampler
 
-from protein_lm.synthetic_collation import (
+from protein_lm.synthetic.collation import (
     SyntheticProteinBatch,
     collate_synthetic_proteins,
 )
-from protein_lm.synthetic_dataset import (
+from protein_lm.synthetic.dataset import (
     SyntheticProtein,
     SyntheticProteinDataset,
 )
-from protein_lm.synthetic_loader import (
+from protein_lm.synthetic.loader import (
     SYNTHETIC_BASE_SEED,
     SYNTHETIC_BATCH_SIZE,
     create_synthetic_loader,
