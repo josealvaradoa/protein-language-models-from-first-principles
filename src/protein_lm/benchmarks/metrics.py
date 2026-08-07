@@ -167,11 +167,17 @@ def sample_mps_memory(
     maximum_driver: int | None,
 ) -> tuple[int | None, int | None]:
     """Return updated sampled MPS allocation and driver-memory maxima."""
-    if device.type != "mps":
+    allocated, driver = current_mps_memory(device)
+    if allocated is None or driver is None:
         return maximum_allocated, maximum_driver
-    allocated = torch.mps.current_allocated_memory()
-    driver = torch.mps.driver_allocated_memory()
     return max(maximum_allocated or 0, allocated), max(maximum_driver or 0, driver)
+
+
+def current_mps_memory(device: torch.device) -> tuple[int | None, int | None]:
+    """Return one actual MPS memory sample for the explicitly requested device."""
+    if device.type != "mps":
+        return None, None
+    return torch.mps.current_allocated_memory(), torch.mps.driver_allocated_memory()
 
 
 def memory_limit_exceeded(memory_bytes: int | None) -> bool:

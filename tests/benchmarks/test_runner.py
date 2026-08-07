@@ -54,10 +54,14 @@ def test_synthetic_tokens_are_deterministic_canonical_residue_ids() -> None:
 
 
 def test_small_cpu_fixture_exercises_the_complete_training_shaped_workload() -> None:
+    observations: list[tuple[float, int | None, int | None]] = []
     result = run_synthetic_benchmark(
         SMALL_CPU_CONFIG,
         device="cpu",
         project_root=PROJECT_ROOT,
+        measured_step_observer=lambda seconds, allocated, driver: observations.append(
+            (seconds, allocated, driver)
+        ),
     )
 
     assert result.status == "completed"
@@ -76,6 +80,11 @@ def test_small_cpu_fixture_exercises_the_complete_training_shaped_workload() -> 
     assert result.environment["backend"] == "cpu"
     assert result.maximum_sampled_mps_allocated_memory_bytes is None
     assert result.maximum_sampled_mps_driver_memory_bytes is None
+    assert len(observations) == SMALL_CPU_CONFIG.measured_steps
+    assert all(
+        seconds > 0 and allocated is None and driver is None
+        for seconds, allocated, driver in observations
+    )
 
 
 def test_mps_request_records_failure_without_cpu_fallback(

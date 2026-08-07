@@ -18,6 +18,7 @@ from protein_lm.benchmarks.metrics import (
     SwapState,
     calculate_readiness_checks,
     collect_environment,
+    current_mps_memory,
     error_details,
     mean_or_none,
     memory_limit_exceeded,
@@ -35,6 +36,9 @@ from protein_lm.benchmarks.workload import (
     create_synthetic_token_tensors,
     run_one_training_step,
 )
+
+
+MeasuredStepObserver = Callable[[float, int | None, int | None], None]
 
 
 @dataclass(frozen=True)
@@ -75,6 +79,7 @@ def run_synthetic_benchmark(
     device: str | torch.device,
     project_root: Path,
     before_allocation: Callable[[], None] | None = None,
+    measured_step_observer: MeasuredStepObserver | None = None,
 ) -> BenchmarkResult:
     """Run one candidate and return a completed, stopped, or failed record.
 
@@ -82,6 +87,8 @@ def run_synthetic_benchmark(
     returns a failed record and never changes the request to CPU. Callers may
     supply a device-specific pre-allocation guard, which runs after device
     availability is checked and before tensors or the model are created.
+    An optional observer receives each measured step's elapsed seconds and
+    actual MPS allocated and driver-memory samples after synchronization.
     """
     requested_device = torch.device(device)
     swap_before = read_swap_state()
@@ -147,12 +154,15 @@ def run_synthetic_benchmark(
                 finite_loss = True
                 finite_gradients = True
                 synchronize(requested_device)
-                measured_seconds.append(time.perf_counter() - step_started_at)
-                maximum_allocated, maximum_driver = sample_mps_memory(
-                    requested_device,
-                    maximum_allocated,
-                    maximum_driver,
-                )
+                elapsed_seconds = time.perf_counter() - step_started_at
+                measured_seconds.append(elapsed_seconds)
+                allocated, driver = current_mps_memory(requested_device)
+                if allocated is not None:
+                    maximum_allocated = max(maximum_allocated or 0, allocated)
+                if driver is not None:
+                    maximum_driver = max(maximum_driver or 0, driver)
+                if measured_step_observer is not None:
+                    measured_step_observer(elapsed_seconds, allocated, driver)
                 _raise_for_runtime_limits(
                     swap_before,
                     read_swap_state(),
