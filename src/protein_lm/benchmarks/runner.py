@@ -7,6 +7,7 @@ import statistics
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import Callable
 
 import torch
 
@@ -73,11 +74,14 @@ def run_synthetic_benchmark(
     *,
     device: str | torch.device,
     project_root: Path,
+    before_allocation: Callable[[], None] | None = None,
 ) -> BenchmarkResult:
     """Run one candidate and return a completed, stopped, or failed record.
 
     The caller chooses the device explicitly. Requesting MPS when it is absent
-    returns a failed record and never changes the request to CPU.
+    returns a failed record and never changes the request to CPU. Callers may
+    supply a device-specific pre-allocation guard, which runs after device
+    availability is checked and before tensors or the model are created.
     """
     requested_device = torch.device(device)
     swap_before = read_swap_state()
@@ -97,6 +101,8 @@ def run_synthetic_benchmark(
 
     try:
         _require_requested_device(requested_device)
+        if before_allocation is not None:
+            before_allocation()
         torch.manual_seed(config.seed)
         token_ids, target_ids = create_synthetic_token_tensors(config, requested_device)
         batch_shape = list(token_ids.shape)
