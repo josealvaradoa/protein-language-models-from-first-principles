@@ -1,0 +1,55 @@
+[contract]
+identifier = "2026-08-07-week-01-task-11b-esmc-300m-smoke-v1"
+data_boundary = "two canonical synthetic protein fixtures only"
+precision = "float32"
+runtime_limit_seconds = 120
+mps_driver_memory_limit_bytes = 24000000000
+
+[model]
+id = "biohub/ESMC-300M"
+revision = "a59b831785f907e96e6a246b1d142bfb76df31ee"
+published_context_limit = 2048
+
+[code]
+repository = "https://github.com/Biohub/esm.git"
+revision = "26b0bc2b771e3e419ea74f445a5f35cc094a1509"
+version = "3.3.0"
+
+[dependencies]
+transformers_repository = "https://github.com/Biohub/transformers.git"
+transformers_revision = "ef32577f55da19a4989cd7b22e004dc43a4998cb"
+
+[weights]
+filename = "model.safetensors"
+sha256 = "0772d8fe64bb25e14fe6f23b80e3c9a7d215d0da3c6cba5bd356d7c0e0bb22cc"
+expected_reported_weight_size = "1.33 GB"
+license = "Cambrian Open License plus acceptable-use policy"
+
+[expected_config]
+architectures = ["ESMCForMaskedLM"]
+model_type = "esmc"
+vocab_size = 64
+d_model = 960
+n_layers = 30
+n_heads = 15
+mask_token_id = 32
+pad_token_id = 1
+dtype = "float32"
+transformers_version = "4.57.6"
+
+[expected_shapes]
+batch_size = 2
+token_sequence_length = 66
+hidden_states = [2, 66, 960]
+pooled_embeddings = [2, 960]
+mlm_logits = [2, 66, 64]
+
+[[fixtures]]
+identifier = "synthetic-esmc-alpha-32"
+sequence = "ACDEFGHIKLMNPQRSTVWYACDEFGHIKLMN"
+mask_residue_index = 7
+
+[[fixtures]]
+identifier = "synthetic-esmc-beta-64"
+sequence = "MNPQRSTVWYACDEFGHIKLMNPQRSTVWYACDEFGHIKLMNPQRSTVWYACDEFGHIKLMNPQ"
+mask_residue_index = 41

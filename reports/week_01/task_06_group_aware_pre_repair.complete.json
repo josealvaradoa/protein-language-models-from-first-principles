@@ -1,0 +1,27 @@
+{
+  "artifacts": {
+    "manifests/week_01/task_06_group_aware_pre_repair.tsv": {
+      "byte_size": 56285795,
+      "sha256": "f6ee25d078ca6df864e8e30bba848025d5b45810ed60605f09255c767c77f71a"
+    },
+    "manifests/week_01/task_06_group_aware_pre_repair.tsv.sha256": {
+      "byte_size": 101,
+      "sha256": "c1778fe4eb29faf3c78377adf1140dbcf02ee502f3997b0d16eb01280603c76f"
+    },
+    "reports/week_01/task_06_group_aware_pre_repair.json": {
+      "byte_size": 6270,
+      "sha256": "9ebb8093962bf31cc010b160f229efb3bbd73ed6d688c54d277db4e6ee683ebf"
+    },
+    "reports/week_01/task_06_group_aware_pre_repair.md": {
+      "byte_size": 7999,
+      "sha256": "1cdaaac1be62369e7efbb324554ecedba4ef9808b8d119a95abd0d1b4fd84461"
+    },
+    "reports/week_01/task_06_group_aware_pre_repair.sha256": {
+      "byte_size": 102,
+      "sha256": "7eaaad044c752d7686e958d35bf12ed96f6940510498e29b981691663cba83f2"
+    }
+  },
+  "complete": true,
+  "schema_version": 1,
+  "scope": "week_01_task_06_public_outputs"
+}

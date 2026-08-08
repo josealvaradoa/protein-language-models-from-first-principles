@@ -1,0 +1,7 @@
+DMS_id,UniProt_ID,target_seq,seq_len,DMS_number_single_mutants,ProteinGym_version,coarse_selection_type
+PG_ALPHA_1,ALPHA_SYNTH,ACDEF,5,10,1,Activity
+PG_ALPHA_2,ALPHA_SYNTH,ACDEF,5,0,1,Binding
+PG_ALPHA_3,ALPHA_SYNTH,ACDEG,5,5,1,Activity
+PG_DELTA,DELTA_SYNTH,GGG,3,7,0.1,Stability
+PG_EPSILON,EPSILON_SYNTH,W,1,1,0.1,Expression
+PG_EXTERNAL,UNRELATED_SYNTH,AZ,2,4,0.1,OrganismalFitness

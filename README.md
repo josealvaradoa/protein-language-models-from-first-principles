@@ -15,8 +15,17 @@ biological function, safety, or therapeutic value.
 
 ## Status
 
-The repository is in its setup phase. No model result or biological claim has
-been published yet.
+Week 1 technical implementation and experimental evidence are complete. The
+release identifier is `bet-01-homology-aware-data`. The independent-random
+and UniRef50-group diagnostic assignments remain prohibited for model
+training. No model result or biological claim is included in this release.
+
+The main Week 1 finding is that the UniRef50-group assignment had much less
+detected strong training-to-held-out overlap than the random assignment, but
+it still failed the frozen residue-balance tolerance and retained substantial
+detected overlap. See the
+[Week 1 release notes](docs/releases/bet-01-homology-aware-data.md) and the
+[aggregate Task 7 report](reports/week_01/task_07_read_only_fixed_budget_audit_a004.md).
 
 ## Experiment Progression
 

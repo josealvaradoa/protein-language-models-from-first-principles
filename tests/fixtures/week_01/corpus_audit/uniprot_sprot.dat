@@ -1,0 +1,39 @@
+ID   ALPHA_SYNTH             Reviewed;           5 AA.
+AC   P00001; Q10001;
+DE   RecName: Full=Synthetic alpha protein;
+SQ   SEQUENCE   5 AA;  0 MW;  0000000000000000 CRC64;
+     ACDEF
+//
+ID   ALPHA2_SYNTH            Reviewed;           5 AA.
+AC   P00002;
+DE   RecName: Full=Synthetic alpha duplicate; EC=1.1.1.1;
+SQ   SEQUENCE   5 AA;  0 MW;  0000000000000000 CRC64;
+     ACDEF
+//
+ID   BETA_SYNTH              Reviewed;           6 AA.
+AC   P00003;
+DE   RecName: Full=Synthetic partial enzyme; EC=2.7.-.-;
+DE   Flags: Precursor; Fragment;
+SQ   SEQUENCE   6 AA;  0 MW;  0000000000000000 CRC64;
+     ABJXZU
+//
+ID   GAMMA_SYNTH             Reviewed;           4 AA.
+AC   P00004;
+DE   RecName: Full=Synthetic multifunction enzyme; EC=3.1.1.1;
+DE   AltName: Full=Synthetic secondary function; EC=3.1.1.2;
+SQ   SEQUENCE   4 AA;  0 MW;  0000000000000000 CRC64;
+     MOQR
+//
+ID   DELTA_SYNTH             Reviewed;           3 AA.
+AC   P00005;
+DE   RecName: Full=Synthetic mixed enzyme; EC=4.2.1.1;
+DE   AltName: Full=Synthetic partial function; EC=4.2.-.-;
+SQ   SEQUENCE   3 AA;  0 MW;  0000000000000000 CRC64;
+     GGG
+//
+ID   EPSILON_SYNTH           Reviewed;           1 AA.
+AC   P00006;
+DE   RecName: Full=Synthetic singleton protein;
+SQ   SEQUENCE   1 AA;  0 MW;  0000000000000000 CRC64;
+     W
+//
