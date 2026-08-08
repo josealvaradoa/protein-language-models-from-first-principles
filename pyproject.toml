@@ -20,6 +20,14 @@ dev = [
     "pytest>=8.4,<9",
     "ruff>=0.12,<1",
 ]
+esmc = [
+    "esm @ git+https://github.com/Biohub/esm.git@26b0bc2b771e3e419ea74f445a5f35cc094a1509",
+]
+
+[tool.uv]
+override-dependencies = [
+    "transformers @ git+https://github.com/Biohub/transformers.git@ef32577f55da19a4989cd7b22e004dc43a4998cb",
+]
 
 [build-system]
 requires = ["hatchling>=1.27,<2"]

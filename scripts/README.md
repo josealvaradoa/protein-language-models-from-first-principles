@@ -4,6 +4,29 @@ Scripts in this directory provide reproducible setup, data preparation,
 training, evaluation, and audit entrypoints. They must fail clearly rather than
 silently replacing missing data, models, or compute backends.
 
+`run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
+smoke. It requires Jose to install the optional `esmc` group and update the
+lockfile separately, provide the manually acquired pinned model directory, and
+choose a new result JSON path. The command is explicitly offline: it validates
+local config and tokenizer files, stream-hashes the local weights before model
+load, and uses `local_files_only=True`. It accepts only the two public
+synthetic fixtures. It does not download, train, score, evaluate, checkpoint,
+or write embeddings or logits.
+
+Run the MPS smoke first. CPU is available only as a separately explicit
+diagnostic invocation and is never an automatic fallback:
+
+```bash
+env PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+  uv run --locked --offline --group esmc python scripts/run_esmc_300m_smoke.py \
+  --execute-esmc-smoke --model-dir /absolute/local/model-directory \
+  --device mps --result-path /absolute/new-result.json
+```
+
+The script refuses to overwrite a result path and preserves a failed JSON
+record after the explicit path has been accepted. Do not substitute an
+existing private evidence path in documentation or source control.
+
 `validate_acquisition.py` checks the frozen Week 1 source config, uses Git's
 own ignore matcher to prove the raw destinations are excluded, and can verify
 already acquired local files. It never makes network requests.

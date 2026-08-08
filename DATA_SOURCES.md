@@ -11,7 +11,7 @@ assets stay in ignored local directories.
 | UniProtKB/Swiss-Prot | `2026_02` | Canonical curated protein sequences | Present locally; size, MD5, and SHA-256 verified |
 | UniRef50 | Release matched to Swiss-Prot `2026_02` | Group-level train, validation, and test splitting | Present locally; size, MD5, and SHA-256 verified |
 | ProteinGym | `v1.3` | Small mutation-effect evaluation panel | Metadata present and verified; assay files not acquired |
-| Biohub ESMC | `biohub/ESMC-300M`, revision to be pinned | External masked-model and representation baseline | Not downloaded |
+| Biohub ESMC | `biohub/ESMC-300M`, `a59b831785f907e96e6a246b1d142bfb76df31ee` | Private local inference smoke only | Present in an external local cache; SHA-256 verified |
 
 The `2026_02` source pair is frozen for this project. Swiss-Prot records and
 UniRef50 membership must come from the same release.
@@ -46,6 +46,29 @@ they are not prefilled in the acquisition config.
 
 Both UniProt files were retrieved manually on July 28, 2026. No project
 download script was executed.
+
+## ESMC-300M Local Model Pin
+
+The Task 11B smoke uses a manually acquired local cache only. Its weights are
+not committed, inspected by repository code until the explicit smoke command,
+or used with Week 1 diagnostic, validation, or test data.
+
+| Field | Frozen value |
+|---|---|
+| Official model ID | `biohub/ESMC-300M` |
+| Hugging Face revision | `a59b831785f907e96e6a246b1d142bfb76df31ee` |
+| Weight file | `model.safetensors` |
+| Local SHA-256 | `0772d8fe64bb25e14fe6f23b80e3c9a7d215d0da3c6cba5bd356d7c0e0bb22cc` |
+| Expected reported size | 1.33 GB |
+| Expected architecture | float32, vocabulary 64, width 960, 30 layers, 15 heads, context 2048 |
+| Retrieval method | Manual acquisition by Jose outside Git |
+| Use | Two synthetic canonical protein fixtures only, offline local inference smoke |
+
+Before model load, the smoke command validates the local configuration and
+tokenizer files and stream-hashes `model.safetensors`. It rejects any pin
+mismatch and passes `local_files_only=True` to both native Transformers
+loaders. The project does not provide a download command or record a cache path
+in Git.
 
 The Task 2 audit verified the release metadata, published sizes, published MD5
 values, and local SHA-256 values on July 29, 2026:
