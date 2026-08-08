@@ -56,7 +56,7 @@ def load_local_transformers(model_dir: Path) -> tuple[Any, Any]:
         str(model_dir),
         local_files_only=True,
         trust_remote_code=False,
-        torch_dtype=torch.float32,
+        dtype=torch.float32,
     )
     return tokenizer, model
 
@@ -150,7 +150,7 @@ def _run_inference_paths(
         unmasked = model(
             input_ids=input_ids,
             attention_mask=attention_mask,
-            output_hidden_states=True,
+            output_hidden_states=False,
             return_dict=True,
         )
         hidden_states = _final_hidden_states(unmasked)
@@ -206,12 +206,11 @@ def _sample_memory(
 
 
 def _final_hidden_states(outputs: Any) -> torch.Tensor:
-    hidden_states = getattr(outputs, "hidden_states", None)
-    if hidden_states:
-        return hidden_states[-1]
     last_hidden_state = getattr(outputs, "last_hidden_state", None)
     if last_hidden_state is None:
         raise ContractValidationError("model output does not provide final hidden states")
+    if not isinstance(last_hidden_state, torch.Tensor):
+        raise ContractValidationError("model last_hidden_state is not a tensor")
     return last_hidden_state
 
 

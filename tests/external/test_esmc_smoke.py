@@ -12,6 +12,7 @@ import torch
 import protein_lm.external.esmc_smoke as esmc_smoke
 from protein_lm.external.esmc_contract import load_esmc_contract
 from protein_lm.external.esmc_smoke import (
+    _final_hidden_states,
     build_residue_mask,
     load_local_transformers,
     padding_aware_mean_pool,
@@ -77,12 +78,13 @@ def test_cpu_fake_model_covers_both_paths_and_preserves_failure_json(
     contract = _contract_for_temp_weight(tmp_path)
     stable_swap = SwapState(raw="fixture", used_bytes=10, total_bytes=100)
     monkeypatch.setattr(esmc_smoke, "read_swap_state", lambda: stable_swap)
+    model = _FakeModel()
     result = run_esmc_smoke(
         contract,
         model_dir=tmp_path,
         device="cpu",
         project_root=PROJECT_ROOT,
-        loader=lambda _: (_FakeTokenizer(), _FakeModel()),
+        loader=lambda _: (_FakeTokenizer(), model),
         package_provenance_validator=_valid_package_provenance,
     )
 
@@ -95,6 +97,7 @@ def test_cpu_fake_model_covers_both_paths_and_preserves_failure_json(
     assert result["unmasked_hidden_state_shape"] == [2, 66, 960]
     assert result["masked_mlm_logit_shape"] == [2, 66, 64]
     assert result["installed_packages"] == _valid_package_provenance(contract)
+    assert model.calls[0]["output_hidden_states"] is False
 
     failed_path = tmp_path / "failed.json"
     failed = {**result, "status": "failed", "error": {"type": "Example"}}
@@ -138,9 +141,19 @@ def test_lazy_loader_uses_offline_local_transformers_arguments(
             "path": str(tmp_path),
             "local_files_only": True,
             "trust_remote_code": False,
-            "torch_dtype": torch.float32,
+            "dtype": torch.float32,
         }
     ]
+
+
+def test_final_hidden_state_ignores_a_real_shape_multi_element_hidden_states_tensor() -> None:
+    final_hidden_state = torch.ones((2, 66, 960), dtype=torch.float32)
+    output = SimpleNamespace(
+        last_hidden_state=final_hidden_state,
+        hidden_states=torch.zeros((31, 2, 66, 960), dtype=torch.float32),
+    )
+
+    assert _final_hidden_states(output) is final_hidden_state
 
 
 def test_cli_requires_explicit_arguments_and_refuses_overwrite(
@@ -326,6 +339,7 @@ class _FakeModel:
 
     def __init__(self) -> None:
         self._parameter = torch.nn.Parameter(torch.tensor(1.0))
+        self.calls: list[dict[str, object]] = []
 
     def to(self, *_: object, **__: object) -> "_FakeModel":
         return self
@@ -336,10 +350,15 @@ class _FakeModel:
     def parameters(self):
         return [self._parameter]
 
-    def __call__(self, *, input_ids: torch.Tensor, **_: object) -> SimpleNamespace:
+    def __call__(self, *, input_ids: torch.Tensor, **kwargs: object) -> SimpleNamespace:
+        self.calls.append(kwargs)
         hidden = input_ids.to(torch.float32).unsqueeze(-1).expand(-1, -1, 960)
         logits = input_ids.to(torch.float32).unsqueeze(-1).expand(-1, -1, 64)
-        return SimpleNamespace(hidden_states=(hidden,), logits=logits)
+        return SimpleNamespace(
+            last_hidden_state=hidden,
+            hidden_states=torch.stack((hidden, hidden)),
+            logits=logits,
+        )
 
 
 def _valid_package_provenance(contract) -> dict[str, object]:
