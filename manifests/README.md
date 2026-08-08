@@ -34,4 +34,6 @@ The adjacent sidecar records the same checksum.
 The manifest keeps complete UniRef50 groups, exact-duplicate-connected units,
 and represented ProteinGym-reserved groups intact. It is preserved as
 pre-repair evidence, but it failed the frozen residue-balance tolerance and
-must not be used for Task 7 or model training.
+did not authorize Task 7 by itself. It was later used only by the separately
+approved A-003 and A-004 read-only diagnostic audits. It remains prohibited
+for model training.

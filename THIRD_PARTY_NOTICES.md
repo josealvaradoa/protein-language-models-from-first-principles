@@ -15,12 +15,12 @@ Zero to Hero* course and repository:
 Public project code is independently reconstructed for amino-acid sequences.
 Attribution does not mean that tutorial source code is redistributed here.
 
-## Planned External Resources
+## External Resources
 
-The project expects to use the following external resources without committing
-their data, weights, or binaries to this repository:
+The project uses the following external resources without committing their
+data, weights, or binaries to this repository:
 
-| Resource | Planned role | Repository policy |
+| Resource | Role | Repository policy |
 |---|---|---|
 | UniProtKB/Swiss-Prot 2026_02 | Curated protein sequence corpus | Download externally; record source and checksum |
 | Release-matched UniRef50 2026_02 | Homology-aware grouping | Download externally; record source and checksum |

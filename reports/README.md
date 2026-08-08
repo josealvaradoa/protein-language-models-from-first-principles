@@ -65,3 +65,11 @@ remain unauthorized. The canonical Task 6 JSON SHA-256 is
 authorization to run only the frozen MMseqs2 audit against the immutable Task
 5 and Task 6 assignments. It does not rewrite the Task 6 result or authorize
 repair, selection, Task 8 membership use, or model training.
+
+`reports/week_01/task_07_read_only_fixed_budget_audit_a004.md` records the
+completed A-004 aggregate comparison. Under the same pinned procedure, the
+UniRef50-group assignment had lower detected strong-overlap rates than the
+independent-random assignment in both held-out partitions. The report also
+preserves the failed residue-balance result, finite-search limitations, exact
+evidence checksums, and the prohibition on using either assignment for model
+training.
