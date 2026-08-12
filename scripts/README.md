@@ -4,6 +4,15 @@ Scripts in this directory provide reproducible setup, data preparation,
 training, evaluation, and audit entrypoints. They must fail clearly rather than
 silently replacing missing data, models, or compute backends.
 
+`prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
+pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
+parses the frozen configuration and verifies and parses the four pinned local
+inputs; readiness validation parses the frozen configuration and prints its
+planned hard gates. Neither creates output, loads a model, or runs MMseqs2.
+Candidate creation requires `--execute-candidate`. Readiness evidence requires
+`--execute-readiness-validation` after a candidate exists. Jose runs those
+production commands, not automated implementation checks.
+
 `run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
 smoke. It requires Jose to install the optional `esmc` group and update the
 lockfile separately, provide the manually acquired pinned model directory, and

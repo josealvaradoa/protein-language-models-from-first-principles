@@ -87,6 +87,22 @@ Python and PyTorch versions, compute backend, precision, runtime, and relevant
 dataset or model revisions. A result is not promoted from a development run to
 a published result without that provenance.
 
+## Week 2 pre-run model-data boundary
+
+Week 2 Candidate v1 is not yet created or approved for model use. The two
+entrypoints below are safe preflights with no flags. Candidate preparation
+validates the frozen configuration and four pinned local inputs; readiness
+validation validates the frozen configuration and prints its planned checks.
+Neither creates a candidate, report, dataset, model, or network request.
+
+```bash
+env PYTHONPATH=src uv run --locked --offline python scripts/prepare_week2_model_data.py
+env PYTHONPATH=src uv run --locked --offline python scripts/validate_week2_model_data.py
+```
+
+Candidate creation and readiness evidence require separate explicit operator
+flags. The candidate stays in ignored local storage until passing review.
+
 ## Learning Sources
 
 The project is inspired by Andrej Karpathy's *Neural Networks: Zero to Hero*

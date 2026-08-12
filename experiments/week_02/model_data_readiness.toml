@@ -1,0 +1,50 @@
+schema_version = 1
+scope = "week_02_model_data_candidate"
+candidate_identifier = "v1"
+source_release = "2026_02"
+proteingym_release = "v1.3"
+license_spdx = "CC-BY-4.0"
+task4_catalog_relative_path = "data/processed/week_01/task_04_record_catalog.tsv"
+task4_catalog_sha256 = "7d619d7853eb6165786c0e0aca4f50ed66f5b69dfbed134a81d789d9c6dbcb70"
+task4_catalog_byte_size = 286813587
+task4_catalog_row_count = 575503
+reserved_families_relative_path = "data/processed/week_01/task_04_candidate_test_reserved_families.txt"
+reserved_families_sha256 = "7b0f3389c74ad31f849a120c6d944ffdfc64a838a636cb0ee546bec9ce2d2a07"
+reserved_family_count = 175
+task4_report_sha256 = "be791d35b39c4bf1337c121ed830ab01de1d9e73adee77e9eb5d24b0bf64bc5d"
+task4_report_relative_path = "reports/week_01/task_04_eligible_records.json"
+task4_eligibility_policy_sha256 = "69b8160e0aa972b66d28c0404af1c1b0a745bc423b8a620e47d30e5e483ce276"
+task4_eligibility_policy_relative_path = "experiments/week_01/eligibility.toml"
+canonical_amino_acids = "ACDEFGHIKLMNPQRSTVWY"
+minimum_length = 32
+maximum_length = 2046
+sequence_hash = "sha256"
+prediction_token_target = 1000000
+minimum_evaluation_predictions = 900000
+maximum_evaluation_predictions = 1100000
+minimum_bucket_predictions = 10000
+base_seed = 20260812
+hash_algorithm = "sha256"
+allocation_namespaces = [
+  "week2/shared-validation/v1",
+  "week2/shared-sealed-test/v1",
+  "week2/random-native-validation/v1",
+  "week2/family-native-validation/v1",
+  "week2/training-stream/random/v1",
+  "week2/training-stream/family-aware/v1",
+  "week2/sampling/random/v1",
+  "week2/sampling/family-aware/v1",
+]
+length_buckets = [
+  { name = "32-127", minimum = 32, maximum = 127 },
+  { name = "128-255", minimum = 128, maximum = 255 },
+  { name = "256-511", minimum = 256, maximum = 511 },
+  { name = "512-1023", minimum = 512, maximum = 1023 },
+  { name = "1024-2046", minimum = 1024, maximum = 2046 },
+]
+candidate_directory_relative_path = "data/processed/week_02/model_data_candidates/v1"
+readiness_json_relative_path = "reports/week_02/model_data_readiness_v1.json"
+readiness_markdown_relative_path = "reports/week_02/model_data_readiness_v1.md"
+readiness_sha256_relative_path = "reports/week_02/model_data_readiness_v1.sha256"
+mmseqs2_status = "diagnostic_only"
+model_use = "candidate_pending_readiness"
