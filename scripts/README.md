@@ -22,6 +22,23 @@ It copies only shared validation, random-arm, family-aware-arm, and the small
 public registry. Jose runs this production command after reviewing the
 preflight output.
 
+`audit_week2_training_streams.py` freezes and audits the exact 100-million-pair
+bigram stream for each promoted training arm. With no flag it reads only the
+small public stream configuration and prints the plan. It does not load a
+training collection or create output. Jose runs the explicit production audit
+only from a clean committed revision:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/audit_week2_training_streams.py --execute-stream-audit
+```
+
+The command uses only `random_training` and `family_aware_training` through the
+approved loader. It writes new aggregate-only JSON, Markdown, and SHA-256
+evidence under `reports/week_02/`, refusing to overwrite existing evidence.
+It does not load shared validation or sealed membership, train a model, score,
+evaluate, or run MMseqs2.
+
 `run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
 smoke. It requires Jose to install the optional `esmc` group and update the
 lockfile separately, provide the manually acquired pinned model directory, and

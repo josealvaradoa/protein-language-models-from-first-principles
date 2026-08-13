@@ -4,6 +4,19 @@ Weekly reports record aggregate metrics, failures, limitations, and run
 provenance. They must distinguish smoke, development, validation, and final
 test results.
 
+The Week 2 bigram training-stream audit writes these once, after explicit
+operator execution:
+
+```text
+reports/week_02/bigram_training_streams_v1.json
+reports/week_02/bigram_training_streams_v1.md
+reports/week_02/bigram_training_streams_v1.sha256
+```
+
+They record only aggregate stream coordinates, hashes, batch arithmetic, source
+identities, and runtime provenance. They contain no accessions, sequences,
+family identifiers, or membership rows.
+
 The Week 1 Task 2 corpus audit writes:
 
 ```text

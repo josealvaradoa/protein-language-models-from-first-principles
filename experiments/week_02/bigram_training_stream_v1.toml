@@ -1,0 +1,25 @@
+schema_version = 1
+scope = "week_02_bigram_training_stream"
+contract_identifier = "2026-08-13-week-02-bigram-training-stream-v1"
+model_data_contract_identifier = "2026-08-12-week-02-model-data-promotion-v1"
+model_data_config_relative_path = "experiments/week_02/model_data_readiness.toml"
+model_data_config_sha256 = "b35ec4003b002a065c29e3c70ee72ff115edafc6645f9370603e7020b4a05f12"
+model_data_registry_relative_path = "manifests/week_02/model_data_v1.json"
+model_data_registry_sha256 = "13b8e1b3bb371df46f6d363b20882b91a06dde51c64d39b4e5406e0dc44efb5c"
+base_seed = 20260812
+hash_algorithm = "sha256"
+stream_hash_domain = "protein-lm/week2/bigram-transition-stream/v1"
+prediction_pair_budget = 100000000
+batch_size = 65536
+full_batches = 1525
+final_partial_batch_pairs = 57600
+context_roles = ["BOS", "A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"]
+target_roles = ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y", "EOS"]
+training_collections = ["random_training", "family_aware_training"]
+training_namespaces = [
+  "week2/training-stream/random/v1",
+  "week2/training-stream/family-aware/v1",
+]
+report_json_relative_path = "reports/week_02/bigram_training_streams_v1.json"
+report_markdown_relative_path = "reports/week_02/bigram_training_streams_v1.md"
+report_sha256_relative_path = "reports/week_02/bigram_training_streams_v1.sha256"
