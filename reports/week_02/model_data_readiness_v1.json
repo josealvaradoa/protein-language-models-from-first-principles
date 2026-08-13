@@ -1,0 +1,217 @@
+{
+  "artifacts": {
+    "deduplication_aliases.tsv": {
+      "byte_size": 6830179,
+      "row_count": 86441,
+      "sha256": "8a0d0a2494eca0570d93cdfa4fd4781ff0a70eb4a89d9809c5dacc4734e60320"
+    },
+    "family_aware_arm.tsv": {
+      "byte_size": 50649387,
+      "row_count": 463777,
+      "sha256": "e8c307db46b3c603c4b451e7b549e619581828eae95dcf8bba9a43bb18938e50"
+    },
+    "random_arm.tsv": {
+      "byte_size": 50650053,
+      "row_count": 463777,
+      "sha256": "98904d1d4c04151c3322e44fa8f2d773023b85e013a5a4246330f1e7ff7a1b5a"
+    },
+    "shared_sealed_test.tsv": {
+      "byte_size": 311052,
+      "row_count": 2609,
+      "sha256": "799690a3cd2ba416b648e1d3e70b8bbaa2ce8162dddc37ea45ff9533bd7fd8a4"
+    },
+    "shared_validation.tsv": {
+      "byte_size": 345572,
+      "row_count": 2926,
+      "sha256": "8ab7d459010b00ce87f038a263da36fc5033f274145f7ba06ee736919f378173"
+    }
+  },
+  "candidate_status": "passed",
+  "collection_aggregates": {
+    "family_aware_native_validation": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 128287,
+          "records": 91
+        },
+        "128-255": {
+          "prediction_tokens": 144001,
+          "records": 746
+        },
+        "256-511": {
+          "prediction_tokens": 354135,
+          "records": 979
+        },
+        "32-127": {
+          "prediction_tokens": 24290,
+          "records": 307
+        },
+        "512-1023": {
+          "prediction_tokens": 349782,
+          "records": 522
+        }
+      },
+      "prediction_tokens": 1000495,
+      "records": 2645,
+      "residues": 997850,
+      "unique_uniref50_groups": 1093
+    },
+    "family_aware_training": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 19309647,
+          "records": 14548
+        },
+        "128-255": {
+          "prediction_tokens": 23284285,
+          "records": 121148
+        },
+        "256-511": {
+          "prediction_tokens": 69744275,
+          "records": 187851
+        },
+        "32-127": {
+          "prediction_tokens": 5413169,
+          "records": 59142
+        },
+        "512-1023": {
+          "prediction_tokens": 53578078,
+          "records": 78443
+        }
+      },
+      "prediction_tokens": 171329454,
+      "records": 461132,
+      "residues": 170868322,
+      "unique_uniref50_groups": 181976
+    },
+    "random_native_validation": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 117554,
+          "records": 90
+        },
+        "128-255": {
+          "prediction_tokens": 142076,
+          "records": 744
+        },
+        "256-511": {
+          "prediction_tokens": 395508,
+          "records": 1068
+        },
+        "32-127": {
+          "prediction_tokens": 30888,
+          "records": 346
+        },
+        "512-1023": {
+          "prediction_tokens": 314125,
+          "records": 471
+        }
+      },
+      "prediction_tokens": 1000151,
+      "records": 2719,
+      "residues": 997432,
+      "unique_uniref50_groups": 2623
+    },
+    "random_training": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 19320380,
+          "records": 14549
+        },
+        "128-255": {
+          "prediction_tokens": 23286210,
+          "records": 121150
+        },
+        "256-511": {
+          "prediction_tokens": 69702902,
+          "records": 187762
+        },
+        "32-127": {
+          "prediction_tokens": 5406571,
+          "records": 59103
+        },
+        "512-1023": {
+          "prediction_tokens": 53613735,
+          "records": 78494
+        }
+      },
+      "prediction_tokens": 171329798,
+      "records": 461058,
+      "residues": 170868740,
+      "unique_uniref50_groups": 182352
+    },
+    "shared_sealed_test": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 98536,
+          "records": 78
+        },
+        "128-255": {
+          "prediction_tokens": 110492,
+          "records": 571
+        },
+        "256-511": {
+          "prediction_tokens": 362728,
+          "records": 1022
+        },
+        "32-127": {
+          "prediction_tokens": 39496,
+          "records": 392
+        },
+        "512-1023": {
+          "prediction_tokens": 390277,
+          "records": 546
+        }
+      },
+      "prediction_tokens": 1001529,
+      "records": 2609,
+      "residues": 998920,
+      "unique_uniref50_groups": 1082
+    },
+    "shared_validation": {
+      "length_buckets": {
+        "1024-2046": {
+          "prediction_tokens": 73821,
+          "records": 55
+        },
+        "128-255": {
+          "prediction_tokens": 140339,
+          "records": 699
+        },
+        "256-511": {
+          "prediction_tokens": 532844,
+          "records": 1445
+        },
+        "32-127": {
+          "prediction_tokens": 40214,
+          "records": 414
+        },
+        "512-1023": {
+          "prediction_tokens": 212796,
+          "records": 313
+        }
+      },
+      "prediction_tokens": 1000014,
+      "records": 2926,
+      "residues": 997088,
+      "unique_uniref50_groups": 1036
+    }
+  },
+  "hard_gates": {
+    "artifact_and_provenance_checksums": true,
+    "complete_per_arm_population_accounting": true,
+    "deterministic_regeneration": true,
+    "evaluation_bucket_bounds": true,
+    "evaluation_token_bounds": true,
+    "family_aware_groups_do_not_cross": true,
+    "no_accession_or_hash_crossings_within_arm": true,
+    "reserved_members_are_absent": true,
+    "shared_and_sealed_groups_are_isolated": true,
+    "source_sequence_contract": true
+  },
+  "mmseqs2_status": "not_run",
+  "network_requests_made": 0,
+  "random_arm_uniref50_crossing_groups": 1906,
+  "schema_version": 1,
+  "scope": "week_02_model_data_readiness"
+}
