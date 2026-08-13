@@ -1,0 +1,50 @@
+{
+  "artifacts": [
+    {
+      "byte_size": 345572,
+      "filename": "shared_validation.tsv",
+      "row_count": 2926,
+      "sha256": "8ab7d459010b00ce87f038a263da36fc5033f274145f7ba06ee736919f378173"
+    },
+    {
+      "byte_size": 50650053,
+      "filename": "random_arm.tsv",
+      "row_count": 463777,
+      "sha256": "98904d1d4c04151c3322e44fa8f2d773023b85e013a5a4246330f1e7ff7a1b5a"
+    },
+    {
+      "byte_size": 50649387,
+      "filename": "family_aware_arm.tsv",
+      "row_count": 463777,
+      "sha256": "e8c307db46b3c603c4b451e7b549e619581828eae95dcf8bba9a43bb18938e50"
+    }
+  ],
+  "candidate_identifier": "v1",
+  "candidate_revision": "e30c00b34bb07c77cd6709766b6bcf7be638ebfa",
+  "contract_identifier": "2026-08-12-week-02-model-data-promotion-v1",
+  "membership_header": [
+    "primary_accession",
+    "partition",
+    "sequence_sha256",
+    "biological_length",
+    "length_bucket",
+    "uniref50_group"
+  ],
+  "readiness": {
+    "relative_path": "reports/week_02/model_data_readiness_v1.json",
+    "sha256": "19d4ee82eae49b600e9e83e4bb19d468b7a9fc2cfd6b78ffebc995f77db9b881"
+  },
+  "schema_version": 1,
+  "scope": "week_02_model_data",
+  "sealed_test_commitment": {
+    "byte_size": 311052,
+    "row_count": 2609,
+    "sha256": "799690a3cd2ba416b648e1d3e70b8bbaa2ce8162dddc37ea45ff9533bd7fd8a4"
+  },
+  "task4_catalog": {
+    "byte_size": 286813587,
+    "relative_path": "data/processed/week_01/task_04_record_catalog.tsv",
+    "row_count": 575503,
+    "sha256": "7d619d7853eb6165786c0e0aca4f50ed66f5b69dfbed134a81d789d9c6dbcb70"
+  }
+}
