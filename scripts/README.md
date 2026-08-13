@@ -13,6 +13,15 @@ Candidate creation requires `--execute-candidate`. Readiness evidence requires
 `--execute-readiness-validation` after a candidate exists. Jose runs those
 production commands, not automated implementation checks.
 
+`promote_week2_model_data.py` is the final Week 2 model-data handoff. With no
+flag it verifies the approved readiness identity, candidate revision and
+inventory, the three public source manifests, and the sealed aggregate
+commitment without opening sealed membership. `--execute-promotion` additionally
+requires a clean committed revision and atomically creates `manifests/week_02`.
+It copies only shared validation, random-arm, family-aware-arm, and the small
+public registry. Jose runs this production command after reviewing the
+preflight output.
+
 `run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
 smoke. It requires Jose to install the optional `esmc` group and update the
 lockfile separately, provide the manually acquired pinned model directory, and

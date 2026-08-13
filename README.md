@@ -103,6 +103,17 @@ env PYTHONPATH=src uv run --locked --offline python scripts/validate_week2_model
 Candidate creation and readiness evidence require separate explicit operator
 flags. The candidate stays in ignored local storage until passing review.
 
+After a passing readiness review, the next safe command is the no-flag public
+promotion preflight:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline python scripts/promote_week2_model_data.py
+```
+
+It verifies the approved candidate and readiness identities without creating
+output or opening sealed membership. Jose alone runs the separately explicit
+promotion flag after reviewing that output.
+
 ## Learning Sources
 
 The project is inspired by Andrej Karpathy's *Neural Networks: Zero to Hero*

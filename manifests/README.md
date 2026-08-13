@@ -4,6 +4,16 @@ Public manifests may contain stable identifiers, partition assignments, source
 revisions, and checksums. Raw datasets, sealed evaluation labels, and external
 model assets do not belong here.
 
+## Week 2 approved model data
+
+After the operator runs the explicit promotion command, `manifests/week_02/`
+contains the shared validation manifest, random and family-aware arm manifests,
+and `model_data_v1.json`. The registry pins their identities and records only
+the sealed test aggregate commitment. It contains no sealed-test membership,
+sequence text, catalog, or alias table. Model code must use the five-value
+`ModelDataCollection` API and cannot select a filesystem path or a sealed
+collection.
+
 The Week 1 Task 5 random diagnostic manifest is:
 
 ```text
