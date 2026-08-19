@@ -114,6 +114,32 @@ It verifies the approved candidate and readiness identities without creating
 output or opening sealed membership. Jose alone runs the separately explicit
 promotion flag after reviewing that output.
 
+## Week 2 sampling diagnostic
+
+The sampling diagnostic is a separate, synthetic-only educational artifact. It
+uses only the two pinned final neural bigram models. It never loads a dataset,
+validation or test collection, scores samples, or makes biological claims.
+The no-flag command validates local byte-pinned inputs without writing output:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline python scripts/publish_week2_bigram_sampling.py
+```
+
+After a code review and clean commit, Jose can run the explicit publisher:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/publish_week2_bigram_sampling.py --execute-publication
+```
+
+It creates the deterministic JSON, Markdown, and checksum sidecar under
+`reports/week_02/`, refusing an existing report. The separate validator checks
+all report bytes and independently regenerates the saved samples:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline python scripts/validate_week2_bigram_sampling.py
+```
+
 ## Learning Sources
 
 The project is inspired by Andrej Karpathy's *Neural Networks: Zero to Hero*
