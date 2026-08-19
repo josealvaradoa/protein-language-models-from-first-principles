@@ -61,7 +61,6 @@ bin/
 # Private project-management material
 .agents/
 .specify/
-AGENTS.md
 notes/
 prompts/
 specs/
