@@ -1,0 +1,231 @@
+{
+  "contract_identifier": "2026-08-19-week-02-bigram-sampling-v1",
+  "hard_gates": {
+    "no_network_requests": true,
+    "no_selection_or_biological_claims": true,
+    "synthetic_nonfunctional_educational_output": true,
+    "twenty_samples_preserved": true,
+    "two_neural_artifacts_only": true,
+    "validated_passed_candidate": true
+  },
+  "network_requests_made": 0,
+  "publication_code_revision": "fa524f299a9a63ff8e4afa76b1dbb3deea47ae03",
+  "runtime": {
+    "torch_version": "2.13.0",
+    "uv_lock_sha256": "0a273fe208a50476ef04af95f92e20dfa3ad71575e24c78d29435b9a3d607cc3"
+  },
+  "samples": [
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 128,
+      "sample_index": 0,
+      "seed": 5418557320906836041,
+      "sequence": "LRFLRYHSDRPEIKCAGNSQAATSTHPSCTVIPMRYTHGLFGVDRVDTITRLKEKHRPVGARKRAAAVGVSATGQGMGYRAAAKHASRHILELSNEFVYGDLRRYNLSPNLDLKELGHHLHHQAQKKE",
+      "termination_reason": "max_residues"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 70,
+      "sample_index": 1,
+      "seed": 6079842799552922202,
+      "sequence": "ISVKKERKEIWREEKNYDTLEPLGFKQLQEDGRLGGVESLLSSVKVTYVERPTARAPGNQTVEAVLPLQN",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 88,
+      "sample_index": 2,
+      "seed": 5214751350428510844,
+      "sequence": "MAMNCRLVIWVWRRRKSGHQNAERLQIADHGIYFCDSVYKTQILKTDLILISDQRSSQCFWMKGKESAKKGGVDLIISYFDGAPQMMW",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 98,
+      "sample_index": 3,
+      "seed": 5701705669351036323,
+      "sequence": "AEDSPPVNAFRSEKGLFSKRVIVFNFNIATPTSQNWLDLTTHLHKLLKNAAIANLILFLSIYLAPCHKADKVIKISTLMQVCTAITEGVDKRSDDGEN",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 124,
+      "sample_index": 4,
+      "seed": 9118195243564038305,
+      "sequence": "MFEVYCILIFTLGRVSSLLGEHDKIDKYFRDDWITQENIQLAIAFGSTAHNKVVARAGEVTNDPSTYRRGQFGFGDDENFMFLHPDLIRIDTAEGKKIPMPSQNTGVLGQAPTDRQRCTQRERH",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 64,
+      "sample_index": 5,
+      "seed": 3523610923498935074,
+      "sequence": "MVKTLSYYSQSKVLRYMKGDPSNMVQGDEREEALYCNIVLVPLQNAPAEWLVSFGGNRTSNDLC",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 84,
+      "sample_index": 6,
+      "seed": 2251254207831102285,
+      "sequence": "MWIYRAQLYELLVALSSTGERVHESLGWHPVGKAFEIGTRANAKIYYVAVPGKKFLGQMDIISRGNMLRAGGKKTDIYFGARRP",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 35,
+      "sample_index": 7,
+      "seed": 2638874290917688225,
+      "sequence": "MESMGDFLVVITSKDLWLIGTYILSSDDMVTVVFT",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 128,
+      "sample_index": 8,
+      "seed": 7526148344948411937,
+      "sequence": "MRSEDPQAEAKSTTDIEFTYPGREVMSANQQVDKGGKPNLALIEEVAVDPKNPYRLEFKVWLNCDILPEIEDFVDDIRRFIFVINCAVNKRHIFLISTRFSTGEEVMGKKASPLTIEIALPMKGCVAT",
+      "termination_reason": "max_residues"
+    },
+    {
+      "model_arm": "random_training",
+      "namespace": "week2/sampling/random/v1",
+      "residue_length": 128,
+      "sample_index": 9,
+      "seed": 6549766581053663266,
+      "sequence": "ADCLFDPGDKADEQSLNRKDSRYEAKTLGVAQTVEFNRSTHCNGDTTSSAGHPIDIELRTDILGMLHQGVLIAEARSVSGYWNILDGDVAAYNLNVDSFSHNGRAPMTGSFLLSTSHNLQESVKRPAR",
+      "termination_reason": "max_residues"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 40,
+      "sample_index": 0,
+      "seed": 5392191747199132491,
+      "sequence": "MQHAIEQIIPVAPPSSTKHYRIALIRRLTESPTDTDGPRH",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 11,
+      "sample_index": 1,
+      "seed": 7347923931949085046,
+      "sequence": "HKAGNGPLVIF",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 97,
+      "sample_index": 2,
+      "seed": 3379516368464671153,
+      "sequence": "KPGVNQDGFAVVDPPITKLLKDQPEATATTLKVYCYFQALSIENEEDWTDDQNKDDIVYWFSQGRWQNGKNSTHPLGPGGGFMTVGSRYIDNKLRTR",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 111,
+      "sample_index": 3,
+      "seed": 219901943813228867,
+      "sequence": "GIRIRGRSKVIMSPAFRNNDEIFSFLSLRIAMLEEEFYHEIMALDLLDWSIPAYCWTKEVSRVVMGDLPSKRALQGLLKVKCAAMAGLNRRHRAKAYLGEPKATVFFQRQT",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 81,
+      "sample_index": 4,
+      "seed": 8947543624314378380,
+      "sequence": "LRSVTTQTGMLPGVTLDSEKSELIQGWSMGNTLEDGVEAMATWIVAIGERPVVLVTPQQARRRNDRIKGVADLQASSCGRR",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 30,
+      "sample_index": 5,
+      "seed": 7667436988509219857,
+      "sequence": "GVQYELFRNYLAILGQNDEAQGVGKKLRAT",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 36,
+      "sample_index": 6,
+      "seed": 8231971285384393308,
+      "sequence": "PFKASLNSRRLGVYNPIATQQVLKPEMDTALLVKMK",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 35,
+      "sample_index": 7,
+      "seed": 6035722608008621336,
+      "sequence": "MASTATIVVVAEDFSTLKKYAVAQVYIELEKDALA",
+      "termination_reason": "eos"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 128,
+      "sample_index": 8,
+      "seed": 4622040456044880268,
+      "sequence": "ELVLSYLGTNNNQTLRYGSYTLMGRLVIQPFPTWMTKGAWFLYQTRCQGGLLLALLPQPVEFTSGMLEQRSLVTRPIVVISSWDKNLPQIDSMIGNMQMVKASGVYDGIVHRSGDPLAYANWRKKKVM",
+      "termination_reason": "max_residues"
+    },
+    {
+      "model_arm": "family_aware_training",
+      "namespace": "week2/sampling/family-aware/v1",
+      "residue_length": 99,
+      "sample_index": 9,
+      "seed": 2055692098231498304,
+      "sequence": "MEGVCKVWWLSNWWQFDTFSCLIGVITAAEAGEEPHAKDTTNRDSVSAAYAWGLQKSLKTQNYQAYVATKDVGLSKEIFCKIILNQTGMLAVINALGSS",
+      "termination_reason": "eos"
+    }
+  ],
+  "sampling": {
+    "base_seed": 20260812,
+    "max_residues": 128,
+    "samples_per_model": 10,
+    "seed_derivation": "sha256_utf8_v1_nul_base_seed_nul_namespace_nul_sample_index_first_8_bytes_big_endian_mask_63_bits",
+    "start_context": "BOS",
+    "temperature": 1.0,
+    "termination": "EOS_or_max_residues",
+    "top_k": "none",
+    "top_p": "none"
+  },
+  "sampling_configuration_sha256": "6274acfa7407670b2c98e2b05a2b8089e24bc13029fc7d2fd6154d7c166f6304",
+  "schema_version": 1,
+  "scope": "week_02_bigram_sampling_diagnostic",
+  "source": {
+    "candidate_code_revision": "c661315641049ef9f8d3b372f75ac34c86ad67e2",
+    "candidate_id": "week2-bigram-v1-001",
+    "candidate_registry_sha256": "18bca1ec67b639d0ae68ee022a18cb2cdd9e9f571c7b305e5c9960c3a8257e5f",
+    "candidate_run_record_sha256": "e9bee5dadd91c2090304cae301b2eedec5b4e5ef3c1f3bdcadc3fbc5681391e9",
+    "neural_artifacts": {
+      "family_aware_training": {
+        "json_sha256": "8857ff6dec81a0d1e2edddb220c33f7bff243325dcda812a81fd6401d58cb767",
+        "safetensors_sha256": "48da3298e97b2b6fc6129918df181d44aedf5ef6ab7149d8397075436728a0bf"
+      },
+      "random_training": {
+        "json_sha256": "998211cd19e89a27210583cdab05a9abf3070089f58b801a20f7c773a19094db",
+        "safetensors_sha256": "96e8af3b217f931c5cb49b44949cde92be0f49175df80e68a8c7888da6c863ef"
+      }
+    },
+    "relative_path": "data/processed/week_02/bigram_model_candidates/week2-bigram-v1-001"
+  },
+  "status": "passed"
+}
