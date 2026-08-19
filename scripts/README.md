@@ -221,6 +221,27 @@ publish results. `validate_week2_bigram_evaluation.py --evaluation-id ID`
 checks an existing candidate, its artifact checksums, the pinned input model,
 and all metric arithmetic without loading a collection.
 
+`publish_week2_bigram_evaluation.py` is the separate aggregate-only public
+report publisher. With no flags it validates the byte-pinned evaluation
+candidate, its twelve aggregate records, and source provenance without loading
+models or collections and without writing output. The explicit command requires
+a clean committed revision, refuses any existing report artifact, and installs
+the JSON, Markdown, and checksum sidecar together:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/publish_week2_bigram_evaluation.py \
+  --execute-publication
+```
+
+The report contains aggregate metrics, length buckets, fixed comparison
+arithmetic, source identities, and collection-load accounting only. It excludes
+sequences, accessions, family identifiers, and membership rows. It does not
+load a model or collection, access the sealed test, retrain, select, or make a
+network request. `validate_week2_bigram_public_report.py` is a separate
+read-only check of the exact public inventory, checksums, source provenance,
+derived arithmetic, and deterministic Markdown rendering.
+
 `run_read_only_fixed_budget_audit.py` is the separate A-004 fixed-budget
 entrypoint. With no arguments it validates the pinned configuration and prints
 the complete stage plan without creating databases, searches, or evidence.

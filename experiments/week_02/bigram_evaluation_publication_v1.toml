@@ -1,0 +1,15 @@
+schema_version = 1
+scope = "week_02_bigram_evaluation_publication"
+contract_identifier = "2026-08-19-week-02-bigram-evaluation-publication-v1"
+source_evaluation_id = "week2-bigram-eval-v1-001"
+source_evaluation_relative_path = "data/processed/week_02/bigram_evaluation_candidates/week2-bigram-eval-v1-001"
+source_evaluation_sha256 = "b531e45391e4f7e8ae30a031fb0ef8dc14beaca37279d8fbcda6a226344b2bf8"
+source_run_record_sha256 = "f5a34bf7e2ad8289000a773c6d0809c6d9c2090c016ab03632ee5e7e66440211"
+source_registry_sha256 = "c98d9e82b95e7380b363e472d67d33fd05485d3f00ea27bc72ef1b576200d09d"
+source_evaluation_code_revision = "36c8cc9d964421e67bd16e6aa5ebcea14f76c80e"
+source_evaluation_config_sha256 = "219e7a3bc06a6c227ed27b9b4b7e917083b537bd5ac5d11a7526ee8415c2d97c"
+report_json_relative_path = "reports/week_02/bigram_evaluation_v1.json"
+report_markdown_relative_path = "reports/week_02/bigram_evaluation_v1.md"
+report_sha256_relative_path = "reports/week_02/bigram_evaluation_v1.sha256"
+network_requests_made = 0
+publication_scope = "aggregate_only_no_sequences_no_membership"
