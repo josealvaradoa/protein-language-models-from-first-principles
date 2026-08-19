@@ -1,0 +1,998 @@
+{
+  "contract_identifier": "2026-08-19-week-02-bigram-evaluation-publication-v1",
+  "derived_comparisons": {
+    "positive_cross_entropy_improvement_means_lower_comparator_cross_entropy": true,
+    "shared_neural_head_to_head": {
+      "random_minus_family_cross_entropy": 3.779271340587087e-05
+    },
+    "week_03_baseline": {
+      "model_arm": "family_aware_training",
+      "model_type": "neural_bigram",
+      "native_accuracy": 0.09885306773147293,
+      "native_collection": "family_aware_native_validation",
+      "native_cross_entropy": 2.8985748162212692,
+      "optimism_gap": 0.0029218877435779333,
+      "shared_accuracy": 0.10929546986342191,
+      "shared_collection": "shared_validation",
+      "shared_cross_entropy": 2.901496703964847
+    },
+    "within_arm_collection": [
+      {
+        "collection": "random_native_validation",
+        "model_arm": "random_training",
+        "unigram_minus_count_cross_entropy": 0.014657590126763154,
+        "unigram_minus_neural_cross_entropy": 0.007078117534075279
+      },
+      {
+        "collection": "shared_validation",
+        "model_arm": "random_training",
+        "unigram_minus_count_cross_entropy": 0.015095709839533011,
+        "unigram_minus_neural_cross_entropy": 0.009481803177219916
+      },
+      {
+        "collection": "family_aware_native_validation",
+        "model_arm": "family_aware_training",
+        "unigram_minus_count_cross_entropy": 0.014666103900706329,
+        "unigram_minus_neural_cross_entropy": 0.00761662480860581
+      },
+      {
+        "collection": "shared_validation",
+        "model_arm": "family_aware_training",
+        "unigram_minus_count_cross_entropy": 0.015089529586890471,
+        "unigram_minus_neural_cross_entropy": 0.009528052512332685
+      }
+    ]
+  },
+  "evaluation_provenance": {
+    "configuration_sha256": "219e7a3bc06a6c227ed27b9b4b7e917083b537bd5ac5d11a7526ee8415c2d97c",
+    "model_candidate": {
+      "candidate_id": "week2-bigram-v1-001",
+      "candidate_registry_sha256": "18bca1ec67b639d0ae68ee022a18cb2cdd9e9f571c7b305e5c9960c3a8257e5f",
+      "relative_path": "data/processed/week_02/bigram_model_candidates/week2-bigram-v1-001",
+      "run_record_sha256": "e9bee5dadd91c2090304cae301b2eedec5b4e5ef3c1f3bdcadc3fbc5681391e9"
+    },
+    "model_data_registry": {
+      "relative_path": "manifests/week_02/model_data_v1.json",
+      "sha256": "13b8e1b3bb371df46f6d363b20882b91a06dde51c64d39b4e5406e0dc44efb5c"
+    }
+  },
+  "evaluation_runtime": {
+    "collection_loads": {
+      "family_aware_native_validation": 1,
+      "random_native_validation": 1,
+      "shared_sealed_test": 0,
+      "shared_validation": 1
+    },
+    "runtime_seconds": 11.541753542027436
+  },
+  "hard_gates": {
+    "aggregate_only": true,
+    "exact_twelve_records": true,
+    "no_network_requests": true,
+    "sealed_test_inaccessible": true,
+    "validated_source_evaluation": true
+  },
+  "hypothesis": {
+    "comparison": 0.004488438662781036,
+    "family_neural_optimism_gap": 0.0029218877435779333,
+    "random_neural_optimism_gap": 0.007410326406358969,
+    "supports_hypothesis": true
+  },
+  "network_requests_made": 0,
+  "publication_code_revision": "9c8bde9f400264b713256fc76e8c86721a1be9d6",
+  "publication_configuration_sha256": "ad73f29b6769ae430ab7bbfaa6dead1f510714b121babd7ab27b12e52d0e5f54",
+  "records": [
+    {
+      "collection": "random_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09619408952481413,
+            "correct_tokens": 11308,
+            "cross_entropy": 2.9001845519011766,
+            "median_lower_per_protein_nll": 2.8986781982201,
+            "median_per_protein_nll": 2.8987953032585176,
+            "median_upper_per_protein_nll": 2.8989124082969355,
+            "protein_count": 90,
+            "token_count": 117554,
+            "total_nll": 340928.29481419094
+          },
+          "128-255": {
+            "accuracy": 0.09633576395731862,
+            "correct_tokens": 13687,
+            "cross_entropy": 2.9020187359957035,
+            "median_lower_per_protein_nll": 2.896858513074201,
+            "median_per_protein_nll": 2.89686755113331,
+            "median_upper_per_protein_nll": 2.8968765891924195,
+            "protein_count": 744,
+            "token_count": 142076,
+            "total_nll": 412307.21393532556
+          },
+          "256-511": {
+            "accuracy": 0.09757071917635042,
+            "correct_tokens": 38590,
+            "cross_entropy": 2.898894855976445,
+            "median_lower_per_protein_nll": 2.896911207693828,
+            "median_per_protein_nll": 2.896980129172211,
+            "median_upper_per_protein_nll": 2.897049050650594,
+            "protein_count": 1068,
+            "token_count": 395508,
+            "total_nll": 1146536.1066975319
+          },
+          "32-127": {
+            "accuracy": 0.09084434084434084,
+            "correct_tokens": 2806,
+            "cross_entropy": 2.937819310847483,
+            "median_lower_per_protein_nll": 2.934960574088695,
+            "median_per_protein_nll": 2.9357035870720605,
+            "median_upper_per_protein_nll": 2.9364466000554263,
+            "protein_count": 346,
+            "token_count": 30888,
+            "total_nll": 90743.36287345705
+          },
+          "512-1023": {
+            "accuracy": 0.09772224432948667,
+            "correct_tokens": 30697,
+            "cross_entropy": 2.9005185548139103,
+            "median_lower_per_protein_nll": 2.900396927924823,
+            "median_per_protein_nll": 2.900396927924823,
+            "median_upper_per_protein_nll": 2.900396927924823,
+            "protein_count": 471,
+            "token_count": 314125,
+            "total_nll": 911125.3910309195
+          }
+        },
+        "overall": {
+          "accuracy": 0.09707334192536927,
+          "correct_tokens": 97088,
+          "cross_entropy": 2.9012022878059693,
+          "median_lower_per_protein_nll": 2.900899611414312,
+          "median_per_protein_nll": 2.900899611414312,
+          "median_upper_per_protein_nll": 2.900899611414312,
+          "protein_count": 2719,
+          "token_count": 1000151,
+          "total_nll": 2901640.369351428
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "unigram"
+    },
+    {
+      "collection": "random_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09609200877894414,
+            "correct_tokens": 11296,
+            "cross_entropy": 2.8926891030528004,
+            "median_lower_per_protein_nll": 2.890217110502802,
+            "median_per_protein_nll": 2.890460017863215,
+            "median_upper_per_protein_nll": 2.8907029252236276,
+            "protein_count": 90,
+            "token_count": 117554,
+            "total_nll": 340047.1748202689
+          },
+          "128-255": {
+            "accuracy": 0.10228328500239309,
+            "correct_tokens": 14532,
+            "cross_entropy": 2.8770827841619724,
+            "median_lower_per_protein_nll": 2.8728558738125933,
+            "median_per_protein_nll": 2.8729350380484258,
+            "median_upper_per_protein_nll": 2.8730142022842577,
+            "protein_count": 744,
+            "token_count": 142076,
+            "total_nll": 408764.4136425964
+          },
+          "256-511": {
+            "accuracy": 0.10083993244131598,
+            "correct_tokens": 39883,
+            "cross_entropy": 2.8845834276005977,
+            "median_lower_per_protein_nll": 2.8814586101852915,
+            "median_per_protein_nll": 2.881540656574549,
+            "median_upper_per_protein_nll": 2.881622702963807,
+            "protein_count": 1068,
+            "token_count": 395508,
+            "total_nll": 1140875.8222834573
+          },
+          "32-127": {
+            "accuracy": 0.1047008547008547,
+            "correct_tokens": 3234,
+            "cross_entropy": 2.893375931579021,
+            "median_lower_per_protein_nll": 2.882388896082698,
+            "median_per_protein_nll": 2.8828788406459696,
+            "median_upper_per_protein_nll": 2.8833687852092407,
+            "protein_count": 346,
+            "token_count": 30888,
+            "total_nll": 89370.5957746128
+          },
+          "512-1023": {
+            "accuracy": 0.09926939912455232,
+            "correct_tokens": 31183,
+            "cross_entropy": 2.89032251303659,
+            "median_lower_per_protein_nll": 2.890644280584978,
+            "median_per_protein_nll": 2.890644280584978,
+            "median_upper_per_protein_nll": 2.890644280584978,
+            "protein_count": 471,
+            "token_count": 314125,
+            "total_nll": 907922.5594076188
+          }
+        },
+        "overall": {
+          "accuracy": 0.10011288295467384,
+          "correct_tokens": 100128,
+          "cross_entropy": 2.886544697679206,
+          "median_lower_per_protein_nll": 2.881857659983306,
+          "median_per_protein_nll": 2.881857659983306,
+          "median_upper_per_protein_nll": 2.881857659983306,
+          "protein_count": 2719,
+          "token_count": 1000151,
+          "total_nll": 2886980.5659285556
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "count_bigram"
+    },
+    {
+      "collection": "random_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09609200877894414,
+            "correct_tokens": 11296,
+            "cross_entropy": 2.902249394285349,
+            "median_lower_per_protein_nll": 2.899284169743573,
+            "median_per_protein_nll": 2.8995598329469967,
+            "median_upper_per_protein_nll": 2.89983549615042,
+            "protein_count": 90,
+            "token_count": 117554,
+            "total_nll": 341171.0252958199
+          },
+          "128-255": {
+            "accuracy": 0.10228328500239309,
+            "correct_tokens": 14532,
+            "cross_entropy": 2.883348591895264,
+            "median_lower_per_protein_nll": 2.8812148004150635,
+            "median_per_protein_nll": 2.8812355262985294,
+            "median_upper_per_protein_nll": 2.8812562521819953,
+            "protein_count": 744,
+            "token_count": 142076,
+            "total_nll": 409654.63454211154
+          },
+          "256-511": {
+            "accuracy": 0.10083993244131598,
+            "correct_tokens": 39883,
+            "cross_entropy": 2.892062048711052,
+            "median_lower_per_protein_nll": 2.890255697387589,
+            "median_per_protein_nll": 2.8902613338068095,
+            "median_upper_per_protein_nll": 2.89026697022603,
+            "protein_count": 1068,
+            "token_count": 395508,
+            "total_nll": 1143833.676761611
+          },
+          "32-127": {
+            "accuracy": 0.1047008547008547,
+            "correct_tokens": 3234,
+            "cross_entropy": 2.8932346481080975,
+            "median_lower_per_protein_nll": 2.8857262712029845,
+            "median_per_protein_nll": 2.8865008901344025,
+            "median_upper_per_protein_nll": 2.88727550906582,
+            "protein_count": 346,
+            "token_count": 30888,
+            "total_nll": 89366.23181076291
+          },
+          "512-1023": {
+            "accuracy": 0.09926939912455232,
+            "correct_tokens": 31183,
+            "cross_entropy": 2.8986410333825883,
+            "median_lower_per_protein_nll": 2.8992074576164595,
+            "median_per_protein_nll": 2.8992074576164595,
+            "median_upper_per_protein_nll": 2.8992074576164595,
+            "protein_count": 471,
+            "token_count": 314125,
+            "total_nll": 910535.6146113055
+          }
+        },
+        "overall": {
+          "accuracy": 0.10011288295467384,
+          "correct_tokens": 100128,
+          "cross_entropy": 2.894124170271894,
+          "median_lower_per_protein_nll": 2.88998552906344,
+          "median_per_protein_nll": 2.88998552906344,
+          "median_upper_per_protein_nll": 2.88998552906344,
+          "protein_count": 2719,
+          "token_count": 1000151,
+          "total_nll": 2894561.183021605
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "neural_bigram"
+    },
+    {
+      "collection": "family_aware_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09516942480531933,
+            "correct_tokens": 12209,
+            "cross_entropy": 2.9032459117461507,
+            "median_lower_per_protein_nll": 2.90416855638033,
+            "median_per_protein_nll": 2.90416855638033,
+            "median_upper_per_protein_nll": 2.90416855638033,
+            "protein_count": 91,
+            "token_count": 128287,
+            "total_nll": 372448.7082801784
+          },
+          "128-255": {
+            "accuracy": 0.09406184679273061,
+            "correct_tokens": 13545,
+            "cross_entropy": 2.913295128845338,
+            "median_lower_per_protein_nll": 2.90339478732394,
+            "median_per_protein_nll": 2.9034767018561136,
+            "median_upper_per_protein_nll": 2.9035586163882874,
+            "protein_count": 746,
+            "token_count": 144001,
+            "total_nll": 419517.41184885753
+          },
+          "256-511": {
+            "accuracy": 0.09746565575274965,
+            "correct_tokens": 34516,
+            "cross_entropy": 2.8994362589108422,
+            "median_lower_per_protein_nll": 2.8984094505336735,
+            "median_per_protein_nll": 2.8984094505336735,
+            "median_upper_per_protein_nll": 2.8984094505336735,
+            "protein_count": 979,
+            "token_count": 354135,
+            "total_nll": 1026791.8595493911
+          },
+          "32-127": {
+            "accuracy": 0.09802387813915192,
+            "correct_tokens": 2381,
+            "cross_entropy": 2.937701256598354,
+            "median_lower_per_protein_nll": 2.938549449008166,
+            "median_per_protein_nll": 2.938549449008166,
+            "median_upper_per_protein_nll": 2.938549449008166,
+            "protein_count": 307,
+            "token_count": 24290,
+            "total_nll": 71356.76352277401
+          },
+          "512-1023": {
+            "accuracy": 0.09569103041322881,
+            "correct_tokens": 33471,
+            "cross_entropy": 2.9089983549524883,
+            "median_lower_per_protein_nll": 2.906913673278058,
+            "median_per_protein_nll": 2.9069414957766893,
+            "median_upper_per_protein_nll": 2.9069693182753205,
+            "protein_count": 522,
+            "token_count": 349782,
+            "total_nll": 1017515.2625919912
+          }
+        },
+        "overall": {
+          "accuracy": 0.09607444315064043,
+          "correct_tokens": 96122,
+          "cross_entropy": 2.906191441029875,
+          "median_lower_per_protein_nll": 2.9057504329235733,
+          "median_per_protein_nll": 2.9057504329235733,
+          "median_upper_per_protein_nll": 2.9057504329235733,
+          "protein_count": 2645,
+          "token_count": 1000495,
+          "total_nll": 2907630.005793185
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "unigram"
+    },
+    {
+      "collection": "family_aware_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09523958000420932,
+            "correct_tokens": 12218,
+            "cross_entropy": 2.8948070391429215,
+            "median_lower_per_protein_nll": 2.898765669636777,
+            "median_per_protein_nll": 2.898765669636777,
+            "median_upper_per_protein_nll": 2.898765669636777,
+            "protein_count": 91,
+            "token_count": 128287,
+            "total_nll": 371366.11063052795
+          },
+          "128-255": {
+            "accuracy": 0.09953403101367352,
+            "correct_tokens": 14333,
+            "cross_entropy": 2.889135010706524,
+            "median_lower_per_protein_nll": 2.8786551630215707,
+            "median_per_protein_nll": 2.878692098528874,
+            "median_upper_per_protein_nll": 2.8787290340361773,
+            "protein_count": 746,
+            "token_count": 144001,
+            "total_nll": 416038.33067675016
+          },
+          "256-511": {
+            "accuracy": 0.10146413091052847,
+            "correct_tokens": 35932,
+            "cross_entropy": 2.8854076012351557,
+            "median_lower_per_protein_nll": 2.8850431228107234,
+            "median_per_protein_nll": 2.8850431228107234,
+            "median_upper_per_protein_nll": 2.8850431228107234,
+            "protein_count": 979,
+            "token_count": 354135,
+            "total_nll": 1021823.8208634119
+          },
+          "32-127": {
+            "accuracy": 0.10876904075751338,
+            "correct_tokens": 2642,
+            "cross_entropy": 2.8851762720114222,
+            "median_lower_per_protein_nll": 2.8684763732206626,
+            "median_per_protein_nll": 2.8684763732206626,
+            "median_upper_per_protein_nll": 2.8684763732206626,
+            "protein_count": 307,
+            "token_count": 24290,
+            "total_nll": 70080.93164715744
+          },
+          "512-1023": {
+            "accuracy": 0.096565861022008,
+            "correct_tokens": 33777,
+            "cross_entropy": 2.8979405697068454,
+            "median_lower_per_protein_nll": 2.8968231415041505,
+            "median_per_protein_nll": 2.897023830472479,
+            "median_upper_per_protein_nll": 2.8972245194408073,
+            "protein_count": 522,
+            "token_count": 349782,
+            "total_nll": 1013647.4483531998
+          }
+        },
+        "overall": {
+          "accuracy": 0.09885306773147293,
+          "correct_tokens": 98902,
+          "cross_entropy": 2.8915253371291687,
+          "median_lower_per_protein_nll": 2.886282130119532,
+          "median_per_protein_nll": 2.886282130119532,
+          "median_upper_per_protein_nll": 2.886282130119532,
+          "protein_count": 2645,
+          "token_count": 1000495,
+          "total_nll": 2892956.6421710476
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "count_bigram"
+    },
+    {
+      "collection": "family_aware_native_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09523958000420932,
+            "correct_tokens": 12218,
+            "cross_entropy": 2.9035150038798494,
+            "median_lower_per_protein_nll": 2.908197117856692,
+            "median_per_protein_nll": 2.908197117856692,
+            "median_upper_per_protein_nll": 2.908197117856692,
+            "protein_count": 91,
+            "token_count": 128287,
+            "total_nll": 372483.22930273425
+          },
+          "128-255": {
+            "accuracy": 0.09953403101367352,
+            "correct_tokens": 14333,
+            "cross_entropy": 2.8945946250998045,
+            "median_lower_per_protein_nll": 2.8867387171922037,
+            "median_per_protein_nll": 2.8868337846680023,
+            "median_upper_per_protein_nll": 2.886928852143801,
+            "protein_count": 746,
+            "token_count": 144001,
+            "total_nll": 416824.520608997
+          },
+          "256-511": {
+            "accuracy": 0.10146413091052847,
+            "correct_tokens": 35932,
+            "cross_entropy": 2.8925259108044123,
+            "median_lower_per_protein_nll": 2.8933574325688585,
+            "median_per_protein_nll": 2.8933574325688585,
+            "median_upper_per_protein_nll": 2.8933574325688585,
+            "protein_count": 979,
+            "token_count": 354135,
+            "total_nll": 1024344.6634227206
+          },
+          "32-127": {
+            "accuracy": 0.10876904075751338,
+            "correct_tokens": 2642,
+            "cross_entropy": 2.885414333573336,
+            "median_lower_per_protein_nll": 2.8744071634698956,
+            "median_per_protein_nll": 2.8744071634698956,
+            "median_upper_per_protein_nll": 2.8744071634698956,
+            "protein_count": 307,
+            "token_count": 24290,
+            "total_nll": 70086.71416249633
+          },
+          "512-1023": {
+            "accuracy": 0.096565861022008,
+            "correct_tokens": 33777,
+            "cross_entropy": 2.905439625990898,
+            "median_lower_per_protein_nll": 2.905823388876004,
+            "median_per_protein_nll": 2.9058870652994364,
+            "median_upper_per_protein_nll": 2.9059507417228687,
+            "protein_count": 522,
+            "token_count": 349782,
+            "total_nll": 1016270.4832583483
+          }
+        },
+        "overall": {
+          "accuracy": 0.09885306773147293,
+          "correct_tokens": 98902,
+          "cross_entropy": 2.8985748162212692,
+          "median_lower_per_protein_nll": 2.8937568945346133,
+          "median_per_protein_nll": 2.8937568945346133,
+          "median_upper_per_protein_nll": 2.8937568945346133,
+          "protein_count": 2645,
+          "token_count": 1000495,
+          "total_nll": 2900009.6107552988
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "neural_bigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09911813711545495,
+            "correct_tokens": 7317,
+            "cross_entropy": 2.8935225344098194,
+            "median_lower_per_protein_nll": 2.894582631329057,
+            "median_per_protein_nll": 2.894582631329057,
+            "median_upper_per_protein_nll": 2.894582631329057,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213602.72701266728
+          },
+          "128-255": {
+            "accuracy": 0.09641653424921084,
+            "correct_tokens": 13531,
+            "cross_entropy": 2.8961492321960436,
+            "median_lower_per_protein_nll": 2.8894626376304413,
+            "median_per_protein_nll": 2.8894626376304413,
+            "median_upper_per_protein_nll": 2.8894626376304413,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 406442.68709716055
+          },
+          "256-511": {
+            "accuracy": 0.11621787990481267,
+            "correct_tokens": 61926,
+            "cross_entropy": 2.9181089995676324,
+            "median_lower_per_protein_nll": 2.927960787939248,
+            "median_per_protein_nll": 2.927960787939248,
+            "median_upper_per_protein_nll": 2.927960787939248,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1554896.8717656154
+          },
+          "32-127": {
+            "accuracy": 0.0824339782165415,
+            "correct_tokens": 3315,
+            "cross_entropy": 2.9326409667136826,
+            "median_lower_per_protein_nll": 2.921116359642505,
+            "median_per_protein_nll": 2.921266771832107,
+            "median_upper_per_protein_nll": 2.9214171840217085,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 117933.22383542404
+          },
+          "512-1023": {
+            "accuracy": 0.09894452903250062,
+            "correct_tokens": 21055,
+            "cross_entropy": 2.905043066471195,
+            "median_lower_per_protein_nll": 2.9056154327662305,
+            "median_per_protein_nll": 2.9056154327662305,
+            "median_upper_per_protein_nll": 2.9056154327662305,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 618181.5443728043
+          }
+        },
+        "overall": {
+          "accuracy": 0.10714250000499993,
+          "correct_tokens": 107144,
+          "cross_entropy": 2.911016299855473,
+          "median_lower_per_protein_nll": 2.91283969343036,
+          "median_per_protein_nll": 2.9128428951743794,
+          "median_upper_per_protein_nll": 2.9128460969183987,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2911057.054083671
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "unigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09856273959984287,
+            "correct_tokens": 7276,
+            "cross_entropy": 2.8865791595473023,
+            "median_lower_per_protein_nll": 2.8871647554008506,
+            "median_per_protein_nll": 2.8871647554008506,
+            "median_upper_per_protein_nll": 2.8871647554008506,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213090.1601369414
+          },
+          "128-255": {
+            "accuracy": 0.10181061572335559,
+            "correct_tokens": 14288,
+            "cross_entropy": 2.872752161815589,
+            "median_lower_per_protein_nll": 2.867091474525444,
+            "median_per_protein_nll": 2.867091474525444,
+            "median_upper_per_protein_nll": 2.867091474525444,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 403159.16563703795
+          },
+          "256-511": {
+            "accuracy": 0.11749968095727831,
+            "correct_tokens": 62609,
+            "cross_entropy": 2.90409328568168,
+            "median_lower_per_protein_nll": 2.913859268894346,
+            "median_per_protein_nll": 2.913859268894346,
+            "median_upper_per_protein_nll": 2.913859268894346,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1547428.6827157692
+          },
+          "32-127": {
+            "accuracy": 0.09708061869000846,
+            "correct_tokens": 3904,
+            "cross_entropy": 2.892326239817844,
+            "median_lower_per_protein_nll": 2.8806174650747374,
+            "median_per_protein_nll": 2.8811140081030233,
+            "median_upper_per_protein_nll": 2.8816105511313097,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 116312.00740803477
+          },
+          "512-1023": {
+            "accuracy": 0.09971991954735991,
+            "correct_tokens": 21220,
+            "cross_entropy": 2.8946555245700947,
+            "median_lower_per_protein_nll": 2.8942628034246902,
+            "median_per_protein_nll": 2.8942628034246902,
+            "median_upper_per_protein_nll": 2.8942628034246902,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 615971.1170064178
+          }
+        },
+        "overall": {
+          "accuracy": 0.10929546986342191,
+          "correct_tokens": 109297,
+          "cross_entropy": 2.89592059001594,
+          "median_lower_per_protein_nll": 2.8953897316388444,
+          "median_per_protein_nll": 2.8953936183819433,
+          "median_upper_per_protein_nll": 2.895397505125042,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2895961.1329042003
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "count_bigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09856273959984287,
+            "correct_tokens": 7276,
+            "cross_entropy": 2.8959642154102103,
+            "median_lower_per_protein_nll": 2.8976016130714255,
+            "median_per_protein_nll": 2.8976016130714255,
+            "median_upper_per_protein_nll": 2.8976016130714255,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213782.97434579712
+          },
+          "128-255": {
+            "accuracy": 0.10181061572335559,
+            "correct_tokens": 14288,
+            "cross_entropy": 2.879411663556279,
+            "median_lower_per_protein_nll": 2.874981941521516,
+            "median_per_protein_nll": 2.874981941521516,
+            "median_upper_per_protein_nll": 2.874981941521516,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 404093.75345182465
+          },
+          "256-511": {
+            "accuracy": 0.11749968095727831,
+            "correct_tokens": 62609,
+            "cross_entropy": 2.908449532535629,
+            "median_lower_per_protein_nll": 2.917855080722651,
+            "median_per_protein_nll": 2.917855080722651,
+            "median_upper_per_protein_nll": 2.917855080722651,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1549749.8827144147
+          },
+          "32-127": {
+            "accuracy": 0.09708061869000846,
+            "correct_tokens": 3904,
+            "cross_entropy": 2.891398013966404,
+            "median_lower_per_protein_nll": 2.884179623427864,
+            "median_per_protein_nll": 2.8841927081469914,
+            "median_upper_per_protein_nll": 2.884205792866119,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 116274.67973364498
+          },
+          "512-1023": {
+            "accuracy": 0.09971991954735991,
+            "correct_tokens": 21220,
+            "cross_entropy": 2.902657136015344,
+            "median_lower_per_protein_nll": 2.904147610435944,
+            "median_per_protein_nll": 2.904147610435944,
+            "median_upper_per_protein_nll": 2.904147610435944,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 617673.8279155211
+          }
+        },
+        "overall": {
+          "accuracy": 0.10929546986342191,
+          "correct_tokens": 109297,
+          "cross_entropy": 2.901534496678253,
+          "median_lower_per_protein_nll": 2.9009384565018106,
+          "median_per_protein_nll": 2.9009387664094364,
+          "median_upper_per_protein_nll": 2.900939076317062,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2901575.1181612066
+        }
+      },
+      "model_arm": "random_training",
+      "model_type": "neural_bigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09911813711545495,
+            "correct_tokens": 7317,
+            "cross_entropy": 2.893539287894651,
+            "median_lower_per_protein_nll": 2.8945714305859527,
+            "median_per_protein_nll": 2.8945714305859527,
+            "median_upper_per_protein_nll": 2.8945714305859527,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213603.96377167103
+          },
+          "128-255": {
+            "accuracy": 0.09641653424921084,
+            "correct_tokens": 13531,
+            "cross_entropy": 2.8961439803886324,
+            "median_lower_per_protein_nll": 2.889434304966806,
+            "median_per_protein_nll": 2.889434304966806,
+            "median_upper_per_protein_nll": 2.889434304966806,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 406441.9500637603
+          },
+          "256-511": {
+            "accuracy": 0.11621787990481267,
+            "correct_tokens": 61926,
+            "cross_entropy": 2.9181224470332032,
+            "median_lower_per_protein_nll": 2.9279927682253093,
+            "median_per_protein_nll": 2.9279927682253093,
+            "median_upper_per_protein_nll": 2.9279927682253093,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1554904.03716696
+          },
+          "32-127": {
+            "accuracy": 0.0824339782165415,
+            "correct_tokens": 3315,
+            "cross_entropy": 2.9326184208193147,
+            "median_lower_per_protein_nll": 2.9211662959481215,
+            "median_per_protein_nll": 2.921344909063459,
+            "median_upper_per_protein_nll": 2.9215235221787967,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 117932.31717482791
+          },
+          "512-1023": {
+            "accuracy": 0.09894452903250062,
+            "correct_tokens": 21055,
+            "cross_entropy": 2.905051047230926,
+            "median_lower_per_protein_nll": 2.9056785072701232,
+            "median_per_protein_nll": 2.9056785072701232,
+            "median_upper_per_protein_nll": 2.9056785072701232,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 618183.2426465522
+          }
+        },
+        "overall": {
+          "accuracy": 0.10714250000499993,
+          "correct_tokens": 107144,
+          "cross_entropy": 2.91102475647718,
+          "median_lower_per_protein_nll": 2.9128063563000532,
+          "median_per_protein_nll": 2.9128186607571807,
+          "median_upper_per_protein_nll": 2.912830965214308,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2911065.5108237704
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "unigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09856273959984287,
+            "correct_tokens": 7276,
+            "cross_entropy": 2.8866167653661976,
+            "median_lower_per_protein_nll": 2.887018499854362,
+            "median_per_protein_nll": 2.887018499854362,
+            "median_upper_per_protein_nll": 2.887018499854362,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213092.9362360981
+          },
+          "128-255": {
+            "accuracy": 0.10181061572335559,
+            "correct_tokens": 14288,
+            "cross_entropy": 2.8727610224268956,
+            "median_lower_per_protein_nll": 2.8671577478899106,
+            "median_per_protein_nll": 2.8671577478899106,
+            "median_upper_per_protein_nll": 2.8671577478899106,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 403160.4091263681
+          },
+          "256-511": {
+            "accuracy": 0.11749968095727831,
+            "correct_tokens": 62609,
+            "cross_entropy": 2.9041209613269277,
+            "median_lower_per_protein_nll": 2.9139399883252484,
+            "median_per_protein_nll": 2.9139399883252484,
+            "median_upper_per_protein_nll": 2.9139399883252484,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1547443.4295172854
+          },
+          "32-127": {
+            "accuracy": 0.09708061869000846,
+            "correct_tokens": 3904,
+            "cross_entropy": 2.8922901912217833,
+            "median_lower_per_protein_nll": 2.8808024707107567,
+            "median_per_protein_nll": 2.8809523435097906,
+            "median_upper_per_protein_nll": 2.8811022163088245,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 116310.5577497928
+          },
+          "512-1023": {
+            "accuracy": 0.09971991954735991,
+            "correct_tokens": 21220,
+            "cross_entropy": 2.8946429319813918,
+            "median_lower_per_protein_nll": 2.8941601422857577,
+            "median_per_protein_nll": 2.8941601422857577,
+            "median_upper_per_protein_nll": 2.8941601422857577,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 615968.4373539123
+          }
+        },
+        "overall": {
+          "accuracy": 0.10929546986342191,
+          "correct_tokens": 109297,
+          "cross_entropy": 2.8959352268902894,
+          "median_lower_per_protein_nll": 2.895276001668399,
+          "median_per_protein_nll": 2.895301957574257,
+          "median_upper_per_protein_nll": 2.8953279134801155,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2895975.769983466
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "count_bigram"
+    },
+    {
+      "collection": "shared_validation",
+      "metrics": {
+        "length_buckets": {
+          "1024-2046": {
+            "accuracy": 0.09856273959984287,
+            "correct_tokens": 7276,
+            "cross_entropy": 2.8959011524376383,
+            "median_lower_per_protein_nll": 2.8975756092179927,
+            "median_per_protein_nll": 2.8975756092179927,
+            "median_upper_per_protein_nll": 2.8975756092179927,
+            "protein_count": 55,
+            "token_count": 73821,
+            "total_nll": 213778.3189740989
+          },
+          "128-255": {
+            "accuracy": 0.10181061572335559,
+            "correct_tokens": 14288,
+            "cross_entropy": 2.879477410050112,
+            "median_lower_per_protein_nll": 2.8753721431150163,
+            "median_per_protein_nll": 2.8753721431150163,
+            "median_upper_per_protein_nll": 2.8753721431150163,
+            "protein_count": 699,
+            "token_count": 140339,
+            "total_nll": 404102.9802490227
+          },
+          "256-511": {
+            "accuracy": 0.11749968095727831,
+            "correct_tokens": 62609,
+            "cross_entropy": 2.9083987667244555,
+            "median_lower_per_protein_nll": 2.917766139919606,
+            "median_per_protein_nll": 2.917766139919606,
+            "median_upper_per_protein_nll": 2.917766139919606,
+            "protein_count": 1445,
+            "token_count": 532844,
+            "total_nll": 1549722.8324565259
+          },
+          "32-127": {
+            "accuracy": 0.09708061869000846,
+            "correct_tokens": 3904,
+            "cross_entropy": 2.8913510392790545,
+            "median_lower_per_protein_nll": 2.883875395657429,
+            "median_per_protein_nll": 2.883884837183035,
+            "median_upper_per_protein_nll": 2.8838942787086412,
+            "protein_count": 414,
+            "token_count": 40214,
+            "total_nll": 116272.79069356789
+          },
+          "512-1023": {
+            "accuracy": 0.09971991954735991,
+            "correct_tokens": 21220,
+            "cross_entropy": 2.902594045684519,
+            "median_lower_per_protein_nll": 2.9034412798027613,
+            "median_per_protein_nll": 2.9034412798027613,
+            "median_upper_per_protein_nll": 2.9034412798027613,
+            "protein_count": 313,
+            "token_count": 212796,
+            "total_nll": 617660.4025454829
+          }
+        },
+        "overall": {
+          "accuracy": 0.10929546986342191,
+          "correct_tokens": 109297,
+          "cross_entropy": 2.901496703964847,
+          "median_lower_per_protein_nll": 2.900709741500993,
+          "median_per_protein_nll": 2.9007827377769573,
+          "median_upper_per_protein_nll": 2.900855734052922,
+          "protein_count": 2926,
+          "token_count": 1000014,
+          "total_nll": 2901537.3249187027
+        }
+      },
+      "model_arm": "family_aware_training",
+      "model_type": "neural_bigram"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "week_02_bigram_evaluation_public_report",
+  "source": {
+    "code_revision": "36c8cc9d964421e67bd16e6aa5ebcea14f76c80e",
+    "evaluation_configuration_sha256": "219e7a3bc06a6c227ed27b9b4b7e917083b537bd5ac5d11a7526ee8415c2d97c",
+    "evaluation_id": "week2-bigram-eval-v1-001",
+    "evaluation_sha256": "b531e45391e4f7e8ae30a031fb0ef8dc14beaca37279d8fbcda6a226344b2bf8",
+    "registry_sha256": "c98d9e82b95e7380b363e472d67d33fd05485d3f00ea27bc72ef1b576200d09d",
+    "relative_path": "data/processed/week_02/bigram_evaluation_candidates/week2-bigram-eval-v1-001",
+    "run_record_sha256": "f5a34bf7e2ad8289000a773c6d0809c6d9c2090c016ab03632ee5e7e66440211"
+  },
+  "status": "passed"
+}
