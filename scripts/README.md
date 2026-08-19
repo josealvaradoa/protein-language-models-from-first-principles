@@ -199,6 +199,28 @@ The small `similarity_audit.py` and `similarity_inputs.py` files only preserve
 older imports. Task 7 implementation modules import their concrete owners
 directly.
 
+`evaluate_week2_bigrams.py` is the Week 2 evaluation-only entrypoint. With no
+flags it checks the byte-pinned evaluation contract and the candidate run-record
+and registry hashes, plus the pinned promoted model-data registry. It does not
+load a validation collection or write output.
+The explicit command validates the complete frozen six-model candidate before
+loading any validation data, then loads random native validation, family-aware
+native validation, and shared validation once each. It creates an ignored,
+immutable local evaluation candidate containing 12 metric records and never
+loads the shared sealed test:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/evaluate_week2_bigrams.py \
+  --execute-evaluation --evaluation-id NEW_EVALUATION_ID
+```
+
+The command requires a clean committed revision and refuses an existing output
+directory. It is evaluation only: it does not retrain, select, promote, or
+publish results. `validate_week2_bigram_evaluation.py --evaluation-id ID`
+checks an existing candidate, its artifact checksums, the pinned input model,
+and all metric arithmetic without loading a collection.
+
 `run_read_only_fixed_budget_audit.py` is the separate A-004 fixed-budget
 entrypoint. With no arguments it validates the pinned configuration and prints
 the complete stage plan without creating databases, searches, or evidence.
