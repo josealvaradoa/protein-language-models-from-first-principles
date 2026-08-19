@@ -68,6 +68,28 @@ env PYTHONPATH=src uv run --locked --offline \
   --candidate-id week2-bigram-v1-001
 ```
 
+`publish_week2_bigram_sampling.py` is the separate synthetic-output diagnostic.
+With no flags it validates the byte-pinned passed candidate and the two final
+neural bigram artifacts without loading a dataset, validation/test collection,
+or producing output. Jose runs the explicit command only after committing the
+implementation:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/publish_week2_bigram_sampling.py --execute-publication
+```
+
+It samples ten sequences per arm from BOS at temperature 1.0, without top-k or
+top-p filtering, stopping at EOS or 128 residues. Seeds are derived from the
+frozen base seed and arm namespace. It atomically creates the deterministic
+JSON, Markdown, and SHA-256 files under `reports/week_02/`, refusing existing
+outputs. The output is synthetic, non-functional educational material only and
+is never used for selection or biological claims.
+
+`validate_week2_bigram_sampling.py` is the separate read-only validator. It
+checks the output schema, provenance, checksums, deterministic Markdown, and
+independently regenerates all twenty samples from the pinned neural artifacts.
+
 `run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
 smoke. It requires Jose to install the optional `esmc` group and update the
 lockfile separately, provide the manually acquired pinned model directory, and
