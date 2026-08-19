@@ -86,6 +86,7 @@ def _audit_arm(config, collection_name: str, namespace: str):
             base_seed=config.base_seed,
             pair_budget=config.prediction_pair_budget,
             hash_domain=config.stream_hash_domain,
+            batch_size=config.batch_size,
         )
     finally:
         del proteins

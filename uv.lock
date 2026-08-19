@@ -1598,6 +1598,7 @@ dependencies = [
     { name = "jupyterlab" },
     { name = "matplotlib" },
     { name = "numpy" },
+    { name = "safetensors" },
     { name = "torch" },
 ]
 
@@ -1616,6 +1617,7 @@ requires-dist = [
     { name = "jupyterlab", specifier = ">=4.4,<5" },
     { name = "matplotlib", specifier = ">=3.10,<4" },
     { name = "numpy", specifier = ">=2.2,<3" },
+    { name = "safetensors", specifier = ">=0.8,<1" },
     { name = "torch", specifier = ">=2.7,<3" },
 ]
 

@@ -39,6 +39,35 @@ evidence under `reports/week_02/`, refusing to overwrite existing evidence.
 It does not load shared validation or sealed membership, train a model, score,
 evaluate, or run MMseqs2.
 
+`train_week2_bigrams.py` first verifies the frozen training configuration, the
+stream configuration, and the already-published aggregate stream commitment.
+With no flags it prints the planned two-arm, one-pass CPU run without loading a
+collection or creating output. A future operator run must name a new local
+candidate explicitly:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/train_week2_bigrams.py \
+  --execute-candidate --candidate-id week2-bigram-v1-001
+```
+
+That command will create an ignored local candidate under
+`data/processed/week_02/bigram_model_candidates/`. It fits only
+`random_training` and `family_aware_training`, writes six logical models in
+both JSON and Safetensors forms, and preserves an aggregate-only passed or
+failed run record. It does not load validation or test collections, evaluate,
+promote, or make network requests. No production model candidate evidence is
+claimed here.
+
+`validate_week2_bigram_candidate.py` is read-only and requires one existing
+candidate identity. It never calls a model-data collection loader:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/validate_week2_bigram_candidate.py \
+  --candidate-id week2-bigram-v1-001
+```
+
 `run_esmc_300m_smoke.py` is the private Task 11B local ESMC-300M inference
 smoke. It requires Jose to install the optional `esmc` group and update the
 lockfile separately, provide the manually acquired pinned model directory, and

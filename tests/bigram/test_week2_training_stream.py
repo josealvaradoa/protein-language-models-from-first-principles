@@ -16,6 +16,7 @@ from protein_lm.bigram.reporting import report_payload, write_evidence
 from protein_lm.bigram.stream import (
     ArmStreamAudit,
     audit_stream,
+    new_stream_hasher,
     ordered_proteins,
     protein_order_key,
     protein_pair_bytes,
@@ -86,6 +87,24 @@ def test_ordering_key_has_a_frozen_domain_separated_vector() -> None:
         "week2/training-stream/random/v1",
         20260812,
     ).hex() == "b074c35b8e6bd8d29e531fbbbe24ef659380047865670b7addaeeb5091cb24c1"
+
+
+def test_stream_hasher_has_one_canonical_domain_separated_header() -> None:
+    hasher = new_stream_hasher(DOMAIN, "synthetic/hash/v1", 7)
+    expected = hashlib.sha256(
+        b"protein-lm/week2/bigram-transition-stream/v1\0synthetic/hash/v1\0"
+        + b"7\0"
+    )
+    assert hasher.hexdigest() == expected.hexdigest()
+    assert new_stream_hasher("other-domain", "synthetic/hash/v1", 7).hexdigest() != hasher.hexdigest()
+
+
+@pytest.mark.parametrize("hash_domain,namespace,base_seed", (("", "arm", 1), ("domain", "", 1), ("domain", "arm", True)))
+def test_stream_hasher_rejects_invalid_header_inputs(
+    hash_domain: object, namespace: object, base_seed: object
+) -> None:
+    with pytest.raises(ModelDataError, match="hash domain"):
+        new_stream_hasher(hash_domain, namespace, base_seed)  # type: ignore[arg-type]
 
 
 def test_stopping_inside_final_protein_is_exact_and_no_second_protein_starts() -> None:
@@ -351,8 +370,15 @@ def test_no_flag_preflight_does_not_load_collections_or_create_output(
     assert specification is not None and specification.loader is not None
     module = importlib.util.module_from_spec(specification)
     specification.loader.exec_module(module)
+    config = load_config(CONFIG_PATH)
+    output_bytes = {
+        path: (ROOT / path).read_bytes() if (ROOT / path).exists() else None
+        for path in config.output_paths
+    }
     monkeypatch.setattr(module, "load_collection", lambda *_: pytest.fail("loader called"))
     monkeypatch.setattr(sys, "argv", [str(module_path)])
     assert module.main() == 0
-    config = load_config(CONFIG_PATH)
-    assert not any((ROOT / path).exists() for path in config.output_paths)
+    assert {
+        path: (ROOT / path).read_bytes() if (ROOT / path).exists() else None
+        for path in config.output_paths
+    } == output_bytes
