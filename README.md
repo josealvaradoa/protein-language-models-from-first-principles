@@ -27,6 +27,14 @@ detected overlap. See the
 [Week 1 release notes](docs/releases/bet-01-homology-aware-data.md) and the
 [aggregate Task 7 report](reports/week_01/task_07_read_only_fixed_budget_audit_a004.md).
 
+Week 2 engineering, aggregate evidence, and verbal defense are complete. The
+Week 2 release identifier is `bet-02-protein-bigrams`. Its public
+documentation is prepared in the [Week 2 release notes](docs/releases/bet-02-protein-bigrams.md),
+with the [aggregate evaluation report](reports/week_02/bigram_evaluation_v1.md)
+and [synthetic sampling diagnostic](reports/week_02/bigram_sampling_v1.md).
+Under the approved Week 2 and Week 3 publication exception, the combined
+article remains pending and must be published before Week 4 begins.
+
 ## Experiment Progression
 
 1. Homology-aware protein data and deterministic PyTorch inputs
@@ -87,32 +95,19 @@ Python and PyTorch versions, compute backend, precision, runtime, and relevant
 dataset or model revisions. A result is not promoted from a development run to
 a published result without that provenance.
 
-## Week 2 pre-run model-data boundary
+## Week 2 frozen model-data boundary
 
-Week 2 Candidate v1 is not yet created or approved for model use. The two
-entrypoints below are safe preflights with no flags. Candidate preparation
-validates the frozen configuration and four pinned local inputs; readiness
-validation validates the frozen configuration and prints its planned checks.
-Neither creates a candidate, report, dataset, model, or network request.
+The Week 2 model-data boundary is frozen and promoted for the two matched
+training arms. It uses separate random and family-aware native validation
+collections, a shared UniRef50-family-isolated validation collection, and a
+shared sealed test collection. The readiness evidence passed without running
+MMseqs2 or making network requests. See the [readiness report](reports/week_02/model_data_readiness_v1.md),
+[public manifest documentation](manifests/README.md), and [frozen readiness configuration](experiments/week_02/model_data_readiness.toml).
 
-```bash
-env PYTHONPATH=src uv run --locked --offline python scripts/prepare_week2_model_data.py
-env PYTHONPATH=src uv run --locked --offline python scripts/validate_week2_model_data.py
-```
-
-Candidate creation and readiness evidence require separate explicit operator
-flags. The candidate stays in ignored local storage until passing review.
-
-After a passing readiness review, the next safe command is the no-flag public
-promotion preflight:
-
-```bash
-env PYTHONPATH=src uv run --locked --offline python scripts/promote_week2_model_data.py
-```
-
-It verifies the approved candidate and readiness identities without creating
-output or opening sealed membership. Jose alone runs the separately explicit
-promotion flag after reviewing that output.
+The sealed test remains inaccessible to Weeks 2 through 11. Raw source data,
+membership rows, and generated local artifacts remain outside Git. The
+[scripts guide](scripts/README.md) and [external-data policy](DATA_SOURCES.md)
+document the reproduction boundary.
 
 ## Week 2 sampling diagnostic
 
