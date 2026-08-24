@@ -1,0 +1,48 @@
+schema_version = 1
+scope = "week_03_mlp_one_epoch_continuation_exploratory"
+contract_identifier = "2026-08-24-week-03-mlp-one-epoch-continuation-v1"
+base_contract_identifier = "2026-08-23-week-03-mlp-training-v1"
+base_config_relative_path = "experiments/week_03/mlp_training_v1.toml"
+base_config_sha256 = "3df5ed5c13e3f562fdf8cdb2166470f2642f9079305347d9d4c513f8b72d18a7"
+parent_code_revision = "b8db080d37c6d2eff97e546d2a0026eac5e624dd"
+training_collection = "family_aware_training"
+native_validation_collection = "family_aware_native_validation"
+readiness_report_relative_path = "reports/week_02/model_data_readiness_v1.json"
+readiness_report_sha256 = "19d4ee82eae49b600e9e83e4bb19d468b7a9fc2cfd6b78ffebc995f77db9b881"
+training_prediction_tokens = 171329454
+training_records = 461132
+native_validation_prediction_tokens = 1000495
+native_validation_records = 2645
+parent_prediction_position = 100000000
+parent_optimizer_steps = 97660
+parent_cursor_prediction_index = 100000000
+parent_cursor_protein_index = 269057
+parent_cursor_within_protein_target_offset = 270
+final_prediction_position = 171329454
+final_optimizer_steps = 167318
+continuation_optimizer_updates = 69658
+batch_size = 1024
+fixed_learning_rate = 0.01
+milestone_predictions = [124999936, 149999872, 171329454]
+output_relative_root = "data/processed/week_03/mlp_one_epoch_continuation_runs"
+control_three_seed_mean_native_cross_entropy = 2.870820533107851
+minimum_mean_native_cross_entropy_improvement = 0.001
+useful_three_seed_mean_native_cross_entropy_at_most = 2.869820533107851
+
+[[parent_pins]]
+seed = 20260821
+run_id = "week3-mlp-seed-20260821-cpu"
+metadata_sha256 = "8da95b90a7b981485e1d50b842280ca04471b7476c7d2fefd92c85b1737ca4a9"
+tensor_sha256 = "5e467dcd5b63f7e93f470e22cdbdaa73044ad73f6b43ad5a6a869eb14cdb6142"
+
+[[parent_pins]]
+seed = 20260822
+run_id = "week3-mlp-seed-20260822-cpu"
+metadata_sha256 = "be3346133097de29d8a859a82b745ff63e36151b1cc0874f0ab930586a789ba2"
+tensor_sha256 = "86c039123f18421497f659e05dd2d98cd3f7c95bc01dd426ef4f55d297db36ae"
+
+[[parent_pins]]
+seed = 20260823
+run_id = "week3-mlp-seed-20260823-cpu"
+metadata_sha256 = "debbef6655ff5af44d340f06256a7087372bbca6bf0fd690687468b0551239e4"
+tensor_sha256 = "101643b4622050148084ddd1929bc708986dcdd8fc85bdce7065dd2c3207a524"
