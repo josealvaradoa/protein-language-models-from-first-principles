@@ -4,6 +4,16 @@ Scripts in this directory provide reproducible setup, data preparation,
 training, evaluation, and audit entrypoints. They must fail clearly rather than
 silently replacing missing data, models, or compute backends.
 
+`train_week3_mlp.py` is the Week 3 reusable MLP harness. With no flags it only
+loads the byte-pinned configuration and prints the plan. It does not load a
+collection, initialize a device, create a directory, train, evaluate, or write
+evidence. Jose alone runs an explicit local execution, supplying a new run ID,
+one frozen seed, and either `cpu` or available `mps`. It loads only
+`family_aware_training` and `family_aware_native_validation`, keeps local
+checkpoints and status under ignored `data/processed/week_03/mlp_training_runs/`,
+and never accesses shared validation or sealed data. Event boundaries may make
+short batches so milestone and learning-rate accounting remains exact.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local
