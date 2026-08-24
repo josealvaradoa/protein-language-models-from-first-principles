@@ -14,6 +14,26 @@ checkpoints and status under ignored `data/processed/week_03/mlp_training_runs/`
 and never accesses shared validation or sealed data. Event boundaries may make
 short batches so milestone and learning-rate accounting remains exact.
 
+`run_week3_mlp_lr_tail.py` is an explicitly exploratory, non-resumable tail
+experiment. Its no-flag preflight reads only the byte-pinned tail and base
+configuration. It does not inspect parent checkpoints, collections, devices,
+output paths, directories, or Git state. After review and a clean commit, Jose
+can run one CPU-only tail from an exact immutable 90M primary checkpoint:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_week3_mlp_lr_tail.py --new-tail \
+  --run-id NEW_TAIL_ID --seed 20260821 --arm staged_97m_003 --device cpu
+```
+
+Only `staged_97m_003` and `cosine_90m_100m_001` are accepted. The runner
+verifies the inherited Week 2 pins and parent checkpoint bytes before loading
+the parent, trains only the final family-aware 10M-prediction stream, evaluates
+native family-aware validation once at 100M, and writes a separate ignored
+Safetensors model and atomic status record. It never resumes, overwrites, or
+modifies a primary run. These tails are exploratory only and do not replace the
+frozen primary three-seed result.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local

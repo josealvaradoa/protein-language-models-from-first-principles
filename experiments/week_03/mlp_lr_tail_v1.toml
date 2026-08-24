@@ -1,0 +1,42 @@
+schema_version = 1
+scope = "week_03_mlp_learning_rate_tail_exploratory"
+contract_identifier = "2026-08-23-week-03-mlp-lr-tail-v1"
+base_contract_identifier = "2026-08-23-week-03-mlp-training-v1"
+base_config_relative_path = "experiments/week_03/mlp_training_v1.toml"
+base_config_sha256 = "3df5ed5c13e3f562fdf8cdb2166470f2642f9079305347d9d4c513f8b72d18a7"
+parent_code_revision = "b8db080d37c6d2eff97e546d2a0026eac5e624dd"
+training_collection = "family_aware_training"
+native_validation_collection = "family_aware_native_validation"
+parent_prediction_position = 90000000
+parent_optimizer_steps = 87894
+parent_cursor_prediction_index = 90000000
+parent_cursor_protein_index = 241967
+parent_cursor_within_protein_target_offset = 221
+final_prediction_position = 100000000
+final_optimizer_steps = 97660
+tail_optimizer_updates = 9766
+batch_size = 1024
+base_tail_learning_rate = 0.01
+staged_boundary_prediction = 97000000
+staged_lower_learning_rate = 0.003
+cosine_endpoint_learning_rate = 0.001
+output_relative_root = "data/processed/week_03/mlp_lr_tail_runs"
+approved_arms = ["staged_97m_003", "cosine_90m_100m_001"]
+
+[[parent_pins]]
+seed = 20260821
+run_id = "week3-mlp-seed-20260821-cpu"
+metadata_sha256 = "5a71548408c8619e13c225a69644261d7e670b319d5e6ba98e091327e97eb200"
+tensor_sha256 = "96fd28a532041cf0da77bbeb069d779f7b4a62e13f51844b19990e5b2d156d1d"
+
+[[parent_pins]]
+seed = 20260822
+run_id = "week3-mlp-seed-20260822-cpu"
+metadata_sha256 = "4cdf7685ea5b6be8ca602a3f82977e2bf998489ce1ccf8b15eeae3e365c3a0bb"
+tensor_sha256 = "4d85f3a5fb1653154875f7b26ad7d04a9122c21fb620513f15756eec2b4eef40"
+
+[[parent_pins]]
+seed = 20260823
+run_id = "week3-mlp-seed-20260823-cpu"
+metadata_sha256 = "f122feb552a9752eb5a579f7cd0cc58ac75b47b2846010aecb55e93659ce94cf"
+tensor_sha256 = "870991be7a797cb93465bc455c5f477d38cd80426d70aa3694d8e0186fc23d14"
