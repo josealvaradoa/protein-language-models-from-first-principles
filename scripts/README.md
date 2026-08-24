@@ -34,6 +34,32 @@ Safetensors model and atomic status record. It never resumes, overwrites, or
 modifies a primary run. These tails are exploratory only and do not replace the
 frozen primary three-seed result.
 
+`run_week3_mlp_one_epoch_continuation.py` is a separate, operator-gated
+exploratory diagnostic. With no flags it reads only its byte-pinned continuation
+and base configurations. It does not inspect a checkpoint, corpus, device,
+output path, directory, readiness report, or Git revision. After review and a
+clean commit, Jose can resume one exact CPU primary checkpoint at 100,000,000
+predictions through the previously unseen `family_aware_training` targets to
+the first epoch boundary at 171,329,454:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_week3_mlp_one_epoch_continuation.py \
+  --execute-continuation --run-id NEW_CONTINUATION_ID \
+  --seed 20260821 --device cpu
+```
+
+It verifies the clean derived revision, Week 2 source and readiness pins, the
+one-epoch training aggregate and native-validation token aggregate, and
+immutable parent bytes before deserializing and again after training. It uses fixed LR 0.01, batch size 1024, the original stream
+order, and native validation only as diagnostics at 124,999,936, 149,999,872,
+and 171,329,454. The last endpoint is the sole partial continuation batch. It
+writes a separate ignored Safetensors model plus atomic local status, never
+resumes, and never changes a primary run. The rule is applied only after Jose
+returns all three outputs: the three-seed mean native CE must be at most
+2.869820533107851, a 0.001 improvement over the frozen 100M control mean.
+There is no per-seed selection or automatic decision/report generation.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local
