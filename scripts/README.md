@@ -334,3 +334,12 @@ env PYTHONPATH=src uv run --locked --offline \
 The orchestration is owned by `fixed_budget_audit/workflow.py`. It imports the
 historical A-003 evidence read-only and does not import or invoke
 `fixed_budget_audit/diagnostic_workflow.py`.
+
+# Week 3 capacity screen
+
+`run_week3_mlp_capacity_screen.py` defaults to a config-only preflight. It has
+no data, control-output, device, directory, or git access until an operator
+passes `--execute-screen --run-id ... --arm ... --seed ... --device cpu`.
+Each execution is a new, CPU-only, non-resumable 25M-prediction exploratory
+arm run. It writes ignored local status and checkpoints only. It does not
+select an arm or generate a decision report.

@@ -13,3 +13,9 @@ continuation contract. It freezes the three immutable 100M CPU parents, fixed
 readiness aggregate, output root, and the three-seed-only decision threshold.
 It does not alter the frozen primary configuration or authorize replacement of
 the primary runs.
+
+`week_03/mlp_capacity_screen_v1.toml` is a separate CPU-only exploratory
+screen. It fixes three one-axis capacity arms at 25M predictions, aligned
+native-validation/checkpoint events, the Week 2 readiness population, and
+control provenance. It writes only ignored local run artifacts and never
+selects an arm or produces a decision report automatically.
