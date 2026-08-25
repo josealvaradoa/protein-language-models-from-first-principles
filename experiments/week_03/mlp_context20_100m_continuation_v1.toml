@@ -1,0 +1,96 @@
+schema_version = 1
+scope = "week_03_mlp_context20_100m_continuation_exploratory"
+contract_identifier = "2026-08-25-week-03-context20-100m-continuation-v1"
+base_contract_identifier = "2026-08-23-week-03-mlp-training-v1"
+base_config_relative_path = "experiments/week_03/mlp_training_v1.toml"
+base_config_sha256 = "3df5ed5c13e3f562fdf8cdb2166470f2642f9079305347d9d4c513f8b72d18a7"
+capacity_config_relative_path = "experiments/week_03/mlp_capacity_screen_v1.toml"
+capacity_config_sha256 = "78e52264ed569a4f5b4592cab7dada6dc7e71ded1d40ab507909bc2598ee459b"
+parent_code_revision = "17aa23d0a6a7ec070f0d649bb912f2c422245ad5"
+training_collection = "family_aware_training"
+native_validation_collection = "family_aware_native_validation"
+readiness_report_relative_path = "reports/week_02/model_data_readiness_v1.json"
+readiness_report_sha256 = "19d4ee82eae49b600e9e83e4bb19d468b7a9fc2cfd6b78ffebc995f77db9b881"
+training_prediction_tokens = 171329454
+training_records = 461132
+native_validation_prediction_tokens = 1000495
+native_validation_records = 2645
+context_length = 20
+embedding_width = 32
+hidden_width = 800
+parameter_count = 530293
+parent_prediction_position = 25000000
+parent_optimizer_steps = 24416
+parent_cursor_prediction_index = 25000000
+parent_cursor_protein_index = 67233
+parent_cursor_within_protein_target_offset = 99
+final_prediction_position = 100000000
+final_optimizer_steps = 97660
+continuation_optimizer_updates = 73244
+final_cursor_prediction_index = 100000000
+final_cursor_protein_index = 269057
+final_cursor_within_protein_target_offset = 270
+batch_size = 1024
+base_learning_rate = 0.1
+post_boundary_learning_rate = 0.01
+learning_rate_boundary_predictions = 90000000
+historical_milestone_predictions = [1000000, 5000000, 10000000, 25000000, 50000000, 100000000]
+historical_checkpoint_predictions = [1000000, 5000000, 10000000, 25000000, 50000000, 90000000, 100000000]
+continuation_evaluation_predictions = [50000000, 100000000]
+continuation_checkpoint_predictions = [50000000, 90000000, 100000000]
+output_relative_root = "data/processed/week_03/mlp_context20_100m_continuation_runs"
+control_three_seed_mean_native_cross_entropy = 2.870820533107851
+control_three_seed_sample_standard_deviation = 0.000004786278252060456
+minimum_mean_native_cross_entropy_improvement = 0.001
+qualifying_mean_native_cross_entropy_at_most = 2.869820533107851
+
+[[parent_runs]]
+seed = 20260821
+run_id = "week3-capacity-context-20-seed-20260821-cpu"
+run_status_sha256 = "178a44b3cc02ace3cb2065e2a34f48e6c823f4a7f2166f87779b0552b97ee251"
+metadata_sha256 = "3028e8dd90cf92cfd2827f09ca251e5b8f7a8789412f895bef1a6be6c409c3e1"
+tensor_sha256 = "adaafe22d37b3578b9d941bad84243deece1069740921643b10fb08fa2ee6956"
+training_loss_numerator = 71547700.54751587
+
+[[parent_runs]]
+seed = 20260822
+run_id = "week3-capacity-context-20-seed-20260822-cpu"
+run_status_sha256 = "d85c2d8d0b991f8a026a5b9cd6da65911acb82e0e69a315eb411189769c06b86"
+metadata_sha256 = "da084beace76f64d3fa3087a2aee8bc3df23ec1474970b4982dcbdeaab46eb22"
+tensor_sha256 = "bd08fcb2cc9ce350c8d8cf7755d1fe30253cc55a2f4b5a60f9439a70ca5dbb7d"
+training_loss_numerator = 71550640.13130188
+
+[[parent_runs]]
+seed = 20260823
+run_id = "week3-capacity-context-20-seed-20260823-cpu"
+run_status_sha256 = "84c73968a1261ecda04d095dd7e67ac1e02a4f1e0a9365cd405a07db8095d323"
+metadata_sha256 = "df303c5617c4994b985f829590d194c5dae1f67e4ef6f11892892d7ff8b8cda2"
+tensor_sha256 = "1c969e4e8513a103330a08ff71387011dedc716c8f1febd1c1ab5da028859786"
+training_loss_numerator = 71551996.43241882
+
+[[control_runs]]
+seed = 20260821
+run_id = "week3-mlp-seed-20260821-cpu"
+run_status_sha256 = "ea2928958daadaa41035688df2a35c5059732010bc72e2f414f2210f13771cdf"
+native_cross_entropy = 2.8708225749287593
+native_accuracy = 0.10900004497773602
+native_nll_numerator = 2872243.632103349
+native_correct_predictions = 109054
+
+[[control_runs]]
+seed = 20260822
+run_id = "week3-mlp-seed-20260822-cpu"
+run_status_sha256 = "4a1fd7745c78eb1a4562d338aab63777b5cc9a349e0b31e82777ded97906db91"
+native_cross_entropy = 2.8708150645367714
+native_accuracy = 0.10889209841128641
+native_nll_numerator = 2872236.117993717
+native_correct_predictions = 108946
+
+[[control_runs]]
+seed = 20260823
+run_id = "week3-mlp-seed-20260823-cpu"
+run_status_sha256 = "e1c582c9a2ce4a3cf1f7d29e2878a47fa3f5a34f2cd54fd3e236734c03f703e4"
+native_cross_entropy = 2.8708239598580225
+native_accuracy = 0.10889209841128641
+native_nll_numerator = 2872245.017718152
+native_correct_predictions = 108946

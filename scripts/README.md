@@ -60,6 +60,31 @@ returns all three outputs: the three-seed mean native CE must be at most
 2.869820533107851, a 0.001 improvement over the frozen 100M control mean.
 There is no per-seed selection or automatic decision/report generation.
 
+`run_week3_mlp_context20_100m_continuation.py` is the separate operator-gated
+continuation of the three winning C=20 capacity-screen parents. With no flags
+it reads only the byte-pinned continuation, capacity, and base configurations.
+It does not inspect parent status or checkpoints, readiness, collections,
+devices, output paths, or Git state. After review and a clean commit, Jose can
+continue one exact 25M parent without replaying the first 25M predictions:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_week3_mlp_context20_100m_continuation.py \
+  --execute-continuation --run-id NEW_CONTEXT20_CONTINUATION_ID \
+  --seed 20260821 --device cpu
+```
+
+The runner verifies pinned Week 2 evidence, parent status bytes, checkpoint
+metadata and tensor bytes before loading and again before it passes. It uses
+the historical 100M schedule exactly: SGD LR 0.1 before 90M and 0.01 from 90M,
+with native validation only at 50M and 100M and checkpoints at 50M, 90M, and
+100M. It writes ignored local artifacts under
+`data/processed/week_03/mlp_context20_100m_continuation_runs/`. After all
+three independently run outputs are returned, Jose may apply the manual rule:
+the 100M three-seed mean native CE must be at most 2.869820533107851. It never
+uses the sealed test collection, selects a seed, or generates a decision or
+report automatically.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local
