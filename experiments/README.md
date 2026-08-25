@@ -19,3 +19,10 @@ screen. It fixes three one-axis capacity arms at 25M predictions, aligned
 native-validation/checkpoint events, the Week 2 readiness population, and
 control provenance. It writes only ignored local run artifacts and never
 selects an arm or produces a decision report automatically.
+
+`week_03/mlp_context20_100m_continuation_v1.toml` freezes the approved
+continuation of the three winning C=20 capacity-screen checkpoints from 25M to
+100M predictions. It pins the capacity contract, each parent status and
+checkpoint byte sequence, the full historical event schedule, original 100M
+control provenance, and the three-seed native-CE threshold. It is exploratory,
+CPU-only, non-resumable, and produces no automatic selection or report.
