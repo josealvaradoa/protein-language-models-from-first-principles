@@ -35,6 +35,11 @@ and [synthetic sampling diagnostic](reports/week_02/bigram_sampling_v1.md).
 Under the approved Week 2 and Week 3 publication exception, the combined
 article remains pending and must be published before Week 4 begins.
 
+Week 3 final validation evidence is frozen in a pre-release package. Its
+aggregate-only publisher and public notebook are ready, but the operator has
+not yet created the Week 3 public report or release tag. See the
+[pre-release note](docs/releases/bet-03-mlp-protein-context.md).
+
 ## Experiment Progression
 
 1. Homology-aware protein data and deterministic PyTorch inputs

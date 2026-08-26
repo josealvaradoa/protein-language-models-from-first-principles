@@ -86,3 +86,10 @@ independent-random assignment in both held-out partitions. The report also
 preserves the failed residue-balance result, finite-search limitations, exact
 evidence checksums, and the prohibition on using either assignment for model
 training.
+
+## Week 3 MLP report
+
+`week_03/mlp_evaluation_v1.{json,md,sha256}` is intentionally absent until the
+operator runs the clean-revision publication command. When created, it will be
+an aggregate-only native-validation report. It excludes raw checkpoint tensors,
+sequences, accessions, family IDs, and sealed-test material.

@@ -1,0 +1,210 @@
+schema_version = 1
+scope = "week_03_mlp_publication"
+contract_identifier = "2026-08-26-week-03-mlp-publication-v1"
+publication_scope = "aggregate_only_no_sequences_no_accessions_no_family_ids_no_raw_tensors"
+report_json_relative_path = "reports/week_03/mlp_evaluation_v1.json"
+report_markdown_relative_path = "reports/week_03/mlp_evaluation_v1.md"
+report_sha256_relative_path = "reports/week_03/mlp_evaluation_v1.sha256"
+run_seeds = [20260821, 20260822, 20260823]
+forbidden_public_keys = ["sequence", "sequences", "accession", "accessions", "family_id", "family_ids", "raw_tensor", "raw_tensors", "weights", "model.safetensors"]
+
+[expected]
+native_validation_token_count = 1000495
+final_prediction_budget = 100000000
+context20_parameter_count = 530293
+embedding64_parameter_count = 530965
+context20_mean_cross_entropy = 2.863665856220289
+context20_sample_standard_deviation = 0.00001985865257320209
+context20_mean_accuracy = 0.1112489317787695
+embedding64_mean_cross_entropy = 2.8708249214089068
+embedding64_sample_standard_deviation = 0.000007648534920387316
+embedding64_mean_accuracy = 0.10892208356863353
+material_gap = 0.001
+embedding64_minus_context20_mean_cross_entropy = 0.0071590651886177525
+baseline_cross_entropy = 2.8985748162212692
+baseline_accuracy = 0.09885306773147293
+context20_cross_entropy_gain_over_baseline = 0.0349089600009802
+context20_accuracy_gain_over_baseline = 0.01239586404729657
+capacity_context20_cross_entropy = 2.864816843586844
+capacity_embedding64_cross_entropy = 2.8713892507036705
+capacity_hidden1600_cross_entropy = 2.871764147540805
+position_20_plus_advantage_share = 0.9677791608740332
+
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_training_v1.toml"
+sha256 = "3df5ed5c13e3f562fdf8cdb2166470f2642f9079305347d9d4c513f8b72d18a7"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_capacity_screen_v1.toml"
+sha256 = "78e52264ed569a4f5b4592cab7dada6dc7e71ded1d40ab507909bc2598ee459b"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_context20_100m_continuation_v1.toml"
+sha256 = "a0b1aa37c647aa5dc62c9d7a2b7c051bf66a81380448a5719d9ebe34eb6a3fb6"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_embedding64_100m_challenger_v1.toml"
+sha256 = "5d441c6e27746f59428ee1a5ee9d3a0aa32cac28b3dea9c188095c873ed7d92a"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_position_availability_diagnostic_v1.toml"
+sha256 = "392c571f1dbef0b2288179d59c0cfb3569765c0751679cc7c95ad75cee429417"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_lr_tail_v1.toml"
+sha256 = "76afe3e1a3cef4afa4e4468cb722684746889e0a9b94636fa97f3b35c85648a4"
+[[sources]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_one_epoch_continuation_v1.toml"
+sha256 = "3294151b1ccdd496bf42f1b223e5733c900c7401b36bb9da9c2ca2b0b0e811b1"
+[[sources]]
+kind = "week2_public_baseline"
+relative_path = "reports/week_02/bigram_evaluation_v1.json"
+sha256 = "ac0df5ef240c63105df49247ded76c3362eec6510572216bed550cf5110d8103"
+[[sources]]
+kind = "c10_learning_curve_status"
+relative_path = "data/processed/week_03/mlp_training_runs/week3-mlp-seed-20260821-cpu/run_status.json"
+sha256 = "ea2928958daadaa41035688df2a35c5059732010bc72e2f414f2210f13771cdf"
+[[sources]]
+kind = "c10_learning_curve_status"
+relative_path = "data/processed/week_03/mlp_training_runs/week3-mlp-seed-20260822-cpu/run_status.json"
+sha256 = "4a1fd7745c78eb1a4562d338aab63777b5cc9a349e0b31e82777ded97906db91"
+[[sources]]
+kind = "c10_learning_curve_status"
+relative_path = "data/processed/week_03/mlp_training_runs/week3-mlp-seed-20260823-cpu/run_status.json"
+sha256 = "e1c582c9a2ce4a3cf1f7d29e2878a47fa3f5a34f2cd54fd3e236734c03f703e4"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-context-20-seed-20260821-cpu/run_status.json"
+sha256 = "178a44b3cc02ace3cb2065e2a34f48e6c823f4a7f2166f87779b0552b97ee251"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-context-20-seed-20260822-cpu/run_status.json"
+sha256 = "d85c2d8d0b991f8a026a5b9cd6da65911acb82e0e69a315eb411189769c06b86"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-context-20-seed-20260823-cpu/run_status.json"
+sha256 = "84c73968a1261ecda04d095dd7e67ac1e02a4f1e0a9365cd405a07db8095d323"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-embedding-64-seed-20260821-cpu/run_status.json"
+sha256 = "a286541f440ea64837b66329323af60ddebf42e73be93cc8ee6eaee300290c3a"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-embedding-64-seed-20260822-cpu/run_status.json"
+sha256 = "ce3131e58176f840476354b45b0be937723bc65dfc2e65531dde7d4a2e033e3c"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-embedding-64-seed-20260823-cpu/run_status.json"
+sha256 = "98cfe745717eb344b7b1289bc5ad3a24c38ff4d8db9ed377ceab0dcdfe1317fe"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-hidden-1600-seed-20260821-cpu/run_status.json"
+sha256 = "9f548c205b7689494b6194ab0dab5a0cb7877cfaf40cfd83a3d4e2d9c5b66e67"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-hidden-1600-seed-20260822-cpu/run_status.json"
+sha256 = "6ddc91d49852dc6b715f70d2b806b4c026f100c0892b63bff3cad9fa5ddd9133"
+[[sources]]
+kind = "capacity_status"
+relative_path = "data/processed/week_03/mlp_capacity_screen_runs/week3-capacity-hidden-1600-seed-20260823-cpu/run_status.json"
+sha256 = "a36c793458b4130b7aa01130fa0d1dc3793c3a0ba1f125ab1494cf094f32171c"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-cosine-90m-100m-001-seed-20260821-cpu/run_status.json"
+sha256 = "24fd302d05bdcd3e9a36f4968f9d2376538ae1c40b368f97b4016fce7458d6cb"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-cosine-90m-100m-001-seed-20260822-cpu/run_status.json"
+sha256 = "4349d8feb979cf75fbf0af45853969521e5da6835c5da0d91860ae3882d68327"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-cosine-90m-100m-001-seed-20260823-cpu/run_status.json"
+sha256 = "93461c346ceb342e03af35c72ee22ebdcb28a1617d868415d60d3c10354c5097"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-staged-97m-003-seed-20260821-cpu/run_status.json"
+sha256 = "5d54c9c3c608a6bec0abbdc22635d4f4b89689f375b8bbcb393e1a4c19b8fb3b"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-staged-97m-003-seed-20260822-cpu/run_status.json"
+sha256 = "cfb6305542c6e2616850c3140f01f8142326c1deea314b103379c72bc69f050c"
+[[sources]]
+kind = "lr_tail_status"
+relative_path = "data/processed/week_03/mlp_lr_tail_runs/week3-lr-tail-staged-97m-003-seed-20260823-cpu/run_status.json"
+sha256 = "ed45e766c020fd87fd049947eaa78561f32d78bec729b66a5f66734910de8f74"
+[[sources]]
+kind = "one_epoch_status"
+relative_path = "data/processed/week_03/mlp_one_epoch_continuation_runs/week3-mlp-one-epoch-seed-20260821-cpu/run_status.json"
+sha256 = "b095191e35c4e8f3b454a2f132c08f830257f62ac0f2ea20d2444f137cc55b91"
+[[sources]]
+kind = "one_epoch_status"
+relative_path = "data/processed/week_03/mlp_one_epoch_continuation_runs/week3-mlp-one-epoch-seed-20260822-cpu/run_status.json"
+sha256 = "9e00739ad9fd323d906add41b89754f951d83385f320b54f49a959555d4b3b16"
+[[sources]]
+kind = "one_epoch_status"
+relative_path = "data/processed/week_03/mlp_one_epoch_continuation_runs/week3-mlp-one-epoch-seed-20260823-cpu/run_status.json"
+sha256 = "08a0b9e4336b43e500c4a754c66bf5025a38075b0926137a43c46401f5128d78"
+
+[[final_checkpoints]]
+arm = "context20"
+seed = 20260821
+status_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260821-cpu/run_status.json"
+status_sha256 = "d8993158e3aa2494435f15c382356fb21198c41ce113b240e1caf2b75b5725db"
+checkpoint_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260821-cpu/checkpoint-100000000"
+metadata_sha256 = "fcd6c250194163e7914dac48f737b207e07f55f9427f4b7393e924d51598a950"
+tensor_sha256 = "3c9b75f4d04852c50b35de9715e8ff10843e7a3fe6be90faca410f88ef4d8a22"
+[[final_checkpoints]]
+arm = "context20"
+seed = 20260822
+status_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260822-cpu/run_status.json"
+status_sha256 = "ec05aff42d8402b8c7900f77d3181502722afb2d29644a4d11691750b4782298"
+checkpoint_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260822-cpu/checkpoint-100000000"
+metadata_sha256 = "0cb92f80084198bad880e02748dca6b4aa77ce4333de3e0b37e5366ecc791a9e"
+tensor_sha256 = "e986a2474a0a8adc965a054c92c4645dbe1481d35208666ec58cce7e6da65a5b"
+[[final_checkpoints]]
+arm = "context20"
+seed = 20260823
+status_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260823-cpu/run_status.json"
+status_sha256 = "fcfffeefa5b593e0678096679ecfbfdf9472a81a2fe2d0108dbcad97238a4f64"
+checkpoint_relative_path = "data/processed/week_03/mlp_context20_100m_continuation_runs/week3-context20-100m-seed-20260823-cpu/checkpoint-100000000"
+metadata_sha256 = "cdf4c1a9f998df858fe59f9e9183d631b8015c9bbdea0b756a1bdf910ae3cd98"
+tensor_sha256 = "03aa1a0c139e0796293a4303a9c949ea5dfa8cd38452560a947f5729afeb9677"
+[[final_checkpoints]]
+arm = "embedding64"
+seed = 20260821
+status_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260821-cpu/run_status.json"
+status_sha256 = "2308b25376d70718f548534dd422fa164bb499e1067e9f8857c48ccf15a130f2"
+checkpoint_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260821-cpu/checkpoint-100000000"
+metadata_sha256 = "d9cd4bff6f01f88c4f5bb9bc5f3539cec90f0ce38b53287304d85932b9a5de7d"
+tensor_sha256 = "bcde255afa0b993fa73b677a5e9b4c04b9a20526618932fce8cc531d80ba189f"
+[[final_checkpoints]]
+arm = "embedding64"
+seed = 20260822
+status_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260822-cpu/run_status.json"
+status_sha256 = "4e690de0244c6c93cbab0f28867081c44b8b7df0a61bfc83fbf3be3c159f61b3"
+checkpoint_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260822-cpu/checkpoint-100000000"
+metadata_sha256 = "2cb42f61d8525b0fb9e85d10527c9410779fc481ff9ab3885d6b5339675b03d8"
+tensor_sha256 = "d2e0210d624e37944071f410486a92128ad19a418d86d9b4b482085838977cfb"
+[[final_checkpoints]]
+arm = "embedding64"
+seed = 20260823
+status_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260823-cpu/run_status.json"
+status_sha256 = "a59189cba538954515f3e43c3f32bd0a17dbfea62f0e304dda7793614f6556d9"
+checkpoint_relative_path = "data/processed/week_03/mlp_embedding64_100m_challenger_runs/week3-embedding64-100m-seed-20260823-cpu/checkpoint-100000000"
+metadata_sha256 = "9152f22de69348d391670fe5f8973df498e9caed04e52ed1a7e65867e46295a9"
+tensor_sha256 = "972346dc07c43486985b4da506e55c49337b6a0b7e0ce2599ffbd2c28fc2164d"
+
+[[diagnostic_statuses]]
+seed = 20260821
+relative_path = "data/processed/week_03/mlp_position_availability_diagnostic_runs/week3-position-availability-seed-20260821-cpu/run_status.json"
+sha256 = "d4099511314da63694055a5a1ed05c255f5afabee8e453a87802e3be66e5842c"
+[[diagnostic_statuses]]
+seed = 20260822
+relative_path = "data/processed/week_03/mlp_position_availability_diagnostic_runs/week3-position-availability-seed-20260822-cpu/run_status.json"
+sha256 = "5571311c6935ea11db7441f8c05dce3a3dc64d0383062cc09b8b0c04e0e351af"
+[[diagnostic_statuses]]
+seed = 20260823
+relative_path = "data/processed/week_03/mlp_position_availability_diagnostic_runs/week3-position-availability-seed-20260823-cpu/run_status.json"
+sha256 = "962a224ccebdbcfdf9a3431a804e2537b75ed761a97d96152a1f89dbdea2b289"

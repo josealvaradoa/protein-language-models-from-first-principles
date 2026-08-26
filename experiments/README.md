@@ -36,3 +36,12 @@ population, event schedule, and symmetric three-seed interpretation boundaries.
 The E64 model has 530,965 parameters versus the frozen C20 reference's
 530,293. It is CPU-only, exploratory, non-resumable, writes ignored local
 artifacts, and cannot automatically choose an arm or produce a report.
+
+## Week 3 publication contract
+
+`week_03/mlp_publication_v1.toml` freezes the exact local configuration,
+status, checkpoint metadata, tensor, diagnostic, and Week 2 public-baseline
+bytes permitted to support the aggregate Week 3 report. It pins final C20 and
+E64 checkpoints, the 25M screen, LR tails, one-epoch runs, and the no-training
+position diagnostic. It contains no dataset rows, sequences, or sealed-test
+material.
