@@ -417,3 +417,19 @@ passes `--execute-screen --run-id ... --arm ... --seed ... --device cpu`.
 Each execution is a new, CPU-only, non-resumable 25M-prediction exploratory
 arm run. It writes ignored local status and checkpoints only. It does not
 select an arm or generate a decision report.
+
+`publish_week3_mlp_results.py` is the operator-gated Week 3 aggregate-report
+publisher. With no flags it only verifies frozen local source bytes and prints
+the three planned output paths. It makes no writes, initializes no model, and
+does not load collections, devices, or network resources. Jose may create the
+report only from a clean committed revision:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/publish_week3_mlp_results.py --execute-publication
+```
+
+`validate_week3_mlp_public_report.py` is read-only. It verifies the public
+inventory, checksums, provenance, arithmetic, deterministic Markdown, and the
+PCA and cosine summaries recomputed from the pinned final embedding tensors.
+It never loads a collection or sealed data.
