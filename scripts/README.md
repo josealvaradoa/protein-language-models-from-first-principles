@@ -109,6 +109,31 @@ Jose manually applies the symmetric 0.001 mean-native-CE categories. The
 runner never performs per-seed selection, an allocation decision, or report
 generation.
 
+`run_week3_mlp_position_availability_diagnostic.py` is a separate,
+descriptive no-training diagnostic for the already-observed C20 advantage.
+With no flags it reads only its byte-pinned diagnostic, C20 continuation, E64
+challenger, and base configurations. It does not inspect run status,
+checkpoints, readiness, collections, devices, output paths, or Git state.
+After review and a clean commit, Jose can run one matched seed on CPU:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_week3_mlp_position_availability_diagnostic.py \
+  --execute-diagnostic --run-id NEW_POSITION_DIAGNOSTIC_ID \
+  --seed 20260821 --device cpu
+```
+
+It verifies source status and checkpoint bytes before model load and again
+before success, then loads only `family_aware_native_validation` and evaluates
+the two final checkpoints sequentially. Every target, including EOS, is placed
+once by the number of real residues available before it: 0-10, 11-19, or 20+.
+The ignored local atomic status JSON records per-bin and overall counts, NLL,
+CE, accuracy, and signed differences. It does not train, use sealed data,
+produce significance or biology claims, reopen model selection, or generate a
+decision or report.
+The frozen C20-versus-E64 aggregate comparison is recorded only as provenance;
+the diagnostic cannot reopen that selection.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local
