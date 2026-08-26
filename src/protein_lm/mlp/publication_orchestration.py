@@ -279,7 +279,18 @@ def _week2_baseline(reports: list[dict[str, object]]) -> dict[str, float]:
     if not isinstance(metrics, dict) or not isinstance(metrics.get("overall"), dict):
         raise ModelDataError("Week 2 public baseline metrics are malformed")
     overall = metrics["overall"]
-    metric = _metric(overall)
+    required = (
+        "token_count", "total_nll", "correct_tokens", "cross_entropy", "accuracy",
+    )
+    if any(key not in overall for key in required):
+        raise ModelDataError("Week 2 public baseline metrics are incomplete")
+    metric = _metric({
+        "token_count": overall["token_count"],
+        "nll_numerator": overall["total_nll"],
+        "correct_predictions": overall["correct_tokens"],
+        "cross_entropy": overall["cross_entropy"],
+        "accuracy": overall["accuracy"],
+    })
     return {"cross_entropy": float(metric["cross_entropy"]), "accuracy": float(metric["accuracy"])}
 
 

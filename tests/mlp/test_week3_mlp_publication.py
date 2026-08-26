@@ -17,6 +17,7 @@ from protein_lm.mlp.publication_orchestration import (
     _one_epoch_summary,
     _staged_runtimes,
     _tail_summary,
+    _week2_baseline,
 )
 from protein_lm.mlp.publication_payload import (
     capacity_screen,
@@ -99,6 +100,20 @@ def capacity_status(arm: str, seed: int, parameter_count: int) -> dict[str, obje
     }
 
 
+def week2_report() -> dict[str, object]:
+    return {
+        "records": [{
+            "model_arm": "family_aware_training", "model_type": "neural_bigram",
+            "collection": "family_aware_native_validation",
+            "metrics": {"overall": {
+                "token_count": TOKENS, "total_nll": 2.5 * TOKENS,
+                "correct_tokens": 100_000, "cross_entropy": 2.5,
+                "accuracy": 100_000 / TOKENS,
+            }},
+        }],
+    }
+
+
 def test_committed_contract_pins_inventory_and_scope() -> None:
     config = load_publication_config(ROOT / "experiments/week_03/mlp_publication_v1.toml")
     assert config.output_paths == (
@@ -142,6 +157,22 @@ def test_pin_and_path_drift_fail_closed(tmp_path: Path) -> None:
     source.write_text("x")
     with pytest.raises(ModelDataError):
         verify_bytes(source, "0" * 64, "synthetic")
+
+
+def test_week2_baseline_adapter_maps_real_field_names_and_rejects_tampering() -> None:
+    report = week2_report()
+    assert _week2_baseline([report]) == {
+        "cross_entropy": 2.5, "accuracy": 100_000 / TOKENS,
+    }
+    for field, value in (("total_nll", None), ("total_nll", 1.0), ("correct_tokens", None), ("correct_tokens", 1)):
+        tampered = copy.deepcopy(report)
+        overall = tampered["records"][0]["metrics"]["overall"]
+        if value is None:
+            del overall[field]
+        else:
+            overall[field] = value
+        with pytest.raises(ModelDataError):
+            _week2_baseline([tampered])
 
 
 def test_position_reconstruction_and_all_tamper_gates_fail() -> None:
