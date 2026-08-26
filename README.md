@@ -95,6 +95,18 @@ Python and PyTorch versions, compute backend, precision, runtime, and relevant
 dataset or model revisions. A result is not promoted from a development run to
 a published result without that provenance.
 
+## Week 3 position-availability diagnostic
+
+The Week 3 position-availability diagnostic is a local, descriptive,
+no-training check of where the already-observed C20 advantage occurs on the
+family-aware native validation collection. It compares only matched final C20
+and E64 seed checkpoints and assigns each residue target and EOS target once by
+the number of preceding real residues. It records metrics by the frozen 0-10,
+11-19, and 20+ bins without reopening model selection, producing significance
+claims, biological conclusions, or a final report.
+The frozen aggregate C20-versus-E64 comparison remains provenance only and
+cannot be reopened by this diagnostic.
+
 ## Week 2 frozen model-data boundary
 
 The Week 2 model-data boundary is frozen and promoted for the two matched

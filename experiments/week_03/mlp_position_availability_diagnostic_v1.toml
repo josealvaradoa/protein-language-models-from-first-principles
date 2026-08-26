@@ -1,0 +1,91 @@
+schema_version = 1
+scope = "week_03_mlp_position_availability_diagnostic_exploratory"
+contract_identifier = "2026-08-25-week-03-position-availability-diagnostic-v1"
+frozen_comparison_scope = "provenance_only_diagnostic_cannot_reopen_selection"
+frozen_context20_mean_native_cross_entropy = 2.863665856220289
+frozen_context20_sample_standard_deviation = 0.00001985865257320209
+frozen_embedding64_mean_native_cross_entropy = 2.8708249214089068
+frozen_embedding64_sample_standard_deviation = 0.000007648534920387316
+frozen_embedding64_minus_context20_mean_native_cross_entropy = 0.0071590651886177525
+frozen_material_gap = 0.001
+frozen_category = "context20_materially_better"
+context20_config_relative_path = "experiments/week_03/mlp_context20_100m_continuation_v1.toml"
+context20_config_sha256 = "a0b1aa37c647aa5dc62c9d7a2b7c051bf66a81380448a5719d9ebe34eb6a3fb6"
+embedding64_config_relative_path = "experiments/week_03/mlp_embedding64_100m_challenger_v1.toml"
+embedding64_config_sha256 = "5d441c6e27746f59428ee1a5ee9d3a0aa32cac28b3dea9c188095c873ed7d92a"
+readiness_report_relative_path = "reports/week_02/model_data_readiness_v1.json"
+readiness_report_sha256 = "19d4ee82eae49b600e9e83e4bb19d468b7a9fc2cfd6b78ffebc995f77db9b881"
+native_validation_collection = "family_aware_native_validation"
+native_validation_prediction_tokens = 1000495
+native_validation_records = 2645
+batch_size = 1024
+device = "cpu"
+output_relative_root = "data/processed/week_03/mlp_position_availability_diagnostic_runs"
+overall_metric_absolute_tolerance = 0.000001
+bins = ["available_prior_residues_0_10", "available_prior_residues_11_19", "available_prior_residues_20_plus"]
+
+[[context20_runs]]
+seed = 20260821
+run_id = "week3-context20-100m-seed-20260821-cpu"
+run_status_sha256 = "d8993158e3aa2494435f15c382356fb21198c41ce113b240e1caf2b75b5725db"
+metadata_sha256 = "fcd6c250194163e7914dac48f737b207e07f55f9427f4b7393e924d51598a950"
+tensor_sha256 = "3c9b75f4d04852c50b35de9715e8ff10843e7a3fe6be90faca410f88ef4d8a22"
+native_cross_entropy = 2.863655667524791
+native_accuracy = 0.11126392435744306
+native_nll_numerator = 2865073.177080216
+native_correct_predictions = 111319
+
+[[context20_runs]]
+seed = 20260822
+run_id = "week3-context20-100m-seed-20260822-cpu"
+run_status_sha256 = "ec05aff42d8402b8c7900f77d3181502722afb2d29644a4d11691750b4782298"
+metadata_sha256 = "0cb92f80084198bad880e02748dca6b4aa77ce4333de3e0b37e5366ecc791a9e"
+tensor_sha256 = "e986a2474a0a8adc965a054c92c4645dbe1481d35208666ec58cce7e6da65a5b"
+native_cross_entropy = 2.8636887412663112
+native_accuracy = 0.11123393920009596
+native_nll_numerator = 2865106.2671932383
+native_correct_predictions = 111289
+
+[[context20_runs]]
+seed = 20260823
+run_id = "week3-context20-100m-seed-20260823-cpu"
+run_status_sha256 = "fcfffeefa5b593e0678096679ecfbfdf9472a81a2fe2d0108dbcad97238a4f64"
+metadata_sha256 = "cdf4c1a9f998df858fe59f9e9183d631b8015c9bbdea0b756a1bdf910ae3cd98"
+tensor_sha256 = "03aa1a0c139e0796293a4303a9c949ea5dfa8cd38452560a947f5729afeb9677"
+native_cross_entropy = 2.863653159869764
+native_accuracy = 0.1112489317787695
+native_nll_numerator = 2865070.6681838995
+native_correct_predictions = 111304
+
+[[embedding64_runs]]
+seed = 20260821
+run_id = "week3-embedding64-100m-seed-20260821-cpu"
+run_status_sha256 = "2308b25376d70718f548534dd422fa164bb499e1067e9f8857c48ccf15a130f2"
+metadata_sha256 = "d9cd4bff6f01f88c4f5bb9bc5f3539cec90f0ce38b53287304d85932b9a5de7d"
+tensor_sha256 = "bcde255afa0b993fa73b677a5e9b4c04b9a20526618932fce8cc531d80ba189f"
+native_cross_entropy = 2.8708171345729854
+native_accuracy = 0.10898105437808285
+native_nll_numerator = 2872238.189054599
+native_correct_predictions = 109035
+
+[[embedding64_runs]]
+seed = 20260822
+run_id = "week3-embedding64-100m-seed-20260822-cpu"
+run_status_sha256 = "4e690de0244c6c93cbab0f28867081c44b8b7df0a61bfc83fbf3be3c159f61b3"
+metadata_sha256 = "2cb42f61d8525b0fb9e85d10527c9410779fc481ff9ab3885d6b5339675b03d8"
+tensor_sha256 = "d2e0210d624e37944071f410486a92128ad19a418d86d9b4b482085838977cfb"
+native_cross_entropy = 2.870825205952225
+native_accuracy = 0.1088890998955517
+native_nll_numerator = 2872246.2644291716
+native_correct_predictions = 108943
+
+[[embedding64_runs]]
+seed = 20260823
+run_id = "week3-embedding64-100m-seed-20260823-cpu"
+run_status_sha256 = "a59189cba538954515f3e43c3f32bd0a17dbfea62f0e304dda7793614f6556d9"
+metadata_sha256 = "9152f22de69348d391670fe5f8973df498e9caed04e52ed1a7e65867e46295a9"
+tensor_sha256 = "972346dc07c43486985b4da506e55c49337b6a0b7e0ce2599ffbd2c28fc2164d"
+native_cross_entropy = 2.870832423701509
+native_accuracy = 0.10889609643226603
+native_nll_numerator = 2872253.4857512414
+native_correct_predictions = 108950
