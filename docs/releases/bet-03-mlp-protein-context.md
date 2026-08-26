@@ -1,47 +1,58 @@
 # Bet 03: MLP Protein Context
 
-## Pre-release Result
+## Result
 
-This pre-release package prepares the validation-only evidence for the future
-`bet-03-mlp-protein-context` release. It does not claim that a tag exists.
+The frozen final model is a fixed-context MLP with context length 20,
+embedding width 32, and hidden width 800 (C20/E32/H800). It has 530,293
+parameters and was evaluated for 100,000,000 predictions with seeds 20260821,
+20260822, and 20260823.
 
-The final fixed-context MLP uses context length 20, embedding width 32, hidden
-width 800, 530,293 parameters, and three fixed seeds. It is compared with the
-frozen Week 2 family-aware neural bigram on the same native validation
-collection and the same 100,000,000-prediction budget. The aggregate report
-will record the result whether the MLP wins or loses.
+| Model | Parameters | Mean native CE | Sample SD |
+|---|---:|---:|---:|
+| C20/E32/H800 final MLP | 530,293 | 2.863666 | 0.000020 |
+| C10/E64/H800 challenger | 530,965 | 2.870825 | 0.000008 |
+| Week 2 family-aware neural bigram baseline | n/a | 2.898575 | n/a |
 
-The public evidence package also retains negative and exploratory outcomes:
-the 25M capacity screen, LR-tail experiments, and one-epoch continuations. The
-E=64 challenger has a nearly matched parameter count and the same flattened
-input width as C=20, so it distinguishes context allocation from parameter
-count within this architecture and budget. The no-training position diagnostic
-is descriptive only. It does not reopen model selection or make a significance
-claim.
+The C20/E32/H800 mean native cross-entropy was 2.863666, compared with
+2.898575 for the frozen Week 2 family-aware neural bigram baseline. The
+C10/E64/H800 challenger has a similar parameter count and the same flattened
+input width as C20/E32/H800. Its mean native cross-entropy was 2.870825, a
+0.007159 disadvantage relative to C20/E32/H800. This is a fixed-architecture,
+fixed-budget comparison, not a significance or mechanism claim.
 
 ## Evidence And Reproduction
 
-After Jose runs the operator-gated publisher at a clean committed revision, the
-aggregate report will be at
-[`reports/week_03/mlp_evaluation_v1.json`](../../reports/week_03/mlp_evaluation_v1.json)
-and its deterministic Markdown and SHA-256 companion files will be adjacent.
-The original public notebook at
-[`notebooks/week_03/week_03_mlp_protein_context.ipynb`](../../notebooks/week_03/week_03_mlp_protein_context.ipynb)
-reads only that JSON report.
+- [Aggregate evaluation report](../../reports/week_03/mlp_evaluation_v1.md)
+- [Aggregate evaluation JSON](../../reports/week_03/mlp_evaluation_v1.json)
+- [Aggregate evaluation SHA-256](../../reports/week_03/mlp_evaluation_v1.sha256)
+- [Original public notebook](../../notebooks/week_03/week_03_mlp_protein_context.ipynb)
+- [Frozen final-model configuration](../../experiments/week_03/mlp_context20_100m_continuation_v1.toml)
+- [Frozen E64 challenger configuration](../../experiments/week_03/mlp_embedding64_100m_challenger_v1.toml)
 
-The publisher verifies frozen source bytes before prose or tensor reads. It
-publishes aggregate metrics, PCA coordinates, and seed-aware residue cosine
-summaries only. Raw sequences, accessions, family IDs, checkpoint tensors, and
-model weights are excluded.
+The aggregate report records the complete evidence trail, including the 25M
+capacity screen, the final C20 continuation, the E64 challenger, exploratory
+learning-rate tails and one-epoch continuation, and the post-freeze position
+diagnostic. The publisher verifies frozen source bytes before reading prose or
+tensors. It publishes aggregate metrics, PCA coordinates, and seed-aware
+residue cosine summaries only. Raw sequences, accessions, family IDs,
+checkpoint tensors, and model weights are excluded.
 
 ## Boundaries And Limitations
 
-All reported scores are native-validation scores. The sealed test collection is
-not loaded by the publisher, validator, or notebook. There is no test claim,
-significance claim, mechanism claim, structure claim, or function claim.
+All scores here are descriptive native-validation results. The sealed test
+collection is not loaded by the publisher, validator, or notebook. These
+results make no sealed-test, statistical-significance, biological-mechanism,
+structure, or function claim.
 
-A causal protein language model is a statistical factorization. Ribosomes read
-mRNA codons and do not choose the next amino acid from earlier amino acids.
-Remaining cross-entropy can reflect genuine conditional variability and missing
-family, function, global-fold, distant-residue, or future-context information.
-Embedding plots are descriptive diagnostics, not biological explanations.
+The post-freeze position diagnostic does not train models and does not reopen
+model selection. PCA panels and residue cosine summaries are descriptive only;
+they are not biological explanations. Exploratory learning-rate tails and the
+one-epoch continuation are retained as exploratory outcomes and do not reopen
+model selection.
+
+A causal protein language model is a statistical factorization over residue
+sequences. It does not reproduce biological translation. Ribosomes translate
+mRNA codons; they do not choose the next amino acid by conditioning on earlier
+amino-acid residues. Remaining cross-entropy can reflect genuine conditional
+variability and information absent from this fixed-context model, including
+family, function, global fold, distant residues, and future context.
