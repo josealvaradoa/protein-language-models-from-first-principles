@@ -26,3 +26,13 @@ continuation of the three winning C=20 capacity-screen checkpoints from 25M to
 checkpoint byte sequence, the full historical event schedule, original 100M
 control provenance, and the three-seed native-CE threshold. It is exploratory,
 CPU-only, non-resumable, and produces no automatic selection or report.
+
+`week_03/mlp_embedding64_100m_challenger_v1.toml` is the adversarial,
+parameter-count-matched alternative to that C=20 continuation. It continues
+only the three fixed C=10, E=64, H=800 capacity-screen parents from 25M to
+100M predictions, without replaying their first 25M predictions. It pins the
+parents, C20 reference status provenance, readiness evidence, native-token
+population, event schedule, and symmetric three-seed interpretation boundaries.
+The E64 model has 530,965 parameters versus the frozen C20 reference's
+530,293. It is CPU-only, exploratory, non-resumable, writes ignored local
+artifacts, and cannot automatically choose an arm or produce a report.

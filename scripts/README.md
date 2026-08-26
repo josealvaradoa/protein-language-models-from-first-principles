@@ -85,6 +85,30 @@ the 100M three-seed mean native CE must be at most 2.869820533107851. It never
 uses the sealed test collection, selects a seed, or generates a decision or
 report automatically.
 
+`run_week3_mlp_embedding64_100m_challenger.py` is the separate operator-gated
+E=64 challenger to the frozen C20 100M result. With no flags it reads only the
+byte-pinned challenger, capacity, and base configurations. It does not inspect
+parents, readiness, collections, devices, output paths, or Git state. After
+review and a clean commit, Jose can continue one exact E64 25M parent:
+
+```bash
+env PYTHONPATH=src uv run --locked --offline \
+  python scripts/run_week3_mlp_embedding64_100m_challenger.py \
+  --execute-challenger --run-id NEW_EMBEDDING64_CHALLENGER_ID \
+  --seed 20260821 --device cpu
+```
+
+It verifies the parent status and checkpoint bytes before checkpoint load and
+again before success, then continues only predictions 25M through 100M. It
+uses SGD with LR 0.1 before 90M and 0.01 from 90M, evaluates the native
+family-aware validation collection only at 50M and 100M, and saves checkpoints
+at 50M, 90M, and 100M. It writes ignored local artifacts under
+`data/processed/week_03/mlp_embedding64_100m_challenger_runs/`. The recorded
+C20 evidence is provenance only: after all three E64 outputs are returned,
+Jose manually applies the symmetric 0.001 mean-native-CE categories. The
+runner never performs per-seed selection, an allocation decision, or report
+generation.
+
 `prepare_week2_model_data.py` and `validate_week2_model_data.py` implement the
 pre-run Week 2 Candidate v1 contract. With no flag, candidate preparation
 parses the frozen configuration and verifies and parses the four pinned local
