@@ -1,0 +1,528 @@
+schema_version = 1
+schema_identifier = "protein_lm.foundations_reproduction_contract"
+contract_identifier = "2026-09-01-week-04-foundations-reproduction-v1"
+scope = "closed_week_01_to_week_03_foundations_reproduction"
+status = "frozen_contract_not_yet_executable"
+
+[evidence_scope]
+week_01 = "complete_closed_a004_aggregate_read_only_audit"
+week_02 = "complete_final_bigram_evaluation_report"
+week_03 = "final_c10_c20_e64_three_seed_comparison"
+historical_evidence_mutable = false
+public_scope = "aggregate_only_no_sequences_no_accessions_no_family_ids_no_raw_tensors"
+
+[tolerances]
+reevaluation_cross_entropy_absolute = 0.000001
+retraining_cross_entropy_absolute = 0.0001
+material_cross_entropy_gap = 0.001
+comparison_operator = "absolute_delta_lte_tolerance"
+nonfinite_or_missing_metric = "fail"
+unexpected_or_duplicate_metric = "fail"
+
+[identity]
+configuration_checksums = "exact"
+manifest_memberships = "exact"
+dataset_and_token_counts = "exact"
+parameter_counts = "exact"
+seeds = "exact"
+prediction_budgets = "exact"
+model_and_collection_names = "exact"
+week_01_scientific_aggregate_counts = "exact"
+sealed_test_access = "denied"
+network_requests_made = 0
+branch_state = "clean_named_feature_branch"
+
+[operator_boundary]
+sole_operator = "Jose"
+execution_mode = "local_only"
+offline_required = true
+production_execution_by_agent = false
+browser_supplies_only = "fixed_job_id"
+browser_may_supply = []
+manual_dashboard_override = false
+coordinator_command = "not_implemented"
+dashboard_jobs_remain_blocked = true
+
+[run_bundle]
+root_relative_path = "runs/week_04"
+ignored_by_git = true
+completed_runs_immutable = true
+retries_require_new_run_id = true
+atomic_json_replace = true
+required_files = ["contract.toml", "run.json", "log.txt", "metrics.json", "comparison.json", "provenance.json"]
+terminal_states = ["completed", "failed", "cancelled", "runner_restarted"]
+
+[week_01_identity]
+adjustment_id = "A-004"
+model_use = "prohibited"
+task8_membership_use_authorized = false
+selected_split_authorized = false
+audit_seed_applicability = "not_applicable"
+eligible_protein_count = 557718
+random_validation_prohibited_queries = 24261
+random_validation_held_out_queries = 27757
+group_aware_validation_prohibited_queries = 10255
+group_aware_validation_held_out_queries = 28550
+random_test_prohibited_queries = 24619
+random_test_held_out_queries = 28117
+group_aware_test_prohibited_queries = 10690
+group_aware_test_held_out_queries = 28583
+
+[week_02_identity]
+base_seed = 20260812
+prediction_pair_budget = 100000000
+model_arms = ["random_training", "family_aware_training"]
+model_types = ["unigram", "count_bigram", "neural_bigram"]
+native_collections = ["random_native_validation", "family_aware_native_validation"]
+shared_collection = "shared_validation"
+sealed_test_collection = "shared_sealed_test"
+sealed_test_accessed = false
+primary_record_count = 12
+
+[week_03_identity]
+run_seeds = [20260821, 20260822, 20260823]
+training_collection = "family_aware_training"
+native_validation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+native_validation_token_count = 1000495
+native_validation_record_count = 2645
+
+[comparison_scope]
+week_01_scientific_aggregate_fields = "all_result_staged_result_balance_context_and_interpretation_aggregate_fields"
+week_01_exact_provenance_identity_fields = ["a004_fingerprint", "configuration_identity", "source_input_identities", "assignment_identities", "mmseqs2_version"]
+week_01_variable_comparison_exclusions = ["reproduction_code_revision", "runtime", "hardware", "local_evidence_paths", "machine_specific_paths"]
+week_02_overall_record_count = 12
+week_02_overall_records = "all_model_arm_model_type_collection_overall_metrics"
+week_02_family_aware_shared_validation_length_bucket_record_count = 15
+week_02_family_aware_shared_validation_length_buckets = "all_three_models_times_five_buckets"
+week_02_derived_comparisons_payload = "complete_payload_and_field_coverage_exact_numeric_values_follow_stage_tolerance_or_claim_rules"
+week_02_secondary_coverage = "required_exact_coverage_not_independent_pass_gate"
+
+[[source_pins]]
+kind = "project_dependency_manifest"
+relative_path = "pyproject.toml"
+sha256 = "ce77f471c92733c7278ba9a1efea276eda5da6d6d2aaa22bf5dc2fed7e9cc825"
+
+[[source_pins]]
+kind = "project_lockfile"
+relative_path = "uv.lock"
+sha256 = "0a273fe208a50476ef04af95f92e20dfa3ad71575e24c78d29435b9a3d607cc3"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_01/read_only_similarity_audit_a004.toml"
+sha256 = "3a21edeaf45057a8e50b5643abc14d3b633edb69b66aefd184e5f59963931a04"
+
+[[source_pins]]
+kind = "historical_report"
+relative_path = "reports/week_01/task_07_read_only_fixed_budget_audit_a004.md"
+sha256 = "02d6005205f838eaf33806dbac0db3f9cc38e9e3ca5b04c89cb8918e0e784490"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_02/bigram_training_v1.toml"
+sha256 = "a77851513d5c7be10ee34afe09ef46c334d028647d22c4745e17729dc35b1ffc"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_02/bigram_evaluation_v1.toml"
+sha256 = "219e7a3bc06a6c227ed27b9b4b7e917083b537bd5ac5d11a7526ee8415c2d97c"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_02/bigram_evaluation_publication_v1.toml"
+sha256 = "ad73f29b6769ae430ab7bbfaa6dead1f510714b121babd7ab27b12e52d0e5f54"
+
+[[source_pins]]
+kind = "historical_report"
+relative_path = "reports/week_02/bigram_training_streams_v1.json"
+sha256 = "914bcae29e989d550b2db2cc16fe2245821caa496de68e779e69b102439386b8"
+
+[[source_pins]]
+kind = "historical_report"
+relative_path = "reports/week_02/bigram_evaluation_v1.json"
+sha256 = "ac0df5ef240c63105df49247ded76c3362eec6510572216bed550cf5110d8103"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_training_v1.toml"
+sha256 = "3df5ed5c13e3f562fdf8cdb2166470f2642f9079305347d9d4c513f8b72d18a7"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_capacity_screen_v1.toml"
+sha256 = "78e52264ed569a4f5b4592cab7dada6dc7e71ded1d40ab507909bc2598ee459b"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_context20_100m_continuation_v1.toml"
+sha256 = "a0b1aa37c647aa5dc62c9d7a2b7c051bf66a81380448a5719d9ebe34eb6a3fb6"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_embedding64_100m_challenger_v1.toml"
+sha256 = "5d441c6e27746f59428ee1a5ee9d3a0aa32cac28b3dea9c188095c873ed7d92a"
+
+[[source_pins]]
+kind = "config"
+relative_path = "experiments/week_03/mlp_publication_v1.toml"
+sha256 = "11eb8b60c726d8e08d1b331e4118867553ec68f092236e203a087b9e5d7927e0"
+
+[[source_pins]]
+kind = "historical_report"
+relative_path = "reports/week_03/mlp_evaluation_v1.json"
+sha256 = "1d796be4a61e70793308b61bcc16db908f1e77b334627039536910ef75d50f44"
+
+[[stages]]
+stage_id = "week_01_verify"
+week = 1
+stage = "verify"
+depends_on = []
+failure_effect = "week_01_reevaluate_locked"
+
+[[stages]]
+stage_id = "week_01_reevaluate"
+week = 1
+stage = "reevaluate"
+depends_on = ["week_01_verify"]
+failure_effect = "final_comparison_failed"
+
+[[stages]]
+stage_id = "week_02_verify"
+week = 2
+stage = "verify"
+depends_on = []
+failure_effect = "week_02_reevaluate_and_retrain_locked"
+
+[[stages]]
+stage_id = "week_02_reevaluate"
+week = 2
+stage = "reevaluate"
+depends_on = ["week_02_verify"]
+failure_effect = "week_02_retrain_locked"
+
+[[stages]]
+stage_id = "week_02_retrain"
+week = 2
+stage = "retrain"
+depends_on = ["week_02_verify", "week_02_reevaluate"]
+failure_effect = "final_comparison_failed"
+
+[[stages]]
+stage_id = "week_03_verify"
+week = 3
+stage = "verify"
+depends_on = []
+failure_effect = "week_03_reevaluate_and_retrain_locked"
+
+[[stages]]
+stage_id = "week_03_reevaluate"
+week = 3
+stage = "reevaluate"
+depends_on = ["week_03_verify"]
+failure_effect = "week_03_retrain_locked"
+
+[[stages]]
+stage_id = "week_03_retrain"
+week = 3
+stage = "retrain"
+depends_on = ["week_03_verify", "week_03_reevaluate"]
+failure_effect = "final_comparison_failed"
+
+[[stages]]
+stage_id = "final_compare"
+week = 4
+stage = "compare"
+depends_on = ["week_01_reevaluate", "week_02_retrain", "week_03_retrain"]
+failure_effect = "milestone_failed"
+
+[[models]]
+model_id = "week1_a004_read_only_audit"
+week = 1
+model_kind = "split_audit_not_model"
+seeds = []
+training_applicable = false
+evaluation_collection = "not_applicable"
+prediction_budget = 0
+
+[[models]]
+model_id = "week2_random_unigram"
+week = 2
+model_kind = "unigram"
+training_arm = "random_training"
+seeds = [20260812]
+evaluation_collection = "random_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "week2_random_count_bigram"
+week = 2
+model_kind = "count_bigram"
+training_arm = "random_training"
+seeds = [20260812]
+evaluation_collection = "random_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "week2_random_neural_bigram"
+week = 2
+model_kind = "neural_bigram"
+training_arm = "random_training"
+seeds = [20260812]
+evaluation_collection = "random_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "week2_family_aware_unigram"
+week = 2
+model_kind = "unigram"
+training_arm = "family_aware_training"
+seeds = [20260812]
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "week2_family_aware_count_bigram"
+week = 2
+model_kind = "count_bigram"
+training_arm = "family_aware_training"
+seeds = [20260812]
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "week2_family_aware_neural_bigram"
+week = 2
+model_kind = "neural_bigram"
+training_arm = "family_aware_training"
+seeds = [20260812]
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "c10"
+week = 3
+model_kind = "C10_E32_H800"
+seeds = [20260821, 20260822, 20260823]
+parameter_count = 274293
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "c20"
+week = 3
+model_kind = "C20_E32_H800"
+seeds = [20260821, 20260822, 20260823]
+parameter_count = 530293
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[models]]
+model_id = "e64"
+week = 3
+model_kind = "C10_E64_H800"
+seeds = [20260821, 20260822, 20260823]
+parameter_count = 530965
+evaluation_collection = "family_aware_native_validation"
+prediction_budget = 100000000
+
+[[metric_targets]]
+model_id = "week2_random_unigram"
+collection = "random_native_validation"
+cross_entropy = 2.9012022878059693
+correct_predictions = 97088
+token_count = 1000151
+
+[[metric_targets]]
+model_id = "week2_random_count_bigram"
+collection = "random_native_validation"
+cross_entropy = 2.886544697679206
+correct_predictions = 100128
+token_count = 1000151
+
+[[metric_targets]]
+model_id = "week2_random_neural_bigram"
+collection = "random_native_validation"
+cross_entropy = 2.894124170271894
+correct_predictions = 100128
+token_count = 1000151
+
+[[metric_targets]]
+model_id = "week2_family_aware_unigram"
+collection = "family_aware_native_validation"
+cross_entropy = 2.906191441029875
+correct_predictions = 96122
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "week2_family_aware_count_bigram"
+collection = "family_aware_native_validation"
+cross_entropy = 2.8915253371291687
+correct_predictions = 98902
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "week2_family_aware_neural_bigram"
+collection = "family_aware_native_validation"
+cross_entropy = 2.8985748162212692
+correct_predictions = 98902
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "week2_random_unigram"
+collection = "shared_validation"
+cross_entropy = 2.911016299855473
+correct_predictions = 107144
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "week2_random_count_bigram"
+collection = "shared_validation"
+cross_entropy = 2.89592059001594
+correct_predictions = 109297
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "week2_random_neural_bigram"
+collection = "shared_validation"
+cross_entropy = 2.901534496678253
+correct_predictions = 109297
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "week2_family_aware_unigram"
+collection = "shared_validation"
+cross_entropy = 2.91102475647718
+correct_predictions = 107144
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "week2_family_aware_count_bigram"
+collection = "shared_validation"
+cross_entropy = 2.8959352268902894
+correct_predictions = 109297
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "week2_family_aware_neural_bigram"
+collection = "shared_validation"
+cross_entropy = 2.901496703964847
+correct_predictions = 109297
+token_count = 1000014
+
+[[metric_targets]]
+model_id = "c10"
+seed = 20260821
+collection = "family_aware_native_validation"
+cross_entropy = 2.8708225749287593
+correct_predictions = 109054
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "c10"
+seed = 20260822
+collection = "family_aware_native_validation"
+cross_entropy = 2.8708150645367714
+correct_predictions = 108946
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "c10"
+seed = 20260823
+collection = "family_aware_native_validation"
+cross_entropy = 2.8708239598580225
+correct_predictions = 108946
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "c20"
+seed = 20260821
+collection = "family_aware_native_validation"
+cross_entropy = 2.863655667524791
+correct_predictions = 111319
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "c20"
+seed = 20260822
+collection = "family_aware_native_validation"
+cross_entropy = 2.8636887412663112
+correct_predictions = 111289
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "c20"
+seed = 20260823
+collection = "family_aware_native_validation"
+cross_entropy = 2.863653159869764
+correct_predictions = 111304
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "e64"
+seed = 20260821
+collection = "family_aware_native_validation"
+cross_entropy = 2.8708171345729854
+correct_predictions = 109035
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "e64"
+seed = 20260822
+collection = "family_aware_native_validation"
+cross_entropy = 2.870825205952225
+correct_predictions = 108943
+token_count = 1000495
+
+[[metric_targets]]
+model_id = "e64"
+seed = 20260823
+collection = "family_aware_native_validation"
+cross_entropy = 2.870832423701509
+correct_predictions = 108950
+token_count = 1000495
+
+[[comparison_claims]]
+claim_id = "week1_group_aware_lower_detected_strong_overlap"
+rule = "group_aware_rate_lt_random_rate_for_validation_and_test"
+minimum_cross_entropy_gap = 0.0
+
+[[comparison_claims]]
+claim_id = "week2_prospective_comparison_supported"
+rule = "random_neural_shared_ce_minus_random_neural_native_ce_gt_family_aware_neural_shared_ce_minus_family_aware_neural_native_ce"
+historical_random_neural_optimism_gap = 0.007410326406358969
+historical_family_aware_neural_optimism_gap = 0.0029218877435779333
+minimum_cross_entropy_gap = 0.0
+
+[[comparison_claims]]
+claim_id = "c20_beats_week2_family_aware_neural_bigram"
+rule = "week2_family_aware_neural_bigram_ce_minus_c20_mean_ce_gte_material_gap"
+minimum_cross_entropy_gap = 0.001
+
+[[comparison_claims]]
+claim_id = "c20_beats_c10"
+rule = "c10_mean_ce_minus_c20_mean_ce_gte_material_gap"
+minimum_cross_entropy_gap = 0.001
+
+[[comparison_claims]]
+claim_id = "c20_beats_e64"
+rule = "e64_mean_ce_minus_c20_mean_ce_gte_material_gap"
+minimum_cross_entropy_gap = 0.001
+
+[exclusions]
+new_models = false
+hyperparameter_changes = false
+seed_changes = false
+split_changes = false
+metric_changes = false
+sealed_test_access = false
+exploratory_week_03_reruns = false
+universal_training_loop = false
+fastapi = false
+sqlite_or_database = false
+cloud_queue_or_remote_worker = false
+multi_user_execution = false
+historical_report_updates = false
+deployed_cicd_service = false
+statistical_significance_claims = false
+biological_function_claims = false
