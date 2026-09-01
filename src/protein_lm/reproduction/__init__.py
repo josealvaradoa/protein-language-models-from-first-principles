@@ -20,16 +20,25 @@ from protein_lm.reproduction.comparison import (
     MetricRecord,
     compare_metric_records,
 )
+from protein_lm.reproduction.historical_evidence import (
+    ClaimOutcome,
+    HistoricalEvidenceError,
+    HistoricalEvidenceReport,
+    evaluate_historical_evidence,
+)
 from protein_lm.reproduction.run_bundle import RunBundle, RunBundleError, RunStatus
 
 __all__ = [
     "APPROVED_FOUNDATIONS_CONTRACT_SHA256",
     "ComparisonClaim",
+    "ClaimOutcome",
     "ComparisonIssue",
     "ComparisonReport",
     "ComparisonStage",
     "CrossEntropyTolerances",
     "FoundationsContract",
+    "HistoricalEvidenceError",
+    "HistoricalEvidenceReport",
     "MetricKey",
     "MetricRecord",
     "ReproductionContractError",
@@ -37,6 +46,7 @@ __all__ = [
     "SourcePinVerification",
     "SourcePinVerificationReport",
     "compare_metric_records",
+    "evaluate_historical_evidence",
     "load_foundations_contract",
     "RunBundle",
     "RunBundleError",
