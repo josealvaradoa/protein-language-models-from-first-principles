@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Reproduction Workbench</title>
+    <link rel="stylesheet" href="/assets/dashboard.css">
+    <script src="/assets/dashboard.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#console">Skip to dashboard</a>
+    <header class="masthead">
+      <div class="brand">
+        <p class="eyebrow">Protein language models · Week 04</p>
+        <h1>Reproduction workbench</h1>
+      </div>
+      <div class="workspace-side">
+        <p class="workspace-label">Local workspace</p>
+        <dl class="workspace-meta" aria-label="Workspace status" id="workspace-meta"></dl>
+        <div class="workspace-control" id="workspace-control" aria-live="polite"></div>
+      </div>
+    </header>
+    <main id="console" tabindex="-1">
+      <section class="introduction" aria-labelledby="introduction-title">
+        <p class="eyebrow">Experiment control</p>
+        <h2 id="introduction-title">Reproduce prior results through three controlled stages.</h2>
+        <p>Verify the workspace first. Reevaluate or retrain only when an approved contract unlocks that stage.</p>
+      </section>
+      <section class="experiment-section" aria-labelledby="experiment-title">
+        <div class="section-heading experiment-heading">
+          <div>
+            <p class="eyebrow">Lab runbook</p>
+            <h2 id="experiment-title">Select an experiment</h2>
+          </div>
+          <nav class="experiment-nav" aria-label="Experiment navigation" id="experiment-nav"></nav>
+        </div>
+        <p id="load-error" class="notice error" role="alert" hidden></p>
+        <p id="run-status" class="notice" role="status" aria-live="polite"></p>
+      </section>
+      <section class="gate-section" aria-labelledby="gate-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Selected path</p>
+            <h2 id="gate-title">Verify, then advance deliberately</h2>
+          </div>
+          <p class="section-note">A stage is actionable only when its fixed contract permits it.</p>
+        </div>
+        <ol class="gate-rail" id="gate-rail" aria-label="Verify, reevaluate, and retrain stages"></ol>
+        <div class="stage-grid" id="stage-grid"></div>
+      </section>
+      <section class="run-section" aria-labelledby="run-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Operational record</p>
+            <h2 id="run-title">Run ledger</h2>
+          </div>
+          <p class="section-note">Persistent local records and polled output.</p>
+        </div>
+        <div class="run-layout">
+          <div class="ledger" id="run-ledger" aria-live="polite"></div>
+          <div class="log-panel">
+            <div class="log-heading">
+              <h3>Output</h3>
+              <button type="button" class="quiet-button" id="cancel-run" hidden>Cancel active run</button>
+            </div>
+            <pre id="run-log" tabindex="0" aria-label="Selected run log">Select a current dashboard run to inspect its log.</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      Local-only dashboard. Commands are server-owned, fixed, and confirmed before launch.
+    </footer>
+    <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+      <form method="dialog" id="confirm-form">
+        <p class="eyebrow">Fixed command confirmation</p>
+        <h2 id="confirm-title">Run this local check?</h2>
+        <p id="confirm-description"></p>
+        <code id="confirm-command"></code>
+        <p class="dialog-note">The browser sends only this immutable job identifier. It cannot alter the command.</p>
+        <div class="dialog-actions">
+          <button value="cancel" type="submit" class="quiet-button">Back</button>
+          <button value="confirm" type="submit" class="signal-button">Confirm and launch</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
