@@ -27,7 +27,9 @@ model evaluation. Retrain is a distinct fit stage and is not applicable to
 Week 1.
 
 The Week 1 audit reproduction plus Week 2 and Week 3 reevaluation and retrain
-actions are currently locked with `reproduction_contract_pending`. The frozen
-[Week 4 reproduction contract](week_04_reproduction_contract.md) defines the
-future checks, but it does not make those runs available. This dashboard does
-not claim that full reproduction is available yet.
+actions are currently locked with `reproduction_contract_pending`. The active
+Week 4 section of `syllabus/protein-language-models-syllabus.md` in the parent
+interview-prep workspace and frozen
+[`foundations_reproduction_v1.toml`](../experiments/week_04/foundations_reproduction_v1.toml)
+define the future checks, but they do not make those runs available. This
+dashboard does not claim that full reproduction is available yet.
