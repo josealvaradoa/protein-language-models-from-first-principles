@@ -37,6 +37,14 @@ tensors. It publishes aggregate metrics, PCA coordinates, and seed-aware
 residue cosine summaries only. Raw sequences, accessions, family IDs,
 checkpoint tensors, and model weights are excluded.
 
+## Publication And Defense
+
+[*The MLP Beat the Bigram. It Still Couldn't See the Whole Protein.*](https://josealvaradoalvarenga.substack.com/p/the-mlp-beat-the-bigram-it-still)
+was published August 28, 2026 and satisfies both the Week 2 and Week 3
+publication obligations. Under workspace adjustment A-009, the Week 3 verbal
+defense was waived. Jose's authored article is the written defense artifact;
+no Week 3 verbal defense occurred.
+
 ## Boundaries And Limitations
 
 All scores here are descriptive native-validation results. The sealed test

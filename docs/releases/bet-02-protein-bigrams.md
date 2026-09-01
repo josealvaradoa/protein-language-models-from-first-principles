@@ -38,9 +38,9 @@ The sealed test collection was untouched. All reported scores are validation
 scores. Sampling is a synthetic, non-functional educational diagnostic and
 makes no biological claim.
 
-The combined Week 2 and Week 3 article is pending. It will be cross-linked
-after both GitHub releases exist and will contain distinct sections for the two
-weeks.
+The combined Week 2 and Week 3 article, [*The MLP Beat the Bigram. It Still Couldn't See the Whole Protein.*](https://josealvaradoalvarenga.substack.com/p/the-mlp-beat-the-bigram-it-still),
+was published August 28, 2026. It cross-links both releases and satisfies both
+the Week 2 and Week 3 publication obligations.
 
 ## Evidence And Reproduction
 
