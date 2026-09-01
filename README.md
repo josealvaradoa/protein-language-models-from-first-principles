@@ -32,8 +32,9 @@ Week 2 release identifier is `bet-02-protein-bigrams`. Its public
 documentation is prepared in the [Week 2 release notes](docs/releases/bet-02-protein-bigrams.md),
 with the [aggregate evaluation report](reports/week_02/bigram_evaluation_v1.md)
 and [synthetic sampling diagnostic](reports/week_02/bigram_sampling_v1.md).
-Under the approved Week 2 and Week 3 publication exception, the combined
-article remains pending and must be published before Week 4 begins.
+The combined article, [*The MLP Beat the Bigram. It Still Couldn't See the Whole Protein.*](https://josealvaradoalvarenga.substack.com/p/the-mlp-beat-the-bigram-it-still),
+was published August 28, 2026. It satisfies both the Week 2 and Week 3
+publication obligations.
 
 Week 3 aggregate validation evidence is final. The frozen C20/E32/H800 MLP
 was evaluated against the Week 2 family-aware neural bigram baseline and an
