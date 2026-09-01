@@ -28,5 +28,6 @@ Week 1.
 
 The Week 1 audit reproduction plus Week 2 and Week 3 reevaluation and retrain
 actions are currently locked with `reproduction_contract_pending`. The frozen
-reproduction contract has not yet made those runs available. This dashboard
-does not claim that full reproduction is available yet.
+[Week 4 reproduction contract](week_04_reproduction_contract.md) defines the
+future checks, but it does not make those runs available. This dashboard does
+not claim that full reproduction is available yet.
