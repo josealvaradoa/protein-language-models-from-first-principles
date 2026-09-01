@@ -9,6 +9,7 @@ from protein_lm.reproduction.comparison import (
     MetricRecord,
     compare_metric_records,
 )
+from protein_lm.reproduction.run_bundle import RunBundle, RunBundleError, RunStatus
 
 __all__ = [
     "ComparisonIssue",
@@ -18,4 +19,7 @@ __all__ = [
     "MetricKey",
     "MetricRecord",
     "compare_metric_records",
+    "RunBundle",
+    "RunBundleError",
+    "RunStatus",
 ]
